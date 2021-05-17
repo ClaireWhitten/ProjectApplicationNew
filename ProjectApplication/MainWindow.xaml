@@ -1,0 +1,44 @@
+﻿<Window x:Class="ProjectApplication.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectApplication"
+        mc:Ignorable="d"
+        Title="CBMS" Height="450" Width="800">
+    <Grid Background="#1daaef">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"></ColumnDefinition>
+            <ColumnDefinition Width="2*"></ColumnDefinition>
+        </Grid.ColumnDefinitions> 
+        <Image Source="Images/coolblue_logo.jpg" Grid.Column="0"></Image>
+        <Border CornerRadius="2"
+                BorderBrush="White"
+                BorderThickness="4"
+                Padding="8"
+                Grid.Column="1"
+                Width="400"
+                Height="300">
+            <StackPanel Orientation="Vertical"  HorizontalAlignment="Center" VerticalAlignment="Center" Background="White">
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Label Foreground="#1daaef" FontSize="20" FontWeight="ExtraBold">Log In</Label>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Label Foreground="#1daaef" Width="120" FontSize="20" FontWeight="ExtraBold">Username:</Label>
+                    <TextBox x:Name="tbUserName" Width="200px" Background="AliceBlue"></TextBox>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal" Margin="10">
+                    <Label Foreground="#1daaef" Width="120" FontSize="20" FontWeight="ExtraBold">Password:</Label>
+                    <TextBox x:Name="tbPassword" Width="200px" Background="AliceBlue"></TextBox>
+                </StackPanel>
+                <StackPanel Margin="20">
+                    <Button x:Name="btnLogIn" Width="100px" Height="40" Foreground="White" Background="#ff6600" FontSize="15" FontWeight="ExtraBold" BorderBrush="White" Click="btnLogIn_Click">Log In</Button>
+                </StackPanel>
+            </StackPanel>
+        </Border>
+        <Label x:Name="lblDate"  Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">Date and Time</Label>
+
+
+
+    </Grid>
+</Window>

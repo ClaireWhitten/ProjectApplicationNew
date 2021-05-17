@@ -1,0 +1,43 @@
+﻿<Window x:Class="ProjectApplication.MainMenu"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectApplication"
+        mc:Ignorable="d"
+        Title="Main Menu" Height="450" Width="800">
+    <Grid Background="#1daaef">
+        <DockPanel>
+            <Menu DockPanel.Dock="Top" Height="30">
+                <MenuItem x:Name="miData" Header="_Manage Data" Height="30" Click="MenuItem_Click">
+                    <ItemsControl x:Name="DataSubMenu">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Header="{Binding}"/>
+                           </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </MenuItem>
+                <MenuItem x:Name="miOverview" Header="_Overview" Height="30" Click="MenuItem_Click">
+                    <ItemsControl x:Name="OrdersSubmenu">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Header="{Binding}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </MenuItem>
+                <MenuItem x:Name="miOrders" Header="_Orders" Height="30" Click="MenuItem_Click">
+                    <ItemsControl x:Name="OverviewSubMenu">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <MenuItem Header="{Binding}"/>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </MenuItem>
+            </Menu>
+            <ContentControl x:Name="MainContentControl"></ContentControl>
+        </DockPanel>
+    </Grid>
+</Window>

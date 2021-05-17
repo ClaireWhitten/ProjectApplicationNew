@@ -1,0 +1,101 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using ProjectApplication.Classes;
+
+
+namespace ProjectApplication
+{
+    /// <summary>
+    /// Interaction logic for UserControl1.xaml
+    /// </summary>
+    public partial class UserControl1 : UserControl
+    {
+        public ProjectApplicationContext Ctx { get; set; }
+
+        public ObservableCollection<UserAccount> UserAccounts { get; set; }
+        public UserControl1()
+        {
+            InitializeComponent();
+            Ctx = new ProjectApplicationContext();
+            //List<UserAccount> userAccounts = ctx.UserAccounts.ToList();
+            //ObservableCollection<UserAccount> observableUserAccounts = new ObservableCollection<UserAccount>(userAccounts); //makes an observable collection from the list
+            //UsersDataGrid.ItemsSource = userAccounts;
+            Ctx.UserAccounts.AsQueryable().Load(); // Executes the query and will load the objects into the DbContext so that they are tracked by the entity framework
+            // load is a method of a queryable
+
+            UserAccounts = Ctx.UserAccounts.Local;
+            UsersDataGrid.ItemsSource = UserAccounts;
+
+            //Complete this using the list method too
+        }
+
+      
+
+        private void btnEditUser_Click(object sender, RoutedEventArgs e)
+        {
+            Ctx.SaveChanges();
+            /*if (UsersDataGrid.SelectedItem is UserAccount)
+            {
+                UserAccount selectedUseraccount = UsersDataGrid.SelectedItem as UserAccount;
+                MessageBox.Show(selectedUseraccount.UserName);
+                EditUser editUser = new EditUser(selectedUseraccount);
+                editUser.Show();
+            }*/
+        }
+
+
+
+
+        private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
+        {
+            UserAccount selectedUser = UsersDataGrid.SelectedItem as UserAccount;
+            if (selectedUser != null)
+            {
+                MessageBoxResult result  = MessageBox.Show($"Are you sure you want to delete the following user: {selectedUser.UserName}?", "Confirm", MessageBoxButton.YesNo);
+                
+                
+                if (result == MessageBoxResult.Yes)
+                {
+                    UserAccounts.Remove(selectedUser); // removes from observable collection 
+                    Ctx.SaveChanges();
+                    MessageBox.Show($"The user {selectedUser.UserName} is succussfully deleted","Deleted");
+                } else
+                {
+                    MessageBox.Show($"The user has not been deleted.", "Action Cancelled");
+                }
+
+            } else
+            {
+                MessageBox.Show("No user has been selected.");
+            }
+            
+            
+        }
+
+        private void UsersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (UsersDataGrid.SelectedItem is UserAccount)
+            {
+                btnDeleteUser.IsEnabled = true;
+                MessageBox.Show(UsersDataGrid.SelectedItem.ToString());
+            } else
+            {
+                MessageBox.Show("Do you want to add a new user account?", "Add User");
+            }
+        }
+    }
+}
