@@ -1,0 +1,29 @@
+﻿<Window x:Class="ProjectApplication.AddUser"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectApplication"
+        mc:Ignorable="d"
+        Title="Add New User Account" Height="450" Width="400">
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <Label Margin="10">Assign this new account to an existing employee.</Label>
+            <Label>Choose employee:</Label>
+            <ComboBox x:Name="cbEmployees" Margin="0 10">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <Label Content="{Binding EmployeeDetails}"></Label>
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <Label>User Name:</Label>
+            <TextBlock x:Name="tbUsername"></TextBlock>
+            <Label>Password:</Label>
+            <TextBlock x:Name="tbPassword"></TextBlock>
+            <Label>Role</Label>
+            <TextBlock x:Name="tbRole"></TextBlock>
+            <Button x:Name="btnAssignEmployee" Width="100" Click="btnAssignEmployee_Click">Save</Button>
+        </StackPanel>
+    </Grid>
+</Window>

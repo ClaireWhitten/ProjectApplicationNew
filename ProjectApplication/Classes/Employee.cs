@@ -42,6 +42,12 @@ namespace ProjectApplication.Classes
         public ICollection<SalesOrder> SalesOrders { get; set; } // only sellers
 
        
-
+        public string EmployeeDetails
+        {
+            get
+            {
+                return $"Name: {this.FirstName} {this.LastName}, Employee ID: {this.EmployeeId}, DOB: {this.DOB}, Role:{this.Role}";
+            }
+        }
     }
 }

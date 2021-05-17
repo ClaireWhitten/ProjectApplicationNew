@@ -27,6 +27,9 @@ namespace ProjectApplication
         public ProjectApplicationContext Ctx { get; set; }
 
         public ObservableCollection<UserAccount> UserAccounts { get; set; }
+
+       
+
         public UserControl1()
         {
             InitializeComponent();
@@ -91,11 +94,20 @@ namespace ProjectApplication
             if (UsersDataGrid.SelectedItem is UserAccount)
             {
                 btnDeleteUser.IsEnabled = true;
-                MessageBox.Show(UsersDataGrid.SelectedItem.ToString());
-            } else
+                //MessageBox.Show(UsersDataGrid.SelectedItem.ToString());
+            } else if (UsersDataGrid.SelectedItem == UsersDataGrid.Items[UsersDataGrid.Items.Count-1])
             {
-                MessageBox.Show("Do you want to add a new user account?", "Add User");
+                btnDeleteUser.IsEnabled = false;
+                AddUser addUser = new AddUser(UserAccounts);
+                addUser.Show();
+               
+                
+            } else if (UsersDataGrid.SelectedItem == null)
+            {
+                btnDeleteUser.IsEnabled = false;
             }
         }
+        
+        
     }
 }
