@@ -27,11 +27,11 @@ namespace ProjectApplication
 
         public ObservableCollection<UserAccount> UserAccounts { get; set; }
 
-        public AddUser(ObservableCollection<UserAccount> userAccounts)
+        public AddUser(ObservableCollection<UserAccount> userAccounts, ProjectApplicationContext context)
         {
             UserAccounts = userAccounts;
 
-            Ctx = new ProjectApplicationContext();
+            Ctx = context;
             var employeesWithoutUserAccount = Ctx.Employees
                .Include("UserAccount")
                .Where(e => e.UserAccount == null)
@@ -53,10 +53,10 @@ namespace ProjectApplication
                 {
                     UserName = tbUsername.Text,
                     Password = tbPassword.Text,
-                    Role = (Role)Enum.Parse(typeof(Role),tbRole.Text) //fix - change to drop down instead of user typing in 
-                    //continue tomorrow
+                    Role = (Role)Enum.Parse(typeof(Role), tbRole.Text), //fix - change to drop down instead of user typing in 
+                    CreatedOn = DateTime.Now,
+                    Employee = selectedEmployee
                 }); 
-               
                 Ctx.SaveChanges();
                 
             }

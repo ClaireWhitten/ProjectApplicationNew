@@ -98,7 +98,7 @@ namespace ProjectApplication
             } else if (UsersDataGrid.SelectedItem == UsersDataGrid.Items[UsersDataGrid.Items.Count-1])
             {
                 btnDeleteUser.IsEnabled = false;
-                AddUser addUser = new AddUser(UserAccounts);
+                AddUser addUser = new AddUser(UserAccounts, Ctx);
                 addUser.Show();
                
                 

@@ -18,11 +18,11 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Label>User Name:</Label>
-            <TextBlock x:Name="tbUsername"></TextBlock>
+            <TextBox x:Name="tbUsername"></TextBox>
             <Label>Password:</Label>
-            <TextBlock x:Name="tbPassword"></TextBlock>
+            <TextBox x:Name="tbPassword"></TextBox>
             <Label>Role</Label>
-            <TextBlock x:Name="tbRole"></TextBlock>
+            <TextBox x:Name="tbRole"></TextBox>
             <Button x:Name="btnAssignEmployee" Width="100" Click="btnAssignEmployee_Click">Save</Button>
         </StackPanel>
     </Grid>
