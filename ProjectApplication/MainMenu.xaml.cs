@@ -82,6 +82,7 @@ namespace ProjectApplication
                 case "Manage Users":
                     this.MainContentControl.Content = new UserControl1();
                     break;
+                
             
             }
         }

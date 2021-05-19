@@ -43,13 +43,6 @@ namespace ProjectApplication
             UserAccounts = Ctx.UserAccounts.Local;
             UsersDataGrid.ItemsSource = UserAccounts;
 
-            //other methods of doing this?
-            /*1.using list 
-             * 2. See below
-            //GetData() creates a collection of Customer data from a database
-            ObservableCollection<Customer> custdata = GetData();
-            //Bind the DataGrid to the customer data
-            DG1.DataContext = custdata;*/
         }
 
       
