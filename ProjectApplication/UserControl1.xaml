@@ -3,9 +3,19 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProjectApplication"
+             xmlns:local="clr-namespace:ProjectApplication.Classes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Role"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </UserControl.Resources>
+
     <Grid Background="AliceBlue">
         <StackPanel>
             <Label>Manage User Accounts</Label>
@@ -15,8 +25,8 @@
                     <DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
                     <DataGridTextColumn Header="Password" Binding="{Binding Password}" />
                     <DataGridTextColumn Header="Date Created"  IsReadOnly="True" Binding="{Binding CreatedOn}" />
-                    <DataGridTextColumn Header="Role" Binding="{Binding Role}" />
-                    <DataGridTextColumn IsReadOnly="True" Header="Employee Name" Binding="{Binding EmployeeName}" />
+                    <DataGridComboBoxColumn x:Name="cbRole" Header="Role" SelectedItemBinding="{Binding Role}" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Employee Name" Binding="{Binding EmployeeName}"/>
                     <DataGridTextColumn IsReadOnly="True"  Header="Email" Binding="{Binding EmployeeEmail}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

@@ -53,11 +53,12 @@ namespace ProjectApplication
                 {
                     UserName = tbUsername.Text,
                     Password = tbPassword.Text,
-                    Role = (Role)Enum.Parse(typeof(Role), tbRole.Text), //fix - change to drop down instead of user typing in 
+                    Role = (Role)cbRole.SelectedItem, 
                     CreatedOn = DateTime.Now,
                     Employee = selectedEmployee
                 }); 
                 Ctx.SaveChanges();
+                this.Close();
                 
             }
             else

@@ -43,7 +43,13 @@ namespace ProjectApplication
             UserAccounts = Ctx.UserAccounts.Local;
             UsersDataGrid.ItemsSource = UserAccounts;
 
-            //Complete this using the list method too
+            //other methods of doing this?
+            /*1.using list 
+             * 2. See below
+            //GetData() creates a collection of Customer data from a database
+            ObservableCollection<Customer> custdata = GetData();
+            //Bind the DataGrid to the customer data
+            DG1.DataContext = custdata;*/
         }
 
       
@@ -100,6 +106,7 @@ namespace ProjectApplication
                 btnDeleteUser.IsEnabled = false;
                 AddUser addUser = new AddUser(UserAccounts, Ctx);
                 addUser.Show();
+                UsersDataGrid.SelectedItem = null;
                
                 
             } else if (UsersDataGrid.SelectedItem == null)

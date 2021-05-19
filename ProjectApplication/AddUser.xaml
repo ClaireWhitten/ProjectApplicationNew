@@ -3,9 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ProjectApplication"
+        xmlns:local="clr-namespace:ProjectApplication.Classes"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
         Title="Add New User Account" Height="450" Width="400">
+    <Window.Resources>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Role"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+    </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center">
             <Label Margin="10">Assign this new account to an existing employee.</Label>
@@ -22,7 +31,7 @@
             <Label>Password:</Label>
             <TextBox x:Name="tbPassword"></TextBox>
             <Label>Role</Label>
-            <TextBox x:Name="tbRole"></TextBox>
+            <ComboBox x:Name="cbRole" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
             <Button x:Name="btnAssignEmployee" Width="100" Click="btnAssignEmployee_Click">Save</Button>
         </StackPanel>
     </Grid>
