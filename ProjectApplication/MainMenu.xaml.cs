@@ -27,6 +27,8 @@ namespace ProjectApplication
         public List<string> OverviewSubMenuItems = new List<string>();
         public List<string> OrdersSubMenuItems = new List<string>();
 
+        public ProjectApplicationContext Ctx { get; set; } = new ProjectApplicationContext();
+
 
         public MainMenu(UserAccount user)
         {
@@ -76,14 +78,21 @@ namespace ProjectApplication
         {
             MenuItem menuItem = e.OriginalSource as MenuItem;
             string selected = menuItem.Header.ToString();
-            //MessageBox.Show(selected);
+            
             switch (selected) 
             {
                 case "Manage Users":
-                    this.MainContentControl.Content = new UserControl1();
+                    this.MainContentControl.Content = new ManageUsers_UserControl(Ctx);
                     break;
-                
-            
+                case "Manage Employees":
+                    this.MainContentControl.Content = new ManageEmployees_UserControl(Ctx);
+                    break;
+                case "Manage Suppliers":
+                    this.MainContentControl.Content = new ManageSuppliers_UserControl(Ctx);
+                    break;
+                case "Manage Products":
+                    this.MainContentControl.Content = new ManageProducts_UserControl(Ctx);
+                    break;
             }
         }
     }

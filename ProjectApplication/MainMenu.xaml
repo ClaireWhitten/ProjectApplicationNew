@@ -5,7 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectApplication"
         mc:Ignorable="d"
-        Title="Main Menu" Height="450" Width="800">
+        Title="Main Menu" Width="1200" Height="800">
+   
     <Grid Background="#1daaef">
         <DockPanel>
             <Menu DockPanel.Dock="Top" Height="30">

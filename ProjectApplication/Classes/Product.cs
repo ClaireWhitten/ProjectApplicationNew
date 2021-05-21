@@ -18,7 +18,7 @@ namespace ProjectApplication.Classes
 
         public double Price { get; set; }
 
-        public int Quantity { get; set; }
+        public int BarCode { get; set; }
 
 
 
@@ -27,5 +27,7 @@ namespace ProjectApplication.Classes
         public ICollection<PurchaseOrderProduct> PurchaseOrderProducts { get; set; }
 
         public ICollection<SalesOrderProduct> SalesOrderProducts { get; set; }
+
+       
     }
 }

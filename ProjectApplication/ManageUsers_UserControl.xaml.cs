@@ -22,7 +22,7 @@ namespace ProjectApplication
     /// <summary>
     /// Interaction logic for UserControl1.xaml
     /// </summary>
-    public partial class UserControl1 : UserControl
+    public partial class ManageUsers_UserControl : UserControl
     {
         public ProjectApplicationContext Ctx { get; set; }
 
@@ -30,10 +30,10 @@ namespace ProjectApplication
 
        
 
-        public UserControl1()
+        public ManageUsers_UserControl(ProjectApplicationContext ctx)
         {
             InitializeComponent();
-            Ctx = new ProjectApplicationContext();
+            Ctx = ctx;
             //List<UserAccount> userAccounts = ctx.UserAccounts.ToList();
             //ObservableCollection<UserAccount> observableUserAccounts = new ObservableCollection<UserAccount>(userAccounts); //makes an observable collection from the list
             //UsersDataGrid.ItemsSource = userAccounts;
