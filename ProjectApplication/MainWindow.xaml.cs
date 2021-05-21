@@ -123,6 +123,19 @@ namespace ProjectApplication
                 }
             });
 
+            ctx.Customers.Add(new Customer() { 
+                FirstName= "David", 
+                LastName = "Hughes",
+                Street = "Cherry Street",
+                Number = 12,
+                PostCode = 2000,
+                Region = "Antwerp",
+                PhoneNumber = 045622345,
+                Email = "d_hughes@gmail.com",
+                CustomerSince = DateTime.Now
+            });
+
+
             ctx.SaveChanges();
 
 

@@ -68,8 +68,14 @@
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManageProducts_UserControl.xaml.cs">
-      <DependentUpon>ManageProducts_UserControl.xaml</DependentUpon>
+    <Compile Include="Buttons_UserControl.xaml.cs">
+      <DependentUpon>Buttons_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManageCustomers_UserControl.xaml.cs">
+      <DependentUpon>ManageCustomers_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ManageStock_UserControl.xaml.cs">
+      <DependentUpon>ManageStock_UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManageSuppliers_UserControl.xaml.cs">
       <DependentUpon>ManageSuppliers_UserControl.xaml</DependentUpon>
@@ -81,6 +87,10 @@
       <DependentUpon>ManageEmployees_UserControl.xaml</DependentUpon>
     </Compile>
     <Page Include="AddUser.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Buttons_UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -116,7 +126,11 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="ManageProducts_UserControl.xaml">
+    <Page Include="ManageCustomers_UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ManageStock_UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -162,6 +176,18 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\coolblue_logo.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\save_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\delete_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\undo_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logout_symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

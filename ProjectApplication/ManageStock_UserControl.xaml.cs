@@ -21,14 +21,14 @@ namespace ProjectApplication
     /// <summary>
     /// Interaction logic for ManageProducts_UserControl.xaml
     /// </summary>
-    public partial class ManageProducts_UserControl : UserControl
+    public partial class ManageStock_UserControl : UserControl
     {
 
         public  ProjectApplicationContext Ctx { get; set; }
 
         public ObservableCollection<Product> Products { get; set; } = new ObservableCollection<Product>();
 
-        public ManageProducts_UserControl(ProjectApplicationContext ctx)
+        public ManageStock_UserControl(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
 

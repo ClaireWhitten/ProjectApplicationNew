@@ -40,9 +40,9 @@ namespace ProjectApplication
                 case Role.Administrator:
                     DataSubMenuItems.Add("Manage Users");
                     DataSubMenuItems.Add("Manage Employees");
-                    DataSubMenuItems.Add("Manage Warehouse");
+                    DataSubMenuItems.Add("Manage Stock");
                     DataSubMenuItems.Add("Manage Suppliers");
-                    DataSubMenuItems.Add("Manage Products");
+                    DataSubMenuItems.Add("Manage Customers");
                     OverviewSubMenuItems.Add("Employee Overview");
                     OverviewSubMenuItems.Add("Warehouse Overview");
                     OverviewSubMenuItems.Add("Supplier Overview");
@@ -58,7 +58,7 @@ namespace ProjectApplication
 
                     break;
                 case Role.WarehouseEmployee:
-                    DataSubMenuItems.Add("Manage Warehouse");
+                    DataSubMenuItems.Add("Manage Stock");
                     OverviewSubMenuItems.Add("Warehouse Overview");
                     OverviewSubMenuItems.Add("Products Overview");
                     OrdersSubMenuItems.Add("Sales Orders");
@@ -90,8 +90,11 @@ namespace ProjectApplication
                 case "Manage Suppliers":
                     this.MainContentControl.Content = new ManageSuppliers_UserControl(Ctx);
                     break;
-                case "Manage Products":
-                    this.MainContentControl.Content = new ManageProducts_UserControl(Ctx);
+                case "Manage Stock":
+                    this.MainContentControl.Content = new ManageStock_UserControl(Ctx);
+                    break;
+                case "Manage Customers":
+                    this.MainContentControl.Content = new ManageCustomers_UserControl(Ctx);
                     break;
             }
         }
