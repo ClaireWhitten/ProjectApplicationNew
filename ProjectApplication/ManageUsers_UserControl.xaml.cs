@@ -42,8 +42,7 @@ namespace ProjectApplication
 
             UserAccounts = Ctx.UserAccounts.Local;
             UsersDataGrid.ItemsSource = UserAccounts;
-            buttonsContentControl.Content = new Buttons_UserControl(this);
-
+            buttonsContentControl.Content = new Buttons_UserControl(UserAccounts, UsersDataGrid, Ctx);
         }
 
       

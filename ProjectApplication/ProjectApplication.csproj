@@ -89,7 +89,6 @@
     <Compile Include="Search_UserControl.xaml.cs">
       <DependentUpon>Search_UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="UtilityClass.cs" />
     <Page Include="AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

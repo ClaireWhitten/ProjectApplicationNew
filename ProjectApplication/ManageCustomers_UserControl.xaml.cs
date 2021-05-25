@@ -42,9 +42,9 @@ namespace ProjectApplication
 
             CustomerDataGrid.ItemsSource = Customers;
 
-            buttonsContentControl.Content = new Buttons_UserControl(Customers, CustomerDataGrid);
+            buttonsContentControl.Content = new Buttons_UserControl(Customers, CustomerDataGrid, Ctx);
 
-            //buttonsContentControl.DataContext = Customers;
+         
         }
     }
 }

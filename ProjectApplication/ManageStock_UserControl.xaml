@@ -21,7 +21,7 @@
                 <Label>Manage Stock</Label>
                 <ContentControl x:Name="buttonsContentControl"></ContentControl>
             </StackPanel>
-            <DataGrid x:Name="ProductsDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="StockDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Product Id" Binding="{Binding ProductId}"/>
                     <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier.Name}" />

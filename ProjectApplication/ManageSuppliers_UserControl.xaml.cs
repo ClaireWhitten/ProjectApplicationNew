@@ -35,8 +35,8 @@ namespace ProjectApplication
             Ctx.Suppliers.AsQueryable().Load();
             Suppliers = Ctx.Suppliers.Local;
             InitializeComponent();
-            DataGridSuppliers.ItemsSource = Suppliers;
-            buttonsContentControl.Content = new Buttons_UserControl(this);
+            SuppliersDataGrid.ItemsSource = Suppliers;
+            buttonsContentControl.Content = new Buttons_UserControl(Suppliers, SuppliersDataGrid, Ctx);
 
         }
 

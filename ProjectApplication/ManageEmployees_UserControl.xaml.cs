@@ -36,7 +36,7 @@ namespace ProjectApplication
             Ctx.Employees.AsQueryable().Load();
             Employees = Ctx.Employees.Local;
             EmployeeDataGrid.ItemsSource = Employees;
-            buttonsContentControl.Content = new Buttons_UserControl(this);
+            buttonsContentControl.Content = new Buttons_UserControl(Employees, EmployeeDataGrid, Ctx);
         }
 
 

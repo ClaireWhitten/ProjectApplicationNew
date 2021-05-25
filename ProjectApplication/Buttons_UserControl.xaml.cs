@@ -23,26 +23,52 @@ namespace ProjectApplication
     public partial class Buttons_UserControl : UserControl
     {
         public DataGrid DataGrid { get; set; }
-       
-        public Buttons_UserControl(object itemsource, DataGrid dataGrid)
+
+        public ProjectApplicationContext Ctx { get; set; }
+
+
+
+        public Buttons_UserControl(Object itemsource, DataGrid dataGrid, ProjectApplicationContext ctx)
         {
-            
             InitializeComponent();
-            this.DataContext = itemsource;
-            this.DataGrid = dataGrid;
+            Ctx = ctx;
+            this.DataContext = itemsource; //set datacontext of button control to the observable collection 
+            DataGrid = dataGrid;
         }
 
         private void btnDelete_Click(object sender, RoutedEventArgs e)
         {
-            Type type = DataGrid.SelectedItem.GetType();
-            UtilityClass<T>.Delete(DataGrid.SelectedItem);
-            
-            MessageBox.Show("Delete");
+            switch (DataGrid.Name)
+            {
+                case "CustomerDataGrid":
+                    ObservableCollection<Customer> customers = this.DataContext as ObservableCollection<Customer>; // convert observable collection to correct type
+                    Customer selectedCustomer = DataGrid.SelectedItem as Customer; // convert selected item in datagrid
+                    customers.Remove(selectedCustomer);
+                    break;
+                case "EmployeeDataGrid":
+                    ObservableCollection<Employee> employees = this.DataContext as ObservableCollection<Employee>; // convert observable collection to correct type
+                    Employee selectedEmployee = DataGrid.SelectedItem as Employee; // convert selected item in datagrid
+                    employees.Remove(selectedEmployee);
+                    break;
+                case "StockDataGrid":
+                    ObservableCollection<Product> stock = this.DataContext as ObservableCollection<Product>; // convert observable collection to correct type
+                    Product selectedProduct = DataGrid.SelectedItem as Product; // convert selected item in datagrid
+                    stock.Remove(selectedProduct);
+                    break;
+                case "SuppliersDataGrid":
+                    ObservableCollection<Supplier> suppliers = this.DataContext as ObservableCollection<Supplier>; // convert observable collection to correct type
+                    Supplier selectedSupplier = DataGrid.SelectedItem as Supplier; // convert selected item in datagrid
+                    suppliers.Remove(selectedSupplier);
+                    break;
+                case "UsersDataGrid":
+                    ObservableCollection<UserAccount> users = this.DataContext as ObservableCollection<UserAccount>; // convert observable collection to correct type
+                    UserAccount selectedUser = DataGrid.SelectedItem as UserAccount; // convert selected item in datagrid
+                    users.Remove(selectedUser);
+                    break;
 
-            MessageBox.Show(this.DataContext.ToString());
-        
-            
-            
+            }
+            Ctx.SaveChanges();
+
         }
     }
 }
