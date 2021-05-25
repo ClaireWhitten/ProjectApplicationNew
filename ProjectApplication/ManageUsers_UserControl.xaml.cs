@@ -42,6 +42,7 @@ namespace ProjectApplication
 
             UserAccounts = Ctx.UserAccounts.Local;
             UsersDataGrid.ItemsSource = UserAccounts;
+            buttonsContentControl.Content = new Buttons_UserControl(this);
 
         }
 
@@ -57,6 +58,7 @@ namespace ProjectApplication
                 EditUser editUser = new EditUser(selectedUseraccount);
                 editUser.Show();
             }*/
+
         }
 
 
@@ -65,6 +67,8 @@ namespace ProjectApplication
         private void btnDeleteUser_Click(object sender, RoutedEventArgs e)
         {
             UserAccount selectedUser = UsersDataGrid.SelectedItem as UserAccount;
+            
+
             if (selectedUser != null)
             {
                 MessageBoxResult result  = MessageBox.Show($"Are you sure you want to delete the following user: {selectedUser.UserName}?", "Confirm", MessageBoxButton.YesNo);

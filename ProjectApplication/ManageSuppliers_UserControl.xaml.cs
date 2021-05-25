@@ -36,6 +36,7 @@ namespace ProjectApplication
             Suppliers = Ctx.Suppliers.Local;
             InitializeComponent();
             DataGridSuppliers.ItemsSource = Suppliers;
+            buttonsContentControl.Content = new Buttons_UserControl(this);
 
         }
 

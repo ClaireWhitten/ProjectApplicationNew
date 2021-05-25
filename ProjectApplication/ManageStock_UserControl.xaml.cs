@@ -38,6 +38,7 @@ namespace ProjectApplication
 
             InitializeComponent();
             ProductsDataGrid.ItemsSource = Products;
+            buttonsContentControl.Content = new Buttons_UserControl(this);
 
         }
     }

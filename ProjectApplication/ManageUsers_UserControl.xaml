@@ -18,7 +18,10 @@
 
     <Grid Background="AliceBlue">
         <StackPanel>
-            <Label>Manage User Accounts</Label>
+            <StackPanel>
+                <Label>Manage User Accounts</Label>
+                <ContentControl x:Name="buttonsContentControl"></ContentControl>
+            </StackPanel>
             <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" SelectionChanged="UsersDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="User Id" Binding="{Binding UserAccountId}"/>

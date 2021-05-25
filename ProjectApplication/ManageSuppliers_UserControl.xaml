@@ -7,8 +7,10 @@
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
         <StackPanel>
-            
-            <Label>Manage Suppliers</Label>
+            <StackPanel>
+                <Label>Manage Suppliers</Label>
+                <ContentControl x:Name="buttonsContentControl"></ContentControl>
+            </StackPanel>
             <DataGrid x:Name="DataGridSuppliers" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" BeginningEdit="DataGridSuppliers_BeginningEdit" RowEditEnding="DataGridSuppliers_RowEditEnding" CellEditEnding="DataGridSuppliers_CellEditEnding" SelectionChanged="DataGridSuppliers_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Employee Id" Binding="{Binding SupplierId}" Width="auto"/>

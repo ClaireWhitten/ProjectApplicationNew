@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjectApplication.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +22,27 @@ namespace ProjectApplication
     /// </summary>
     public partial class Buttons_UserControl : UserControl
     {
-        public Buttons_UserControl()
+        public DataGrid DataGrid { get; set; }
+       
+        public Buttons_UserControl(object itemsource, DataGrid dataGrid)
         {
+            
             InitializeComponent();
+            this.DataContext = itemsource;
+            this.DataGrid = dataGrid;
+        }
+
+        private void btnDelete_Click(object sender, RoutedEventArgs e)
+        {
+            Type type = DataGrid.SelectedItem.GetType();
+            UtilityClass<T>.Delete(DataGrid.SelectedItem);
+            
+            MessageBox.Show("Delete");
+
+            MessageBox.Show(this.DataContext.ToString());
+        
+            
+            
         }
     }
 }
