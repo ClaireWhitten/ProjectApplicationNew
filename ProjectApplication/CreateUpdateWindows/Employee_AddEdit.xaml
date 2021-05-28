@@ -67,7 +67,6 @@
                     <Image Source="Images/save_symbol.png" Width="20" Height="30"></Image>
                 </StackPanel>
             </Button>
-
         </StackPanel>
         
     </Grid>

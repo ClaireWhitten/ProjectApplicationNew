@@ -17,22 +17,21 @@
     </UserControl.Resources>
     <Grid Background="AliceBlue">
         <StackPanel>
-            <StackPanel>
-                <Label>Manage Stock</Label>
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
-                        <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                    <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                        <Image Source="Images/save_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                    <Button x:Name="btnUndo" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                        <Image Source="Images/undo_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                    <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                        <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                </StackPanel>
+            <Label>Manage Stock</Label>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <TextBox x:Name="tbSearch" Width="200" Height="30"></TextBox>
+                <Button x:Name="btnSearch" Width="40" Height="30" Margin="5">
+                    <Image Source="Images/search_symbol.png" Width="30" Height="30"></Image>
+                </Button>
+                <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
+                    <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
+                </Button>
+                <Button x:Name="btnEdit" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                    <Image Source="Images/edit_symbol.png" Width="40" Height="40" VerticalAlignment="Center"></Image>
+                </Button>
+                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                    <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
+                </Button>
             </StackPanel>
             <DataGrid x:Name="StockDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
@@ -44,11 +43,6 @@
                     <DataGridTextColumn IsReadOnly="True" Header="Barcode" Binding="{Binding BarCode}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-
-
-
-
-
         </StackPanel>
     </Grid>
 </UserControl>

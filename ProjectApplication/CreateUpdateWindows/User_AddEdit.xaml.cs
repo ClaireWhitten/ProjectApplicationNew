@@ -19,7 +19,7 @@ namespace ProjectApplication
     /// <summary>
     /// Interaction logic for AddUser.xaml
     /// </summary>
-    public partial class AddUser : Window
+    public partial class User_AddEdit : Window
     {
         public List<Employee> Employees { get; set; } = new List<Employee>();
 
@@ -27,7 +27,7 @@ namespace ProjectApplication
 
         public ObservableCollection<UserAccount> UserAccounts { get; set; }
 
-        public AddUser(ObservableCollection<UserAccount> userAccounts, ProjectApplicationContext context)
+        public User_AddEdit(ObservableCollection<UserAccount> userAccounts, ProjectApplicationContext context)
         {
             UserAccounts = userAccounts;
 

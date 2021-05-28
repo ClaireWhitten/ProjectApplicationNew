@@ -21,9 +21,9 @@ namespace ProjectApplication
     /// <summary>
     /// Interaction logic for MainWindow.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class LogIn : Window
     {
-        public MainWindow()
+        public LogIn()
         {
 
             ProjectApplicationContext ctx = new ProjectApplicationContext();
@@ -131,7 +131,7 @@ namespace ProjectApplication
                 Street = "Cherry Street",
                 Number = 12,
                 PostCode = 2000,
-                Region = "Antwerp",
+                City = "Antwerp",
                 PhoneNumber = 045622345,
                 Email = "d_hughes@gmail.com",
                 CustomerSince = DateTime.Now

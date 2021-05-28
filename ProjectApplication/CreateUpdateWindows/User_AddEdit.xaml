@@ -1,4 +1,4 @@
-﻿<Window x:Class="ProjectApplication.AddUser"
+﻿<Window x:Class="ProjectApplication.User_AddEdit"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -32,7 +32,13 @@
             <TextBox x:Name="tbPassword"></TextBox>
             <Label>Role</Label>
             <ComboBox x:Name="cbRole" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
-            <Button x:Name="btnAssignEmployee" Width="100" Click="btnAssignEmployee_Click">Save</Button>
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
+                    <Image Source="/Images/save_symbol.png" Width="20" Height="30"></Image>
+                </StackPanel>
+            </Button>
+            
         </StackPanel>
     </Grid>
 </Window>

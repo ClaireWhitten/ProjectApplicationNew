@@ -10,17 +10,16 @@ using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace ProjectApplication
+namespace ProjectApplication.CreateUpdateWindows
 {
     /// <summary>
-    /// Interaction logic for Search_UserControl.xaml
+    /// Interaction logic for Customer_AddEdit.xaml
     /// </summary>
-    public partial class Search_UserControl : UserControl
+    public partial class Customer_AddEdit : Window
     {
-        public Search_UserControl()
+        public Customer_AddEdit()
         {
             InitializeComponent();
         }
