@@ -41,34 +41,85 @@ namespace ProjectApplication
             switch (DataGrid.Name)
             {
                 case "CustomerDataGrid":
-                    ObservableCollection<Customer> customers = this.DataContext as ObservableCollection<Customer>; // convert observable collection to correct type
                     Customer selectedCustomer = DataGrid.SelectedItem as Customer; // convert selected item in datagrid
-                    customers.Remove(selectedCustomer);
-                    break;
-                case "EmployeeDataGrid":
-                    ObservableCollection<Employee> employees = this.DataContext as ObservableCollection<Employee>; // convert observable collection to correct type
-                    Employee selectedEmployee = DataGrid.SelectedItem as Employee; // convert selected item in datagrid
-                    employees.Remove(selectedEmployee);
-                    break;
-                case "StockDataGrid":
-                    ObservableCollection<Product> stock = this.DataContext as ObservableCollection<Product>; // convert observable collection to correct type
-                    Product selectedProduct = DataGrid.SelectedItem as Product; // convert selected item in datagrid
-                    stock.Remove(selectedProduct);
-                    break;
-                case "SuppliersDataGrid":
-                    ObservableCollection<Supplier> suppliers = this.DataContext as ObservableCollection<Supplier>; // convert observable collection to correct type
-                    Supplier selectedSupplier = DataGrid.SelectedItem as Supplier; // convert selected item in datagrid
-                    suppliers.Remove(selectedSupplier);
-                    break;
-                case "UsersDataGrid":
-                    ObservableCollection<UserAccount> users = this.DataContext as ObservableCollection<UserAccount>; // convert observable collection to correct type
-                    UserAccount selectedUser = DataGrid.SelectedItem as UserAccount; // convert selected item in datagrid
-                    users.Remove(selectedUser);
+                    if (selectedCustomer != null)
+                    {
+                        ObservableCollection<Customer> customers = this.DataContext as ObservableCollection<Customer>; // convert observable collection to correct type
+                        MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this customer?", "Confirm", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            customers.Remove(selectedCustomer);
+                        }
+                    } else
+                    {
+                        MessageBox.Show("No customer has been selected.");
+                    }
                     break;
 
+
+                case "EmployeeDataGrid":
+                    Employee selectedEmployee = DataGrid.SelectedItem as Employee; // convert selected item in datagrid
+                    if (selectedEmployee != null)
+                    {
+                        ObservableCollection<Employee> employees = this.DataContext as ObservableCollection<Employee>; // convert observable collection to correct type
+                        MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Employee?", "Confirm", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            employees.Remove(selectedEmployee);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("No Employee has been selected.");
+                    }
+                    break;
+
+                case "StockDataGrid":
+                    Product selectedProduct = DataGrid.SelectedItem as Product; // convert selected item in datagrid
+                    if (selectedProduct != null)
+                    {
+                        ObservableCollection<Product> stock = this.DataContext as ObservableCollection<Product>; // convert observable collection to correct type
+                        MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Product?", "Confirm", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            stock.Remove(selectedProduct);
+                        }
+                    }
+                    break;
+                case "SuppliersDataGrid":
+                    Supplier selectedSupplier = DataGrid.SelectedItem as Supplier; // convert selected item in datagrid
+                    if (selectedSupplier!= null)
+                    {
+                        ObservableCollection<Supplier> suppliers = this.DataContext as ObservableCollection<Supplier>; // convert observable collection to correct type
+                        MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this Supplier?", "Confirm", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            suppliers.Remove(selectedSupplier);
+                        }
+                    }
+                    break;
+
+                case "UsersDataGrid":
+                    UserAccount selectedUser = DataGrid.SelectedItem as UserAccount; // convert selected item in datagrid
+                    if (selectedUser != null)
+                    {
+                        ObservableCollection<UserAccount> users = this.DataContext as ObservableCollection<UserAccount>; // convert observable collection to correct type
+                        MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete this User?", "Confirm", MessageBoxButton.YesNo);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            users.Remove(selectedUser);
+                        }
+                    }
+
+                    break;
             }
+                
             Ctx.SaveChanges();
 
         }
+
+
+
+
     }
 }

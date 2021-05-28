@@ -20,9 +20,22 @@
         <StackPanel>
             <StackPanel>
                 <Label>Manage User Accounts</Label>
-                <ContentControl x:Name="buttonsContentControl"></ContentControl>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5" Click="btnDelete_Click">
+                        <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/save_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnUndo" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/undo_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" SelectionChanged="UsersDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" SelectionChanged="UsersDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" CellEditEnding="UsersDataGrid_CellEditEnding" RowEditEnding="UsersDataGrid_RowEditEnding">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="User Id" Binding="{Binding UserAccountId}"/>
                     <DataGridTextColumn Header="Username" Binding="{Binding UserName}" />
@@ -33,10 +46,6 @@
                     <DataGridTextColumn IsReadOnly="True"  Header="Email" Binding="{Binding EmployeeEmail}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnEditUser"  Width="200" Content="Save Changes" Margin="20" Click="btnEditUser_Click"></Button>
-                <Button x:Name="btnDeleteUser" Width="200" Content="Delete User" Margin="20" Click="btnDeleteUser_Click" IsEnabled="False"></Button>
-            </StackPanel>
         </StackPanel>
     </Grid>
 </UserControl>

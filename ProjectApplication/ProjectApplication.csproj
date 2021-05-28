@@ -65,6 +65,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Employee_AddEdit.xaml.cs">
+      <DependentUpon>Employee_AddEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="AddUser.xaml.cs">
       <DependentUpon>AddUser.xaml</DependentUpon>
     </Compile>
@@ -89,6 +92,10 @@
     <Compile Include="Search_UserControl.xaml.cs">
       <DependentUpon>Search_UserControl.xaml</DependentUpon>
     </Compile>
+    <Page Include="Employee_AddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="AddUser.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -198,6 +205,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\search_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\add_symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

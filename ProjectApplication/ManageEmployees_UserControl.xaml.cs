@@ -36,7 +36,7 @@ namespace ProjectApplication
             Ctx.Employees.AsQueryable().Load();
             Employees = Ctx.Employees.Local;
             EmployeeDataGrid.ItemsSource = Employees;
-            buttonsContentControl.Content = new Buttons_UserControl(Employees, EmployeeDataGrid, Ctx);
+            
         }
 
 
@@ -84,19 +84,19 @@ namespace ProjectApplication
         {
             if (EmployeeDataGrid.SelectedItem is Employee)
             {
-                btnDeleteEmployee.IsEnabled = true;
+                btnDelete.IsEnabled = true;
               
             }
             else if (EmployeeDataGrid.SelectedItem == EmployeeDataGrid.Items[EmployeeDataGrid.Items.Count - 1])
             {
-                btnDeleteEmployee.IsEnabled = false;
+                btnDelete.IsEnabled = false;
                 EmployeeDataGrid.SelectedItem = null;
 
 
             }
             else if (EmployeeDataGrid.SelectedItem == null)
             {
-                btnDeleteEmployee.IsEnabled = false;
+                btnDelete.IsEnabled = false;
             }
         }
 

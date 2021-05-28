@@ -42,9 +42,13 @@ namespace ProjectApplication
 
             CustomerDataGrid.ItemsSource = Customers;
 
-            buttonsContentControl.Content = new Buttons_UserControl(Customers, CustomerDataGrid, Ctx);
 
-         
+        }
+
+        private void CustomerDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        {
+            MessageBox.Show("You must save the changes to the selected customer before selecting another.");
+            
         }
     }
 }

@@ -19,7 +19,20 @@
         <StackPanel>
             <StackPanel>
                 <Label>Manage Stock</Label>
-                <ContentControl x:Name="buttonsContentControl"></ContentControl>
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
+                        <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/save_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnUndo" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/undo_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                    <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
+                        <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
+                    </Button>
+                </StackPanel>
             </StackPanel>
             <DataGrid x:Name="StockDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>

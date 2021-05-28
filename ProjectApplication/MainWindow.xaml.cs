@@ -1,8 +1,10 @@
 ﻿using ProjectApplication.Classes;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -139,7 +141,10 @@ namespace ProjectApplication
             ctx.SaveChanges();
 
 
-
+            CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
+            ci.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";
+            ci.DateTimeFormat.DateSeparator = "/";
+            Thread.CurrentThread.CurrentCulture = ci;
 
 
             InitializeComponent();

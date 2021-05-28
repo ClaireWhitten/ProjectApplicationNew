@@ -37,6 +37,9 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </MenuItem>
+                <MenuItem>
+                <Label x:Name="lblDate"  Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">Date and Time</Label>
+                </MenuItem>
             </Menu>
             <Button x:Name="btnLogOut" DockPanel.Dock="Right" Background="#1daaef" BorderBrush="Black"  Width="40" Height="40" VerticalAlignment="Top" Margin="10">
                 <Image Source="Images/Logout_symbol.png" ></Image>

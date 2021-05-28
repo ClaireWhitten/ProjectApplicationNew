@@ -36,7 +36,7 @@
                 </StackPanel>
             </StackPanel>
         </Border>
-        <Label x:Name="lblDate"  Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">Date and Time</Label>
+        
 
 
 
