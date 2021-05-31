@@ -6,65 +6,43 @@
         xmlns:local="clr-namespace:ProjectApplication.Classes"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Customer_AddEdit" Height="450" Width="800">
-    <Window.Resources>
-        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
-                            ObjectType="{x:Type sys:Enum}">
-            <ObjectDataProvider.MethodParameters>
-                <x:Type TypeName="local:Role"/>
-            </ObjectDataProvider.MethodParameters>
-        </ObjectDataProvider>
-    </Window.Resources>
+        Title="Add Customer" Height="450" Width="800">
     <Grid Margin="0,0,0,-66">
         <StackPanel>
             <Label FontWeight="Bold" Margin="20 0 0 0">Customer:</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80">First Name:</Label>
-                <TextBox x:Name="tbFirstName" Width="150"></TextBox>
+                <TextBox x:Name="tbFirstName" Width="150" Text="{Binding FirstName}"></TextBox>
                 <Label Margin="10 0 0 0" Width="80">Last Name:</Label>
-                <TextBox x:Name="tbLastName" Width="150"></TextBox>
-                <Label Margin="10 0 0 0" Width="80">Date of Birth:</Label>
-                <DatePicker SelectedDate="1958-04-19" x:Name="dpDOB"></DatePicker>
+                <TextBox x:Name="tbLastName" Width="150" Text="{Binding LastName}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Margin="10 0 0 0" Width="80">Employee Id:</Label>
-                <TextBox x:Name="tbEmployeeId" Width="150"></TextBox>
-                <Label Margin="10 0 0 0" Width="80">User Account:</Label>
-                <TextBox x:Name="tbUserAccount" Width="150"></TextBox>
+                <Label Margin="10 0 0 0" Width="80">CustomerId:</Label>
+                <TextBox x:Name="tbCustomerId" Width="150" Text="{Binding CustomerId}" IsEnabled="False"></TextBox>
+                <Label Margin="10 0 0 0" Width="100">Customer Since:</Label>
+                <DatePicker x:Name="dpCustomerSince" SelectedDate="{Binding CustomerSince}"></DatePicker>
             </StackPanel>
-            <Label FontWeight="Bold" Margin="20 0 0 0">Job</Label>
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Label  Margin="10 0 0 0" Width="80">Job Role:</Label>
-                <ComboBox x:Name="cbRole" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" Width="150"/>
-                <Label  Margin="10 0 0 0" Width="80">Start Date:</Label>
-                <DatePicker x:Name="dpStartDate" Width="150"></DatePicker>
-                <Label  Margin="10 0 0 0" Width="60">Salary:</Label>
-                <TextBox x:Name="tbSalary" Width="150"></TextBox>
-            </StackPanel>
-
-            <Label FontWeight="Bold" Margin="20 0 0 0">Address</Label>
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Width="80" Margin="10 0 0 0">Street:</Label>
-                <TextBox x:Name="tbStreet" Width="150"></TextBox>
-                <Label Width="60" Margin="10 0 0 0">Number:</Label>
-                <TextBox x:Name="tbNumber" Width="50"></TextBox>
-                <Label Width="40" Margin="10 0 0 0">City:</Label>
-                <TextBox x:Name="tbCity" Width="100"></TextBox>
-                <Label Width="60" Margin="10 0 0 0">Postcode:</Label>
-                <TextBox x:Name="tbPostcode" Width="100"></TextBox>
-            </StackPanel>
-
             <Label FontWeight="Bold" Margin="20 0 0 0">Contact</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80">Phone:</Label>
-                <TextBox x:Name="tbPhoneNumber" Width="150"></TextBox>
+                <TextBox x:Name="tbPhoneNumber" Width="150" Text="{Binding PhoneNumber}"></TextBox>
                 <Label Margin="10 0 0 0" Width="60">Email:</Label>
-                <TextBox x:Name="tbEmail" Width="250"></TextBox>
+                <TextBox x:Name="tbEmail" Width="250" Text="{Binding Email}"></TextBox>
             </StackPanel>
-            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Width="80" Margin="10 0 0 0">Street:</Label>
+                <TextBox x:Name="tbStreet" Width="150" Text="{Binding Street}"></TextBox>
+                <Label Width="60" Margin="10 0 0 0">Number:</Label>
+                <TextBox x:Name="tbNumber" Width="50" Text="{Binding Number}"></TextBox>
+                <Label Width="40" Margin="10 0 0 0">City:</Label>
+                <TextBox x:Name="tbCity" Width="100" Text="{Binding City}"></TextBox>
+                <Label Width="60" Margin="10 0 0 0">Postcode:</Label>
+                <TextBox x:Name="tbPostcode" Width="100" Text="{Binding PostCode}"></TextBox>
+            </StackPanel>
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
-                    <Image Source="/Images/save_symbol.png" Width="20" Height="30"></Image>
+                    <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
                 </StackPanel>
             </Button>
         </StackPanel>

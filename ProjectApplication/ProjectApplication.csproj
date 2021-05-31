@@ -92,6 +92,12 @@
     <Compile Include="ManageDataGrids\ManageEmployees_UserControl.xaml.cs">
       <DependentUpon>ManageEmployees_UserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="usercontrols\Buttons_EditUpdateDelete.xaml.cs">
+      <DependentUpon>Buttons_EditUpdateDelete.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="usercontrols\SearchBar.xaml.cs">
+      <DependentUpon>SearchBar.xaml</DependentUpon>
+    </Compile>
     <Page Include="CreateUpdateWindows\Customer_AddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -157,6 +163,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ManageDataGrids\ManageEmployees_UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrols\Buttons_EditUpdateDelete.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="usercontrols\SearchBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

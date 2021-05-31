@@ -5,8 +5,52 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectApplication.CreateUpdateWindows"
         mc:Ignorable="d"
-        Title="Supplier_AddEdit" Height="450" Width="800">
+        Title="Add Supplier" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <Label FontWeight="Bold" Margin="20 0 0 0">Supplier:</Label>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0 0 0" Width="80">Name:</Label>
+                <TextBox x:Name="tbFirstName" Width="150"></TextBox>
+                <Label Margin="10 0 0 0" Width="80">Supplier Id:</Label>
+                <TextBox x:Name="tbSupplierId" Width="150"></TextBox>
+                <Label Margin="10 0 0 0" Width="100">Supplier Since:</Label>
+                <DatePicker SelectedDate="2021-04-19" x:Name="dpCustomerSince"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0 0 0" Width="80">Products:</Label>
+                <ComboBox Width="300">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <Label FontWeight="Bold" Margin="20 0 0 0">Contact</Label>
+            
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Width="80" Margin="10 0 0 0">Street:</Label>
+                <TextBox x:Name="tbStreet" Width="150"></TextBox>
+                <Label Width="60" Margin="10 0 0 0">Number:</Label>
+                <TextBox x:Name="tbNumber" Width="50"></TextBox>
+                <Label Width="40" Margin="10 0 0 0">City:</Label>
+                <TextBox x:Name="tbCity" Width="100"></TextBox>
+                <Label Width="60" Margin="10 0 0 0">Postcode:</Label>
+                <TextBox x:Name="tbPostcode" Width="100"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0 0 0" Width="80">Phone:</Label>
+                <TextBox x:Name="tbPhoneNumber" Width="150"></TextBox>
+                <Label Margin="10 0 0 0" Width="60">Email:</Label>
+                <TextBox x:Name="tbEmail" Width="250"></TextBox>
+            </StackPanel>
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
+                    <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
+                </StackPanel>
+            </Button>
+        </StackPanel>
     </Grid>
 </Window>

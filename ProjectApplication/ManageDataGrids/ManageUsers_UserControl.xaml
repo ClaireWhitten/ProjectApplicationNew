@@ -21,16 +21,16 @@
             <StackPanel Orientation="Horizontal" Margin="10">
                 <TextBox x:Name="tbSearch" Width="200" Height="30"></TextBox>
                 <Button x:Name="btnSearch" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/search_symbol.png" Width="30" Height="30"></Image>
+                    <Image Source="../Images/search_symbol.png" Width="30" Height="30"></Image>
                 </Button>
                 <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
-                    <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
+                    <Image Source="../Images/delete_symbol.png" Width="20" Height="30"></Image>
                 </Button>
                 <Button x:Name="btnEdit" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/edit_symbol.png" Width="40" Height="40" VerticalAlignment="Center"></Image>
+                    <Image Source="../Images/edit_symbol.png" Width="40" Height="40" VerticalAlignment="Center"></Image>
                 </Button>
                 <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
+                    <Image Source="../Images/add_symbol.png" Width="20" Height="30"></Image>
                 </Button>
             </StackPanel>
             <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" SelectionChanged="UsersDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" CellEditEnding="UsersDataGrid_CellEditEnding" RowEditEnding="UsersDataGrid_RowEditEnding">

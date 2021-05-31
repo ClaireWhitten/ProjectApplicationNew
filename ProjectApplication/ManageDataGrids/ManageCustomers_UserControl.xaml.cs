@@ -15,6 +15,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ProjectApplication.CreateUpdateWindows;
 
 namespace ProjectApplication
 {
@@ -45,10 +46,58 @@ namespace ProjectApplication
 
         }
 
-        private void CustomerDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+     
+
+        //Event handlers for Edit/Add/Delete Customers
+        private void Customers_EditClickedEventHandler(object sender,RoutedEventArgs e)
         {
-            MessageBox.Show("You must save the changes to the selected customer before selecting another.");
             
+            Customer customer = CustomerDataGrid.SelectedItem as Customer;
+            Customer_AddEdit editCustomerForm = new Customer_AddEdit(Ctx, Customers, customer);
+            editCustomerForm.Show();
+
         }
+
+
+
+
+
+        private void Customers_AddClickedEventHandler(object sender, RoutedEventArgs e)
+        {
+            Customer_AddEdit addCustomerForm = new Customer_AddEdit(Ctx, Customers);
+            addCustomerForm.Show();
+        }
+
+
+
+
+        private void Customers_DeleteClickedEventHandler(object sender, RoutedEventArgs e)
+        {
+            Customer customer = CustomerDataGrid.SelectedItem as Customer; // can this be null?
+            if (customer != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the following user: {customer.FirstName}?", "Confirm", MessageBoxButton.YesNo);
+
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Customers.Remove(customer); // removes from observable collection 
+                    Ctx.SaveChanges();
+                    MessageBox.Show($"The customer {customer.FirstName} is succussfully deleted", "Deleted");
+                }
+                else
+                {
+                    MessageBox.Show($"The customer has not been deleted.", "Action Cancelled");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No customer has been selected.");
+            }
+
+        }
+
+
     }
 }

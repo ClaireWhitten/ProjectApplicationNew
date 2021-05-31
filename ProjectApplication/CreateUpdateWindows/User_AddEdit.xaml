@@ -35,10 +35,9 @@
             <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
-                    <Image Source="/Images/save_symbol.png" Width="20" Height="30"></Image>
+                    <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
                 </StackPanel>
             </Button>
-            
         </StackPanel>
     </Grid>
 </Window>

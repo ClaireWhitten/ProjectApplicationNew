@@ -40,65 +40,66 @@ namespace ProjectApplication
         }
 
 
-        private void btnEditEmployee_Click(object sender, RoutedEventArgs e)
+        //Event handlers for Edit/Add/Delete Employees
+        private void Employees_EditClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            Ctx.SaveChanges();
-            
+
+            Employee employee = EmployeeDataGrid.SelectedItem as Employee;
+            Employee_AddEdit editEmployeeForm = new Employee_AddEdit(Ctx, employee, Employees);
+            editEmployeeForm.Show();
+
         }
 
 
 
 
-        private void btnDeleteEmployee_Click(object sender, RoutedEventArgs e)
+
+        private void Employees_AddClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            Employee selectedEmployee = EmployeeDataGrid.SelectedItem as Employee;
-            if (selectedEmployee != null)
+            Employee_AddEdit addEmployeeForm = new Employee_AddEdit(Ctx, Employees);
+            addEmployeeForm.Show();
+        }
+
+
+
+
+        private void Employees_DeleteClickedEventHandler(object sender, RoutedEventArgs e)
+        {
+            Employee employee = EmployeeDataGrid.SelectedItem as Employee; 
+            if (employee != null)
             {
-                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the following user: {selectedEmployee.FirstName}?", "Confirm", MessageBoxButton.YesNo);
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the following employee: {employee.FirstName}? \n The user account for this employee will also be deleted.", "Confirm", MessageBoxButton.YesNo);
 
 
                 if (result == MessageBoxResult.Yes)
                 {
-                    Employees.Remove(selectedEmployee); // removes from observable collection 
+                    Ctx.Employees.Remove(employee);
+                    //Employees.Remove(employee); // removes from observable collection 
                     Ctx.SaveChanges();
-                    MessageBox.Show($"The Employee {selectedEmployee.FirstName} is succussfully deleted", "Deleted");
+                    MessageBox.Show($"The employee {employee.FirstName} is succussfully deleted. The user account for this user no longer exists.", "Deleted");
                 }
                 else
                 {
-                    MessageBox.Show($"The Employee has not been deleted.", "Action Cancelled");
+                    MessageBox.Show($"The employee has not been deleted.", "Action Cancelled");
                 }
 
             }
             else
             {
-                MessageBox.Show("No Employee has been selected.");
+                MessageBox.Show("No employee has been selected.");
             }
-
 
         }
 
 
 
 
-        private void EmployeeDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (EmployeeDataGrid.SelectedItem is Employee)
-            {
-                btnDelete.IsEnabled = true;
-              
-            }
-            else if (EmployeeDataGrid.SelectedItem == EmployeeDataGrid.Items[EmployeeDataGrid.Items.Count - 1])
-            {
-                btnDelete.IsEnabled = false;
-                EmployeeDataGrid.SelectedItem = null;
 
 
-            }
-            else if (EmployeeDataGrid.SelectedItem == null)
-            {
-                btnDelete.IsEnabled = false;
-            }
-        }
+
+
+
+
 
     }
 }

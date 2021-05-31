@@ -4,6 +4,7 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectApplication.Classes"
+             xmlns:uc="clr-namespace:ProjectApplication.usercontrols"
              xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
@@ -19,21 +20,10 @@
         <StackPanel>
             <Label>Manage Employees</Label>
             <StackPanel Orientation="Horizontal" Margin="10">
-                <TextBox x:Name="tbSearch" Width="200" Height="30"></TextBox>
-                <Button x:Name="btnSearch" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/search_symbol.png" Width="30" Height="30"></Image>
-                </Button>
-                <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
-                    <Image Source="Images/delete_symbol.png" Width="20" Height="30"></Image>
-                </Button>
-                <Button x:Name="btnEdit" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/edit_symbol.png" Width="40" Height="40" VerticalAlignment="Center"></Image>
-                </Button>
-                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                    <Image Source="Images/add_symbol.png" Width="20" Height="30"></Image>
-                </Button>
+                <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Employees_EditClickedEventHandler" 
+                                         AddClicked="Employees_AddClickedEventHandler" DeleteClicked="Employees_DeleteClickedEventHandler"/>
             </StackPanel>
-            <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="false" SelectionChanged="EmployeeDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Employee Id" Binding="{Binding EmployeeId}" Width="auto"/>
                     <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="auto"/>

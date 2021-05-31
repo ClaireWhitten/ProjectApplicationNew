@@ -18,6 +18,16 @@ namespace ProjectApplication.Classes
 
         }
 
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            // Configure Student & StudentAddress entity
+            modelBuilder.Entity<Employee>()
+                        .HasOptional(e => e.UserAccount) // Mark Address property optional in Student entity
+                        .WithRequired(ua => ua.Employee) // mark Student property as required in StudentAddress entity. Cannot save StudentAddress without Student
+                        .WillCascadeOnDelete(true);
+        }
+
+
         public DbSet<Customer> Customers { get; set; }
         public DbSet<Employee> Employees { get; set; }
 
@@ -36,5 +46,9 @@ namespace ProjectApplication.Classes
         public DbSet<Supplier> Suppliers { get; set; }
 
         public DbSet<UserAccount> UserAccounts { get; set; }
+
+
+       
+
     }
 }
