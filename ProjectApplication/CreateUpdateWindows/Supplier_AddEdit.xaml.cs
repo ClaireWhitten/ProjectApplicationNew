@@ -1,5 +1,7 @@
-﻿using System;
+﻿using ProjectApplication.Classes;
+using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,9 +21,29 @@ namespace ProjectApplication.CreateUpdateWindows
     /// </summary>
     public partial class Supplier_AddEdit : Window
     {
-        public Supplier_AddEdit()
+
+        ProjectApplicationContext Ctx { get; set; }
+
+        ObservableCollection<Supplier> Suppliers { get; set; }
+
+        Supplier SelectedSupplier { get; set; }
+
+        //add contructor
+        public Supplier_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Supplier> suppliers)
         {
             InitializeComponent();
+        }
+
+
+        //edit constructor
+        public Supplier_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Supplier> suppliers, Supplier selectedSupplier)
+        {
+            Ctx = ctx;
+            SelectedSupplier = selectedSupplier;
+            Suppliers = suppliers;
+            InitializeComponent();
+            this.DataContext = Suppliers;
+            
         }
     }
 }

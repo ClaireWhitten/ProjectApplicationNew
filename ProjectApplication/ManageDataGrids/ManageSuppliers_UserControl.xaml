@@ -3,26 +3,16 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:uc="clr-namespace:ProjectApplication.usercontrols"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <Grid Background="AliceBlue">
         <StackPanel>
             <Label>Manage Suppliers</Label>
             <StackPanel Orientation="Horizontal" Margin="10">
-                    <TextBox x:Name="tbSearch" Width="200" Height="30"></TextBox>
-                    <Button x:Name="btnSearch" Width="40" Height="30" Margin="5">
-                        <Image Source="../Images/search_symbol.png" Width="30" Height="30"></Image>
-                    </Button>
-                    <Button x:Name="btnDelete" Background="AliceBlue" BorderBrush="Black"  Width="40" Height="30" Margin="5">
-                        <Image Source="../Images/delete_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                    <Button x:Name="btnEdit" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                        <Image Source="../Images/edit_symbol.png" Width="40" Height="40" VerticalAlignment="Center"></Image>
-                    </Button>
-                    <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="40" Height="30" Margin="5">
-                        <Image Source="../Images/add_symbol.png" Width="20" Height="30"></Image>
-                    </Button>
-                </StackPanel>
+                <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Suppliers_EditClickedEventHandler" 
+                                         AddClicked="Suppliers_AddClickedEventHandler" DeleteClicked="Suppliers_DeleteClickedEventHandler"/>
+            </StackPanel>
                 <DataGrid x:Name="SuppliersDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" BeginningEdit="DataGridSuppliers_BeginningEdit" RowEditEnding="DataGridSuppliers_RowEditEnding" CellEditEnding="DataGridSuppliers_CellEditEnding" SelectionChanged="DataGridSuppliers_SelectionChanged" >
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Employee Id" Binding="{Binding SupplierId}" Width="auto"/>

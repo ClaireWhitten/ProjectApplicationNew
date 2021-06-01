@@ -93,6 +93,7 @@ namespace ProjectApplication
                 SelectedEmployee.StartDate = (DateTime)dpStartDate.SelectedDate;
                 SelectedEmployee.Salary = Convert.ToDouble(tbSalary.Text);
                 SelectedEmployee.Role = (Role)cbRole.SelectedItem;
+                SelectedEmployee.UserAccount.Role = (Role)cbRole.SelectedItem;
 
 
                 CollectionViewSource.GetDefaultView(Employees).Refresh();

@@ -27,10 +27,11 @@ namespace ProjectApplication
 
         public ObservableCollection<UserAccount> UserAccounts { get; set; }
 
+        public UserAccount SelectedUser { get; set; }
+
         public User_AddEdit(ObservableCollection<UserAccount> userAccounts, ProjectApplicationContext context)
         {
             UserAccounts = userAccounts;
-
             Ctx = context;
             var employeesWithoutUserAccount = Ctx.Employees
                .Include("UserAccount")
@@ -40,30 +41,65 @@ namespace ProjectApplication
             InitializeComponent();
             cbEmployees.ItemsSource = employeesWithoutUserAccount;
            
-            
-
         }
 
-        private void btnAssignEmployee_Click(object sender, RoutedEventArgs e)
+        public User_AddEdit(ObservableCollection<UserAccount> userAccounts, ProjectApplicationContext context, UserAccount selectedUser)
         {
-            if(cbEmployees.SelectedItem is Employee)
+            UserAccounts = userAccounts;
+            Ctx = context;
+            SelectedUser = selectedUser;
+            InitializeComponent();
+            this.DataContext = selectedUser;
+            var employee = Ctx.Employees
+                .Where(e => e.EmployeeId == selectedUser.UserAccountId)
+                .ToList();
+
+            lblEmployee.Content = "Employee:";
+            lblAddEditAccount.Content = "Edit user account details";
+            cbEmployees.ItemsSource = employee;
+            cbEmployees.SelectedItem = employee[0];
+            cbEmployees.IsEnabled = false;
+           
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            //add new
+            if (SelectedUser == null)
             {
-                Employee selectedEmployee = cbEmployees.SelectedItem as Employee;
-                UserAccounts.Add(new UserAccount()
+                if (cbEmployees.SelectedItem is Employee)
                 {
-                    UserName = tbUsername.Text,
-                    Password = tbPassword.Text,
-                    Role = (Role)cbRole.SelectedItem, 
-                    CreatedOn = DateTime.Now,
-                    Employee = selectedEmployee
-                }); 
-                Ctx.SaveChanges();
-                this.Close();
-                
+                    Employee selectedEmployee = cbEmployees.SelectedItem as Employee;
+                    UserAccounts.Add(new UserAccount()
+                    {
+                        UserName = tbUsername.Text,
+                        Password = tbPassword.Text,
+                        Role = (Role)cbRole.SelectedItem,
+                        CreatedOn = DateTime.Now,
+                        Employee = selectedEmployee
+                    });
+                    Ctx.SaveChanges();
+                    this.Close();
+                }
+                else
+                {
+                    MessageBox.Show("You must select or create an employee before you can create a new account.");
+                }
             }
+            //update existing
             else
             {
-                MessageBox.Show("You must select or create an employee before you can create a new account.");
+
+                SelectedUser.UserName = tbUsername.Text;
+                SelectedUser.CreatedOn = DateTime.Now;
+                SelectedUser.Password = tbPassword.Text;
+                SelectedUser.Role = (Role)cbRole.SelectedItem;
+               
+
+                CollectionViewSource.GetDefaultView(UserAccounts).Refresh();
+                Ctx.SaveChanges();
+                this.Close();
+
             }
         }
     }

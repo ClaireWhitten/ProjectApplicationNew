@@ -71,6 +71,9 @@
     <Compile Include="CreateUpdateWindows\Employee_AddEdit.xaml.cs">
       <DependentUpon>Employee_AddEdit.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CreateUpdateWindows\Product_AddEdit.xaml.cs">
+      <DependentUpon>Product_AddEdit.xaml</DependentUpon>
+    </Compile>
     <Compile Include="CreateUpdateWindows\Supplier_AddEdit.xaml.cs">
       <DependentUpon>Supplier_AddEdit.xaml</DependentUpon>
     </Compile>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="CreateUpdateWindows\Employee_AddEdit.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CreateUpdateWindows\Product_AddEdit.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +232,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\edit_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\upload_symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

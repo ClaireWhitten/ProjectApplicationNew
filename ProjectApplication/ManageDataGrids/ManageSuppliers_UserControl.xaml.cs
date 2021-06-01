@@ -1,4 +1,5 @@
 ﻿using ProjectApplication.Classes;
+using ProjectApplication.CreateUpdateWindows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -37,33 +38,52 @@ namespace ProjectApplication
             InitializeComponent();
             SuppliersDataGrid.ItemsSource = Suppliers;
             
-
         }
 
-        private void DataGridSuppliers_BeginningEdit(object sender, DataGridBeginningEditEventArgs e)
+        //show add form
+        private void Suppliers_AddClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("You are editing a cell.");// save button appears
+            Supplier supplier = SuppliersDataGrid.SelectedItem as Supplier;
+            Supplier_AddEdit addSupplierForm = new Supplier_AddEdit(Ctx, Suppliers);
+            addSupplierForm.Show();
         }
 
-        private void DataGridSuppliers_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
+        //show edit form
+        private void Suppliers_EditClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("You are finished editing this row"); // must save the row before being able to click another row(selection changed)
+            Supplier supplier = SuppliersDataGrid.SelectedItem as Supplier;
+            Supplier_AddEdit editSupplierForm = new Supplier_AddEdit(Ctx, Suppliers, supplier);
+            editSupplierForm.Show();
         }
 
-        private void DataGridSuppliers_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
+
+        //delete selected item
+        private void Suppliers_DeleteClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("End of cell edit"); // check valid input  - colour if not 
+            Supplier supplier = SuppliersDataGrid.SelectedItem as Supplier;
+           
+            if (supplier != null)
+            {
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the following supplier: {supplier.Name}?", "Confirm", MessageBoxButton.YesNo);
+
+
+                if (result == MessageBoxResult.Yes)
+                {
+                    Suppliers.Remove(supplier);
+                    Ctx.SaveChanges();
+                    MessageBox.Show($"The supplier {supplier.Name} is succussfully deleted.", "Deleted");
+                }
+                else
+                {
+                    MessageBox.Show($"The supplier has not been deleted.", "Action Cancelled");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No supplier has been selected.");
+            }
+
         }
-
-        private void DataGridSuppliers_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            MessageBox.Show("different row selected");
-        }
-
-
-
-
-
-        // create event listeners and functions for all usercontrols - to add,edit and delete
     }
 }

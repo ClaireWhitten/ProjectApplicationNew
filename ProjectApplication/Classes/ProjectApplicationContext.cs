@@ -22,8 +22,8 @@ namespace ProjectApplication.Classes
         {
             // Configure Student & StudentAddress entity
             modelBuilder.Entity<Employee>()
-                        .HasOptional(e => e.UserAccount) // Mark Address property optional in Student entity
-                        .WithRequired(ua => ua.Employee) // mark Student property as required in StudentAddress entity. Cannot save StudentAddress without Student
+                        .HasOptional(e => e.UserAccount) // Mark userAccount property as optional in Employee entity
+                        .WithRequired(ua => ua.Employee) // mark Employee property as required in StudentAddress entity. Cannot save useraccount without Employee
                         .WillCascadeOnDelete(true);
         }
 

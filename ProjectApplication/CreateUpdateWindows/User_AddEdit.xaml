@@ -17,8 +17,8 @@
     </Window.Resources>
     <Grid>
         <StackPanel HorizontalAlignment="Center">
-            <Label Margin="10">Assign this new account to an existing employee.</Label>
-            <Label>Choose employee:</Label>
+            <Label x:Name="lblAddEditAccount" Margin="10">Assign this new account to an existing employee.</Label>
+            <Label x:Name="lblEmployee">Choose employee:</Label>
             <ComboBox x:Name="cbEmployees" Margin="0 10">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
@@ -27,12 +27,12 @@
                 </ComboBox.ItemTemplate>
             </ComboBox>
             <Label>User Name:</Label>
-            <TextBox x:Name="tbUsername"></TextBox>
+            <TextBox x:Name="tbUsername" Text="{Binding UserName}"></TextBox>
             <Label>Password:</Label>
-            <TextBox x:Name="tbPassword"></TextBox>
+            <TextBox x:Name="tbPassword" Text="{Binding Password}"></TextBox>
             <Label>Role</Label>
-            <ComboBox x:Name="cbRole" ItemsSource="{Binding Source={StaticResource dataFromEnum}}"/>
-            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+            <ComboBox x:Name="cbRole" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectedItem="{Binding Role}"/>
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
                     <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>

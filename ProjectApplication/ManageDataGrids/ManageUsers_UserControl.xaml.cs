@@ -40,90 +40,78 @@ namespace ProjectApplication
          
             Ctx.UserAccounts.AsQueryable().Load(); // Executes the query and will load the objects into the DbContext so that they are tracked by the entity framework
             // load is a method of a queryable
-            MessageBox.Show("fired");
             UserAccounts = Ctx.UserAccounts.Local;
             UsersDataGrid.ItemsSource = UserAccounts;
             
         }
 
-      
 
-        private void btnEditUser_Click(object sender, RoutedEventArgs e)
+
+
+        //Users edit, delete, add event handlers
+
+        private void Users_EditClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            Ctx.SaveChanges();
-            /*if (UsersDataGrid.SelectedItem is UserAccount)
-            {
-                UserAccount selectedUseraccount = UsersDataGrid.SelectedItem as UserAccount;
-                MessageBox.Show(selectedUseraccount.UserName);
-                EditUser editUser = new EditUser(selectedUseraccount);
-                editUser.Show();
-            }*/
+
+            UserAccount userAccount = UsersDataGrid.SelectedItem as UserAccount;
+            User_AddEdit editUserForm = new User_AddEdit(UserAccounts, Ctx, userAccount);
+            editUserForm.Show();
 
         }
 
 
 
 
-        private void btnDelete_Click(object sender, RoutedEventArgs e)
+
+        private void Users_AddClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            UserAccount selectedUser = UsersDataGrid.SelectedItem as UserAccount;
-            
-            if (selectedUser != null)
+            User_AddEdit addUserForm = new User_AddEdit(UserAccounts, Ctx);
+            addUserForm.Show();
+        }
+
+
+
+
+        private void Users_DeleteClickedEventHandler(object sender, RoutedEventArgs e)
+        {
+            UserAccount user = UsersDataGrid.SelectedItem as UserAccount;
+            if (user != null)
             {
-                MessageBoxResult result  = MessageBox.Show($"Are you sure you want to delete the following user: {selectedUser.UserName}?", "Confirm", MessageBoxButton.YesNo);
-                
-                
+                MessageBoxResult result = MessageBox.Show($"Are you sure you want to delete the following user: {user.UserName}? \n Employee '{user.Employee.EmployeeDetails}' will no longer have an user account.", "Confirm", MessageBoxButton.YesNo);
+
+
                 if (result == MessageBoxResult.Yes)
                 {
-                    UserAccounts.Remove(selectedUser); // removes from observable collection 
+                    Ctx.UserAccounts.Remove(user);
                     Ctx.SaveChanges();
-                    MessageBox.Show($"The user {selectedUser.UserName} is succussfully deleted","Deleted");
-                } else
+                    MessageBox.Show($"The user {user.UserName} is succussfully deleted.", "Deleted");
+                }
+                else
                 {
                     MessageBox.Show($"The user has not been deleted.", "Action Cancelled");
                 }
 
-            } else
+            }
+            else
             {
                 MessageBox.Show("No user has been selected.");
             }
-            
-            
+
         }
+
+
 
         private void UsersDataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            if (UsersDataGrid.SelectedItem is UserAccount)
+            
+            if (UsersDataGrid.SelectedItem == UsersDataGrid.Items[UsersDataGrid.Items.Count-1])
             {
-                btnDelete.IsEnabled = true;
-                //MessageBox.Show(UsersDataGrid.SelectedItem.ToString());
-            } else if (UsersDataGrid.SelectedItem == UsersDataGrid.Items[UsersDataGrid.Items.Count-1])
-            {
-                btnDelete.IsEnabled = false;
                 User_AddEdit userAddEdit = new User_AddEdit(UserAccounts, Ctx);
                 userAddEdit.Show();
                 UsersDataGrid.SelectedItem = null;
-               
-                
-            } else if (UsersDataGrid.SelectedItem == null)
-            {
-                btnDelete.IsEnabled = false;
-            }
+            } 
         }
 
-        private void UsersDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
-        {
-            //((DataGrid)sender).BorderBrush = Brushes.Yellow;
-
-            UserAccount selectedUser = (UserAccount)UsersDataGrid.SelectedItem;
-            DataGridRow row = UsersDataGrid.ItemContainerGenerator.ContainerFromItem(selectedUser) as DataGridRow;
-            row.Background = Brushes.YellowGreen;
-
-        }
-
-        private void UsersDataGrid_RowEditEnding(object sender, DataGridRowEditEndingEventArgs e)
-        {
-            MessageBox.Show("You must save the changes you've made to this row or they will be lost.");
-        }
+     
     }
 }
