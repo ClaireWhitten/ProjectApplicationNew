@@ -18,7 +18,7 @@ namespace ProjectApplication.Classes
 
         public double Price { get; set; }
 
-        public int BarCode { get; set; }
+        public string BarCode { get; set; }
 
 
 

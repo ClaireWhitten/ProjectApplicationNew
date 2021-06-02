@@ -22,16 +22,19 @@ namespace ProjectApplication.CreateUpdateWindows
     public partial class Supplier_AddEdit : Window
     {
 
-        ProjectApplicationContext Ctx { get; set; }
+        public ProjectApplicationContext Ctx { get; set; }
 
-        ObservableCollection<Supplier> Suppliers { get; set; }
+        public ObservableCollection<Supplier> Suppliers { get; set;}
 
-        Supplier SelectedSupplier { get; set; }
+        public Supplier SelectedSupplier { get; set; }
 
         //add contructor
         public Supplier_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Supplier> suppliers)
         {
+            Ctx = ctx;
+            Suppliers = suppliers;
             InitializeComponent();
+            this.Title = "Add Supplier";
         }
 
 
@@ -42,8 +45,56 @@ namespace ProjectApplication.CreateUpdateWindows
             SelectedSupplier = selectedSupplier;
             Suppliers = suppliers;
             InitializeComponent();
-            this.DataContext = Suppliers;
-            
+            this.Title = "Edit Supplier";
+            this.DataContext = selectedSupplier;
+            dpCustomerSince.IsEnabled = false;
+            tbSupplierId.IsEnabled = false;
+
+
+        }
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedSupplier == null)
+            {
+
+                Supplier newSupplier = new Supplier()
+                {
+                    Name = tbName.Text,
+                    Street = tbStreet.Text,
+                    Number = tbNumber.Text,
+                    PostCode = tbPostcode.Text,
+                    City = tbCity.Text,
+                    Country = tbCountry.Text,
+                    PhoneNumber = tbPhoneNumber.Text,
+                    Email = tbEmail.Text,
+                    SupplierSince = DateTime.Now
+                };
+
+                Ctx.Suppliers.Add(newSupplier);
+                Ctx.SaveChanges();
+            }
+            else
+            {
+
+                SelectedSupplier.Name = tbName.Text;
+                SelectedSupplier.Street = tbStreet.Text;
+                SelectedSupplier.Number = tbNumber.Text;
+                SelectedSupplier.PostCode = tbPostcode.Text;
+                SelectedSupplier.City = tbCity.Text;
+                SelectedSupplier.Country = tbCountry.Text;
+                SelectedSupplier.PhoneNumber = tbPhoneNumber.Text;
+                SelectedSupplier.Email = tbEmail.Text;
+                
+
+
+
+                CollectionViewSource.GetDefaultView(Suppliers).Refresh();
+                Ctx.SaveChanges();
+            }
         }
     }
+
 }
+
+

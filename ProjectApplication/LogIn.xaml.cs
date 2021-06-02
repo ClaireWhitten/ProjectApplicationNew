@@ -96,32 +96,34 @@ namespace ProjectApplication
             ctx.Suppliers.Add(new Supplier()
             {
                 Name = "Samsung Ltd",
-                Street= "Grafton Street",
-                Number=89,
-                PostCode=3000,
-                City="Dublin",
-                Country="Ireland",
-                PhoneNumber= "02897765454",
-                Email="samsung_Dublin@suppliers.com"
-                
-            });
+                Street = "Grafton Street",
+                Number = "89",
+                PostCode = "3000",
+                City = "Dublin",
+                Country = "Ireland",
+                PhoneNumber = "02897765454",
+                Email = "samsung_Dublin@suppliers.com",
+                SupplierSince = DateTime.Now
+
+            }) ;
 
             ctx.Products.Add(new Product()
             {
                 Name = "Iphone 5",
                 Description = "This is an Iphone 5.",
                 Price = 490,
-                BarCode = 12345678,
+                BarCode = "12345678",
                 Supplier = new Supplier()
                 {
                     Name = "Apple Ltd",
                     Street = "Apple Street",
-                    Number = 6,
-                    PostCode = 1600,
+                    Number = "6",
+                    PostCode = "1600",
                     City = "New York",
                     Country = "America",
                     PhoneNumber = "08897765454",
-                    Email = "Apple_NewYork@suppliers.com"
+                    Email = "Apple_NewYork@suppliers.com",
+                    SupplierSince = DateTime.Now
                 }
             });
 

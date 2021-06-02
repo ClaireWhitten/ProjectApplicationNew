@@ -11,9 +11,9 @@
             <Label FontWeight="Bold" Margin="20 0 0 0">Product Details:</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="100">Product Id:</Label>
-                <TextBox x:Name="tbProductId" Width="80"></TextBox>
+                <TextBox x:Name="tbProductId" Width="80" Text="{Binding ProductId}"></TextBox>
                 <Label Width="80" Margin="10 0 0 0">Barcode:</Label>
-                <TextBox x:Name="tbBarcode" Width="180"></TextBox>
+                <TextBox x:Name="tbBarcode" Width="180" Text="{Binding BarCode}"></TextBox>
                 <Label Width="100" Margin="10 0 0 0">Number in stock:</Label>
                 <TextBox x:Name="tbQuantity" Width="80"></TextBox>
             </StackPanel>
@@ -21,19 +21,27 @@
             <StackPanel Orientation="Vertical" Margin="20">
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                     <Label Margin="10 0 0 0" Width="150">Product Name:</Label>
-                    <TextBox x:Name="tbName" Width="300"></TextBox>
+                    <TextBox x:Name="tbName" Width="300" Text="{Binding Name}"></TextBox>
+                    <Label Width="80" Margin="10 0 0 0">Price:</Label>
+                    <TextBox x:Name="tbPrice" Width="100" Text="{Binding Price}"></TextBox>
                 </StackPanel>
                 <StackPanel Orientation="Horizontal" Margin="0 0 0 20">
                 <Label Margin="10 0 0 0" Width="150">Product Description:</Label>
-                <TextBox x:Name="tbDescription" Width="500" Height="100"></TextBox>
+                    <TextBox x:Name="tbDescription" Width="500" Height="100" Text="{Binding Description}"></TextBox>
                 </StackPanel>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20 0">
                 <Label Margin="10 0 0 0" Width="100">Supplier:</Label>
-                <TextBox x:Name="tbSupplier" Width="300"></TextBox>
+                <ComboBox Name="cbSupplier" Width="300">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}"/>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click_1">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
                         <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>

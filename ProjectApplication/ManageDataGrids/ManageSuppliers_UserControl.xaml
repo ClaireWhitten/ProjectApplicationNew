@@ -13,16 +13,16 @@
                 <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Suppliers_EditClickedEventHandler" 
                                          AddClicked="Suppliers_AddClickedEventHandler" DeleteClicked="Suppliers_DeleteClickedEventHandler"/>
             </StackPanel>
-                <DataGrid x:Name="SuppliersDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" BeginningEdit="DataGridSuppliers_BeginningEdit" RowEditEnding="DataGridSuppliers_RowEditEnding" CellEditEnding="DataGridSuppliers_CellEditEnding" SelectionChanged="DataGridSuppliers_SelectionChanged" >
+                <DataGrid x:Name="SuppliersDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>
-                    <DataGridTextColumn IsReadOnly="True" Header="Employee Id" Binding="{Binding SupplierId}" Width="auto"/>
+                    <DataGridTextColumn IsReadOnly="True" Header="Supplier Id" Binding="{Binding SupplierId}" Width="auto"/>
                     <DataGridTextColumn Header="Name" Binding="{Binding Name}" Width="auto"/>
                     <DataGridTextColumn  Header="Email" Binding="{Binding Email}" Width="auto"/>
                     <DataGridTextColumn  Header="Phone Number" Binding="{Binding PhoneNumber}" Width="auto"/>
                     <DataGridTextColumn  Header="Street" Binding="{Binding Street}" Width="auto"/>
                     <DataGridTextColumn  Header="Number" Binding="{Binding Number}" Width="auto"/>
                     <DataGridTextColumn  Header="PostCode" Binding="{Binding PostCode}" Width="auto"/>
-                    <DataGridTextColumn  Header="Region" Binding="{Binding City}" Width="auto"/>
+                    <DataGridTextColumn  Header="City" Binding="{Binding City}" Width="auto"/>
                     <DataGridTextColumn  Header="Country" Binding="{Binding Country}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>

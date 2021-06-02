@@ -43,7 +43,6 @@ namespace ProjectApplication
         //show add form
         private void Suppliers_AddClickedEventHandler(object sender, RoutedEventArgs e)
         {
-            Supplier supplier = SuppliersDataGrid.SelectedItem as Supplier;
             Supplier_AddEdit addSupplierForm = new Supplier_AddEdit(Ctx, Suppliers);
             addSupplierForm.Show();
         }

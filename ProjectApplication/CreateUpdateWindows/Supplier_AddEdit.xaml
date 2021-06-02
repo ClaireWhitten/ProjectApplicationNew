@@ -11,41 +11,33 @@
             <Label FontWeight="Bold" Margin="20 0 0 0">Supplier:</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80">Name:</Label>
-                <TextBox x:Name="tbFirstName" Width="150"></TextBox>
+                <TextBox x:Name="tbName" Width="150" Text="{Binding Name}"></TextBox>
                 <Label Margin="10 0 0 0" Width="80">Supplier Id:</Label>
-                <TextBox x:Name="tbSupplierId" Width="150"></TextBox>
+                <TextBox x:Name="tbSupplierId" Width="150" Text="{Binding SupplierId}"></TextBox>
                 <Label Margin="10 0 0 0" Width="100">Supplier Since:</Label>
-                <DatePicker SelectedDate="2021-04-19" x:Name="dpCustomerSince"></DatePicker>
+                <DatePicker x:Name="dpCustomerSince" SelectedDate="{Binding SupplierSince}"></DatePicker>
             </StackPanel>
-            <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Margin="10 0 0 0" Width="80">Products:</Label>
-                <ComboBox Width="300">
-                    <ComboBox.ItemTemplate>
-                        <DataTemplate>
-                            <Label></Label>
-                        </DataTemplate>
-                    </ComboBox.ItemTemplate>
-                </ComboBox>
-            </StackPanel>
+
             <Label FontWeight="Bold" Margin="20 0 0 0">Contact</Label>
-            
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Width="80" Margin="10 0 0 0">Street:</Label>
-                <TextBox x:Name="tbStreet" Width="150"></TextBox>
+                <TextBox x:Name="tbStreet" Width="150" Text="{Binding Street}"></TextBox>
                 <Label Width="60" Margin="10 0 0 0">Number:</Label>
-                <TextBox x:Name="tbNumber" Width="50"></TextBox>
+                <TextBox x:Name="tbNumber" Width="50" Text="{Binding Number}"></TextBox>
                 <Label Width="40" Margin="10 0 0 0">City:</Label>
-                <TextBox x:Name="tbCity" Width="100"></TextBox>
+                <TextBox x:Name="tbCity" Width="100" Text="{Binding City}"></TextBox>
                 <Label Width="60" Margin="10 0 0 0">Postcode:</Label>
-                <TextBox x:Name="tbPostcode" Width="100"></TextBox>
+                <TextBox x:Name="tbPostcode" Width="100" Text="{Binding PostCode}"></TextBox>
+                <Label Width="60" Margin="10 0 0 0">Country:</Label>
+                <TextBox x:Name="tbCountry" Width="100" Text="{Binding Country}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80">Phone:</Label>
-                <TextBox x:Name="tbPhoneNumber" Width="150"></TextBox>
+                <TextBox x:Name="tbPhoneNumber" Width="150" Text="{Binding PhoneNumber}"></TextBox>
                 <Label Margin="10 0 0 0" Width="60">Email:</Label>
-                <TextBox x:Name="tbEmail" Width="250"></TextBox>
+                <TextBox x:Name="tbEmail" Width="250" Text="{Binding Email}"></TextBox>
             </StackPanel>
-            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
                     <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>

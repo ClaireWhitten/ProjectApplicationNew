@@ -27,20 +27,89 @@ namespace ProjectApplication.CreateUpdateWindows
 
         public Product SelectedProduct { get; set; }
 
-
+        //add constructor
         public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Product> products)
         {
             Ctx = ctx;
             Products = products;
             InitializeComponent();
+            this.Title = "Add Product";
+            cbSupplier.ItemsSource = Ctx.Suppliers.ToList();
+            tbQuantity.IsEnabled = false;
+            tbProductId.IsEnabled = false;
         }
 
-        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Product> products, Product SelectedProduct)
+        //edit constructor
+        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Product> products, Product selectedProduct)
         {
             Ctx = ctx;
             Products = products;
-            SelectedProduct = SelectedProduct;
+            SelectedProduct = selectedProduct;
             InitializeComponent();
+            this.Title = "Edit Product";
+
+            var productAndSupplier = Ctx.Products.Include("Supplier").Where(p => p.ProductId == selectedProduct.ProductId).ToList();
+            this.DataContext = productAndSupplier;
+
+            var suppliers = Ctx.Suppliers.ToList();
+            cbSupplier.DataContext = suppliers;
+            cbSupplier.ItemsSource = suppliers;
+            Supplier selectedSupplier = null;
+            foreach (var item in suppliers)
+            {
+                if (item.SupplierId == productAndSupplier[0].Supplier.SupplierId)
+                {
+                    selectedSupplier = item;
+                }
+                    
+            }
+            cbSupplier.SelectedItem = selectedSupplier;
+            
+
+            int numberOfProducts = Ctx.Products.Where(p => p.BarCode == selectedProduct.BarCode).ToList().Count();
+            tbQuantity.Text = numberOfProducts.ToString();
+
+
+            tbQuantity.IsEnabled = false;
+            tbProductId.IsEnabled = false;
+            cbSupplier.IsEnabled = false;
+
+        }
+
+        private void btnSave_Click_1(object sender, RoutedEventArgs e)
+        {
+            Supplier supplier = cbSupplier.SelectedItem as Supplier;
+            if (SelectedProduct == null)
+            {
+
+                Product newProduct = new Product()
+                {
+                    Name = tbName.Text,
+                    Description = tbDescription.Text,
+                    BarCode = tbBarcode.Text,
+                    Price = Convert.ToDouble(tbPrice.Text),
+                    Supplier = supplier
+                };
+
+                Ctx.Products.Add(newProduct);
+                Ctx.SaveChanges();
+                this.Close();
+            }
+            else
+            {
+
+                SelectedProduct.Name = tbName.Text;
+                SelectedProduct.Description = tbDescription.Text;
+                SelectedProduct.BarCode = tbBarcode.Text;
+                SelectedProduct.ProductId = Convert.ToInt32(tbProductId.Text);
+                SelectedProduct.Price = Convert.ToInt32(tbPrice.Text);
+                SelectedProduct.Supplier = supplier;
+
+
+                CollectionViewSource.GetDefaultView(Products).Refresh();
+                Ctx.SaveChanges();
+                this.Close();
+            }
         }
     }
 }
