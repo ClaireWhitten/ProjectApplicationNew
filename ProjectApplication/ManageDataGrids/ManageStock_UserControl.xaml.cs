@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data.Entity;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -83,6 +84,22 @@ namespace ProjectApplication
                 MessageBox.Show("No product has been selected.");
             }
 
+        }
+
+        private void btnGenerateTemplate_Click(object sender, RoutedEventArgs e)
+        {
+            string[] templateProperties = {"Product Name:","Product Description:","Price:","BarCode:","Supplier Name:"};
+
+                                 //returns the path of                this special folder https://docs.microsoft.com/en-us/dotnet/api/system.environment.specialfolder?view=net-5.0
+            string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+
+            using (StreamWriter outputFile = new StreamWriter(System.IO.Path.Combine(docPath, "ProductTemplate.txt")))
+            {
+                foreach (var line in templateProperties)
+                {
+                    outputFile.WriteLine(line);
+                }
+            }
         }
     }
 }

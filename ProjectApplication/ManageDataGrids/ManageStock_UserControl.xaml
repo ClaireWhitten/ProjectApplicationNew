@@ -22,6 +22,12 @@
             <StackPanel Orientation="Horizontal" Margin="10">
                 <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Stock_EditClickedEventHandler" 
                                          AddClicked="Stock_AddClickedEventHandler" DeleteClicked="Stock_DeleteClickedEventHandler"/>
+                <Button x:Name="btnGenerateTemplate" Background="AliceBlue" BorderBrush="Black"  Width="200" Height="30" Margin="5" HorizontalAlignment="Right" Click="btnGenerateTemplate_Click">
+                    <StackPanel Orientation="Horizontal">
+                    <Label>Generate Template</Label>
+                    <Image Source="../Images/template_symbol.png" Width="20" Height="30"></Image>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <DataGrid x:Name="StockDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
                 <DataGrid.Columns>

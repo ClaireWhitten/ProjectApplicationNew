@@ -1,7 +1,10 @@
-﻿using ProjectApplication.Classes;
+﻿using Microsoft.Win32;
+using Newtonsoft.Json.Linq;
+using ProjectApplication.Classes;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -110,6 +113,23 @@ namespace ProjectApplication.CreateUpdateWindows
                 Ctx.SaveChanges();
                 this.Close();
             }
+        }
+
+        private void btnuploadFile_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog openFileDialog = new OpenFileDialog();
+            if (openFileDialog.ShowDialog() == true)
+            {
+                MessageBox.Show(File.ReadAllText(openFileDialog.FileName));
+            }
+
+            string fileContent = File.ReadAllText(openFileDialog.FileName);
+
+            //???
+            JObject data = JObject.Parse(fileContent);
+            MessageBox.Show(data.ToString());
+
+
         }
     }
 }

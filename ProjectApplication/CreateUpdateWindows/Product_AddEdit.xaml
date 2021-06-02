@@ -47,7 +47,7 @@
                         <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
                     </StackPanel>
                 </Button>
-                <Button x:Name="btnuploadFile" Background="AliceBlue" BorderBrush="Black" Width="110" Height="30" Margin="20">
+                <Button x:Name="btnuploadFile" Background="AliceBlue" BorderBrush="Black" Width="110" Height="30" Margin="20" Click="btnuploadFile_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Upload File</TextBlock>
                     <Image Source="../Images/upload_symbol.png" Width="25" Height="30"></Image>
