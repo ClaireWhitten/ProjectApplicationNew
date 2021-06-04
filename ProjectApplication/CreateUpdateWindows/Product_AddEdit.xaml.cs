@@ -104,7 +104,6 @@ namespace ProjectApplication.CreateUpdateWindows
                 SelectedProduct.Name = tbName.Text;
                 SelectedProduct.Description = tbDescription.Text;
                 SelectedProduct.BarCode = tbBarcode.Text;
-                SelectedProduct.ProductId = Convert.ToInt32(tbProductId.Text);
                 SelectedProduct.Price = Convert.ToInt32(tbPrice.Text);
                 SelectedProduct.Supplier = supplier;
 
@@ -122,12 +121,21 @@ namespace ProjectApplication.CreateUpdateWindows
             {
                 MessageBox.Show(File.ReadAllText(openFileDialog.FileName));
             }
-
+                                        // reads entire content of file
             string fileContent = File.ReadAllText(openFileDialog.FileName);
 
-            //???
-            JObject data = JObject.Parse(fileContent);
-            MessageBox.Show(data.ToString());
+            string[] delimiters = {
+                            "Name:",
+                            "Description:",
+                            "Barcode:",
+                            "Price:",
+                          };
+            string[] productDetailArray = fileContent.Split(delimiters, StringSplitOptions.RemoveEmptyEntries);
+
+            tbName.Text = productDetailArray[0];
+            tbDescription.Text = productDetailArray[1];
+            tbBarcode.Text = productDetailArray[2];
+            tbPrice.Text = productDetailArray[3];
 
 
         }

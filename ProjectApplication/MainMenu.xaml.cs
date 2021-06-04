@@ -41,7 +41,7 @@ namespace ProjectApplication
                 case Role.Administrator:
                     DataSubMenuItems.Add("Manage Users");
                     DataSubMenuItems.Add("Manage Employees");
-                    DataSubMenuItems.Add("Manage Stock");
+                    DataSubMenuItems.Add("Manage Products");
                     DataSubMenuItems.Add("Manage Suppliers");
                     DataSubMenuItems.Add("Manage Customers");
                     OverviewSubMenuItems.Add("Employee Overview");
@@ -98,6 +98,13 @@ namespace ProjectApplication
                     this.MainContentControl.Content = new ManageCustomers_UserControl(Ctx);
                     break;
             }
+        }
+
+        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            LogIn loginPage = new LogIn();
+            loginPage.Show();
+            this.Close();
         }
     }
 }

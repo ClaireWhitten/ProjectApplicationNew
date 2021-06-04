@@ -1,0 +1,76 @@
+﻿<Window x:Class="ProjectApplication.CreateUpdateWindows.PurchaseOrder_AddEdit"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ProjectApplication.CreateUpdateWindows"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        mc:Ignorable="d"
+        Title="Purchase Order" Height="auto" Width="auto">
+    <Grid>
+        <StackPanel>
+            <Label>Purchase Order</Label>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Width="70">Order Id:</Label>
+                <TextBlock x:Name="tbOrderId" Width="40"></TextBlock>
+                <Label Width="70">Employee:</Label>
+                <ComboBox x:Name="cbEmployee" Width="200"></ComboBox>
+                <Label Width="90">Date of Order:</Label>
+                <DatePicker x:Name="dpOrderDate"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+            <Label>Supplier:</Label>
+                <ComboBox x:Name="cbSupplier" Width="200" HorizontalAlignment="Left">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+             </StackPanel>
+
+            <StackPanel x:Name="spAddProducts" Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0">Product:</Label>
+                <ComboBox x:Name="cbProducts" Width="300" HorizontalAlignment="Left">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Margin="20 0">Quantity</Label>
+                <xctk:IntegerUpDown Name="UpDownQuantity" Width="100" HorizontalAlignment="Left"/>
+                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="30 0" Click="btnAdd_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/add_symbol.png" Width="20" Height="30"></Image>
+                        <Label>Add Product</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Margin="20">
+                <Label>Order overview:</Label>
+                <ListView x:Name="lvOrderedProducts" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                    <GridView>
+                        <GridViewColumn Header="BarCode" Width="120" DisplayMemberBinding="{Binding BarCode}"/>
+                        <GridViewColumn Header="Product" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                        <GridViewColumn Header="Price" Width="120" DisplayMemberBinding="{Binding Price}"/>
+                    </GridView>
+                </ListView>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0">Total Price:</Label>
+                <TextBox x:Name="tbPrice" Width="100"></TextBox>
+                <CheckBox VerticalAlignment="Center" Margin="10 0">Order Received</CheckBox>
+                <CheckBox VerticalAlignment="Center" Margin="10 0">Invoice paid</CheckBox>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
+                        <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</Window>

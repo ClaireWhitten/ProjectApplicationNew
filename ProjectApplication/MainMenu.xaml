@@ -42,7 +42,7 @@
                 </MenuItem>
             </Menu>
             <Button x:Name="btnLogOut" DockPanel.Dock="Right" Background="#1daaef" BorderBrush="Black"  Width="40" Height="40" VerticalAlignment="Top" Margin="10">
-                <Image Source="Images/Logout_symbol.png" ></Image>
+                <Image Source="Images/Logout_symbol.png" MouseDown="Image_MouseDown" ></Image>
             </Button>
             <ContentControl x:Name="MainContentControl"></ContentControl>
         </DockPanel>
