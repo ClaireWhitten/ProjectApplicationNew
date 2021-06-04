@@ -52,6 +52,11 @@ namespace ProjectApplication.Classes
             }
         }
 
-       
+        public override string ToString()
+        {
+            return $"Name:  Employee ID: {this.EmployeeId}, {this.FirstName} {this.LastName}, Role:{this.Role}";
+        }
+
+
     }
 }

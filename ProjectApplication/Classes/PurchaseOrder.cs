@@ -29,6 +29,9 @@ namespace ProjectApplication.Classes
         public Supplier Supplier { get; set; }
 
         public ICollection<PurchaseOrderProduct> PurchaseOrderProducts { get; set; }
+
+
+        
     }
 
 

@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using ProjectApplication.Classes;
 using ProjectApplication.CreateUpdateWindows;
+using ProjectApplication.OrdersListViews;
 
 namespace ProjectApplication
 {
@@ -62,8 +63,8 @@ namespace ProjectApplication
                     DataSubMenuItems.Add("Manage Stock");
                     OverviewSubMenuItems.Add("Warehouse Overview");
                     OverviewSubMenuItems.Add("Products Overview");
-                    OrdersSubMenuItems.Add("Sales Orders");
-                    OrdersSubMenuItems.Add("Purchase Orders");
+                    OrdersSubMenuItems.Add("Sales");
+                    OrdersSubMenuItems.Add("Purchases");
                     break;
             }
 
@@ -96,6 +97,9 @@ namespace ProjectApplication
                     break;
                 case "Manage Customers":
                     this.MainContentControl.Content = new ManageCustomers_UserControl(Ctx);
+                    break;
+                case "Purchases":
+                    this.MainContentControl.Content = new PurchaseOrders_UserControl(Ctx);
                     break;
             }
         }

@@ -20,7 +20,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
             <Label>Supplier:</Label>
-                <ComboBox x:Name="cbSupplier" Width="200" HorizontalAlignment="Left">
+                <ComboBox x:Name="cbSupplier" Width="200" HorizontalAlignment="Left" SelectionChanged="cbSupplier_SelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <Label Content="{Binding Name}"></Label>
