@@ -27,6 +27,8 @@ namespace ProjectApplication.CreateUpdateWindows
 
         Product SelectedProduct { get; set; }
 
+        Employee SelectedEmployee { get; set; }
+
         ObservableCollection<Product> ProductsOrdered { get; set; }
 
 
@@ -37,6 +39,7 @@ namespace ProjectApplication.CreateUpdateWindows
             InitializeComponent();
             tbOrderId.Visibility = Visibility.Hidden;
             lvOrderedProducts.ItemsSource = ProductsOrdered;
+           
 
             //List warehouse employees and administrators
             var purchaseEmployees = Ctx.Employees.Where(e => e.Role == Role.Administrator || e.Role == Role.WarehouseEmployee).ToList();
@@ -73,7 +76,7 @@ namespace ProjectApplication.CreateUpdateWindows
             int quantity = Convert.ToInt32(UpDownQuantity.Value);
             if (SelectedProduct != null)
             {
-                for (int i = 0; i < quantity; i++)
+                for (int i = 0; i <quantity; i++)
                 {
                     ProductsOrdered.Add(new Product()
                     {
@@ -81,15 +84,89 @@ namespace ProjectApplication.CreateUpdateWindows
                         Name = SelectedProduct.Name,
                         Description = SelectedProduct.Description,
                         Price = SelectedProduct.Price,
-                        Supplier = SelectedSupplier,
+                        Supplier = SelectedSupplier
                     });
                 }
+                tbPrice.Text = Convert.ToString(CalculateTotal());
             }
             else
             {
                 MessageBox.Show("You must select a product");
             }
         }
+
+
+        private void btnSave_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedEmployee = cbEmployee.SelectedItem as Employee;
+
+            
+
+            if (SelectedEmployee != null)
+            {
+                // create the purchase order
+                PurchaseOrder newPurchaseOrder = new PurchaseOrder()
+                {
+                    OrderDate = (DateTime)dpOrderDate.SelectedDate,
+                    TotalPrice = Convert.ToDouble(tbPrice.Text),
+                    Supplier = SelectedSupplier,
+                    Employee = SelectedEmployee,
+                    Paid = (bool)chkPaid.IsChecked,
+                    Arrived = (bool)chkArrived.IsChecked
+                };
+                Ctx.PurchaseOrders.Add(newPurchaseOrder);
+               
+                //loop over each product in the products Ordered list and add them to the database
+                foreach (var item in ProductsOrdered)
+                {
+                    //Method 1 (in comment) adding products to products table, 
+
+                    //Ctx.Products.Add(item);
+
+                    //Method 2  - adding all via the purchaseOrderProducts icollection property of the purchase order (the icollection needs to be initiated first. Have done so in the constructor.)
+                    newPurchaseOrder.PurchaseOrderProducts.Add(new PurchaseOrderProduct()
+                    {
+                        PurchaseOrder = newPurchaseOrder,
+                        Product = item
+                    });
+
+
+                    /*PurchaseOrderProduct purchaseOrderProduct = new PurchaseOrderProduct()
+                    {
+                        PurchaseOrderId = newPurchaseOrder.PurchaseOrderId,
+                        ProductId = item.ProductId
+                    };
+                    
+                    Ctx.PurchaseOrderProducts.Add(purchaseOrderProduct);*/
+                    Ctx.SaveChanges();
+                }
+                MessageBox.Show("The purchase order has been saved in the system.");
+                this.Close();
+
+
+            }
+            else
+            {
+                MessageBox.Show("You must select an employee before saving the order.");
+            }
+            
+        }
+
+
+
+
+        //methods
+        private double CalculateTotal()
+        {
+            double totalPrice = 0;
+            foreach (var item in ProductsOrdered)
+            {
+                totalPrice += item.Price;
+            }
+            return totalPrice;
+        }
+
+       
     }
 }
                 

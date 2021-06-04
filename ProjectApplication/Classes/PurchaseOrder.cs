@@ -20,15 +20,21 @@ namespace ProjectApplication.Classes
 
         public bool Paid { get; set; }
 
+        public bool Arrived { get; set; }
 
 
-        public OrderStatus OrderStatus { get; set; }
+
 
         public Employee Employee { get; set; }
 
         public Supplier Supplier { get; set; }
 
         public ICollection<PurchaseOrderProduct> PurchaseOrderProducts { get; set; }
+
+        public PurchaseOrder()
+        {
+            this.PurchaseOrderProducts = new List<PurchaseOrderProduct>();
+        }
 
 
         

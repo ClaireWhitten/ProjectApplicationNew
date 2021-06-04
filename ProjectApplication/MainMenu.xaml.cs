@@ -92,7 +92,7 @@ namespace ProjectApplication
                 case "Manage Suppliers":
                     this.MainContentControl.Content = new ManageSuppliers_UserControl(Ctx);
                     break;
-                case "Manage Stock":
+                case "Manage Products":
                     this.MainContentControl.Content = new ManageStock_UserControl(Ctx);
                     break;
                 case "Manage Customers":

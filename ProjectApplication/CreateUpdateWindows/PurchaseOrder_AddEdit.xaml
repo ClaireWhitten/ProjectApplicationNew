@@ -49,22 +49,40 @@
             </StackPanel>
             <StackPanel Margin="20">
                 <Label>Order overview:</Label>
-                <ListView x:Name="lvOrderedProducts" ScrollViewer.VerticalScrollBarVisibility="Visible">
-                    <GridView>
-                        <GridViewColumn Header="BarCode" Width="120" DisplayMemberBinding="{Binding BarCode}"/>
-                        <GridViewColumn Header="Product" Width="120" DisplayMemberBinding="{Binding Name}"/>
-                        <GridViewColumn Header="Price" Width="120" DisplayMemberBinding="{Binding Price}"/>
-                    </GridView>
+                <ListView x:Name="lvOrderedProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="400">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="BarCode" Width="120" DisplayMemberBinding="{Binding BarCode}"/>
+                            <GridViewColumn Header="Product" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="120" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Quantity" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="tbQuantity" Text="1"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Modify" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+                                            <Image Source="../Images/delete_symbol.png" Width="20" Height="20"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
                 </ListView>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0">Total Price:</Label>
                 <TextBox x:Name="tbPrice" Width="100"></TextBox>
-                <CheckBox VerticalAlignment="Center" Margin="10 0">Order Received</CheckBox>
-                <CheckBox VerticalAlignment="Center" Margin="10 0">Invoice paid</CheckBox>
+                <CheckBox x:Name="chkArrived" VerticalAlignment="Center" Margin="10 0">Order Arrived</CheckBox>
+                <CheckBox x:Name="chkPaid" VerticalAlignment="Center" Margin="10 0">Invoice paid</CheckBox>
             </StackPanel>
             <StackPanel>
-                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
                     <StackPanel Orientation="Horizontal">
                         <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
                         <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>

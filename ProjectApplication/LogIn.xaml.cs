@@ -26,8 +26,8 @@ namespace ProjectApplication
         public LogIn()
         {
 
-            ProjectApplicationContext ctx = new ProjectApplicationContext();
-           ctx.Employees.Add(new Employee()
+           ProjectApplicationContext ctx = new ProjectApplicationContext();
+           /*ctx.Employees.Add(new Employee()
             {
                 FirstName = "Claire",
                 LastName = "Whitten",
@@ -141,7 +141,7 @@ namespace ProjectApplication
 
 
             ctx.SaveChanges();
-
+*/
 
             CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
             ci.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";

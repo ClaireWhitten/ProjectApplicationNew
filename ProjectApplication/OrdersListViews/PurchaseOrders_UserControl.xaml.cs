@@ -36,7 +36,10 @@ namespace ProjectApplication.OrdersListViews
             Ctx = ctx;
             InitializeComponent();
             Ctx.PurchaseOrders.AsQueryable().Load();
-            PurchaseOrders = Ctx.PurchaseOrders.Local;
+            //PurchaseOrders = Ctx.PurchaseOrders.Local;
+           
+
+            PurchaseOrders = Ctx.PurchaseOrders.Include("Supplier").Include("Employee").
             lvPurchaseOrders.ItemsSource = PurchaseOrders;
             
         }
