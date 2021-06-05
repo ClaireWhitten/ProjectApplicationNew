@@ -22,6 +22,12 @@ namespace ProjectApplication.Classes
 
         public bool Arrived { get; set; }
 
+        public bool Problem { get; set; }
+
+        public bool Archived { get; set; }
+
+        public string Comment { get; set; }
+
 
 
 

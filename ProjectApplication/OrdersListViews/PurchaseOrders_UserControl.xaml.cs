@@ -25,29 +25,66 @@ namespace ProjectApplication.OrdersListViews
     public partial class PurchaseOrders_UserControl : UserControl
     {
 
-        public ProjectApplicationContext Ctx { get; set; } 
+        public ProjectApplicationContext Ctx { get; set; }
 
         ObservableCollection<PurchaseOrder> PurchaseOrders { get; set; }
 
         PurchaseOrder SelectedPurchaseOrder { get; set; }
 
+
         public PurchaseOrders_UserControl(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
-            InitializeComponent();
-            Ctx.PurchaseOrders.AsQueryable().Load();
-            //PurchaseOrders = Ctx.PurchaseOrders.Local;
-           
+            if (!IsInitialized)
+            {
+                InitializeComponent();
+            }
 
-            PurchaseOrders = Ctx.PurchaseOrders.Include("Supplier").Include("Employee").
-            lvPurchaseOrders.ItemsSource = PurchaseOrders;
             
+            MessageBox.Show("fired!");
+
+            //Ctx.PurchaseOrders.AsQueryable().Load();
+
+            // query purchase orders including the supplier, employee and the products in the purchase order (via the purchaseorderproducts icollection property)
+            Ctx.PurchaseOrders
+                .Include("Supplier")
+                .Include("Employee")
+                .Include(po => po.PurchaseOrderProducts.Select(p => p.Product)).Load(); //load - does same as toList() - executes query
+
+            PurchaseOrders = Ctx.PurchaseOrders.Local;
+            lvPurchaseOrders.ItemsSource = PurchaseOrders;
         }
 
+
+        //checkbox and text box inputs changed event handler
+        private void inputChanged(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("changes saved to database");
+            Ctx.SaveChanges();
+        }
+
+      
+
+        //new purchase order event handler
         private void btnNewPurchaseOrder_Click(object sender, RoutedEventArgs e)
         {
             PurchaseOrder_AddEdit purchaseOrderForm = new PurchaseOrder_AddEdit(Ctx);
             purchaseOrderForm.Show();
         }
+
+       
+
+
+
+
+        /*private void btnEditPurchaseOrder_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedPurchaseOrder = lvPurchaseOrders.SelectedItem as PurchaseOrder;
+            PurchaseOrder_AddEdit purchaseOrderForm = new PurchaseOrder_AddEdit(Ctx, SelectedPurchaseOrder, PurchaseOrders);
+            purchaseOrderForm.Show();
+        }*/
+
+
+
     }
 }

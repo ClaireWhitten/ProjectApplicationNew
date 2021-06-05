@@ -6,6 +6,9 @@
              xmlns:local="clr-namespace:ProjectApplication.OrdersListViews"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+    </UserControl.Resources>
     <Grid Background="AliceBlue">
         <StackPanel>
             <Label>Purchase Orders</Label>
@@ -24,20 +27,82 @@
                 </ComboBox>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="btnNewPurchaseOrder" Click="btnNewPurchaseOrder_Click" Width="200" Margin="20">New Purchase Order</Button>
-                    <Button x:Name="btnEditPurchaseOrder" Width="200" Margin="20">Edit Purchase Order</Button>
+                    
                 </StackPanel>
             </StackPanel>
-            <ListView x:Name="lvPurchaseOrders">
+            <ListView x:Name="lvPurchaseOrders" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="600">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding PurchaseOrderId}"></GridViewColumn>
                         <GridViewColumn Header="Date" DisplayMemberBinding="{Binding OrderDate}"></GridViewColumn>
                         <GridViewColumn Header="Total Price" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
-                        <GridViewColumn Header="Products" DisplayMemberBinding="{Binding PurchaseOrderProducts.Product}"></GridViewColumn>
                         <GridViewColumn Header="Supplier" DisplayMemberBinding="{Binding Supplier.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Contact" Width="150">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                    <TextBlock Text="{Binding Supplier.Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                                    <TextBlock Text="{Binding Supplier.PhoneNumber}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                         <GridViewColumn Header="Employee" DisplayMemberBinding="{Binding Employee}"></GridViewColumn>
-                        <GridViewColumn Header="Paid" DisplayMemberBinding="{Binding Paid}"></GridViewColumn>
-                        <GridViewColumn Header="Arrived" DisplayMemberBinding="{Binding Arrived}"></GridViewColumn>
+                        <GridViewColumn Header="Invoice Paid">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chkPaid" IsChecked="{Binding Paid}" Checked="inputChanged" Unchecked="inputChanged"></CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                       
+                        <GridViewColumn Header="Products">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Width ="400">
+                                        <Label>View Products</Label>
+                                        <Expander x:Name="exToggle">
+                                            <ListView Width ="400" ItemsSource="{Binding PurchaseOrderProducts}" Visibility="{Binding ElementName=exToggle, Path=IsExpanded, Converter={StaticResource BoolToVis}}" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="100">
+                                                <ListView.View>
+                                                    <GridView>
+                                                        <GridViewColumn Header="Product" DisplayMemberBinding="{Binding Product.Name}"></GridViewColumn>
+                                                        <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Product.BarCode}"></GridViewColumn>
+                                                    </GridView>
+                                                </ListView.View>
+                                         </ListView>
+                                     </Expander>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Order Arrived">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chkArrived" IsChecked="{Binding Arrived}" Click ="inputChanged"></CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Problem">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chkProblem" IsChecked="{Binding Problem}" Click ="inputChanged"></CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Comment">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBox x:Name="tbComment" Text="{Binding Comment}" Width="200" LostFocus="inputChanged"></TextBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Archive Order">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <CheckBox x:Name="chkArchive" IsChecked="{Binding Archived}" Click ="inputChanged"></CheckBox>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
                     </GridView>
                 </ListView.View>
             </ListView>

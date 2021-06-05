@@ -21,17 +21,25 @@ namespace ProjectApplication.CreateUpdateWindows
     /// </summary>
     public partial class PurchaseOrder_AddEdit : Window
     {
-        ProjectApplicationContext Ctx { get; set; }
+        public ProjectApplicationContext Ctx { get; set; }
 
-        Supplier SelectedSupplier { get; set; }
+        public Supplier SelectedSupplier { get; set; }
 
-        Product SelectedProduct { get; set; }
+        public Product SelectedProduct { get; set; }
 
-        Employee SelectedEmployee { get; set; }
+        public  Employee SelectedEmployee { get; set; }
 
-        ObservableCollection<Product> ProductsOrdered { get; set; }
+        public ObservableCollection<Product> ProductsOrdered { get; set; }
+
+        public PurchaseOrder SelectedPurchaseOrder { get; set; }
+
+        public ObservableCollection<PurchaseOrder> PurchaseOrders { get; set; }
+
+       
 
 
+
+        //constructor new purchase order
         public PurchaseOrder_AddEdit(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
@@ -49,6 +57,26 @@ namespace ProjectApplication.CreateUpdateWindows
             var currentSuppliers = Ctx.Suppliers.ToList();
             cbSupplier.ItemsSource = currentSuppliers;
         }
+
+        //constructor edit purchase order
+
+
+        public PurchaseOrder_AddEdit(ProjectApplicationContext ctx, PurchaseOrder selectedPurchaseOrder, ObservableCollection<PurchaseOrder> purchaseOrders)
+        {
+            Ctx = ctx;
+            SelectedPurchaseOrder = selectedPurchaseOrder;
+            PurchaseOrders = purchaseOrders;
+
+            
+        }
+
+
+
+
+
+
+
+
 
 
 
@@ -112,7 +140,9 @@ namespace ProjectApplication.CreateUpdateWindows
                     Supplier = SelectedSupplier,
                     Employee = SelectedEmployee,
                     Paid = (bool)chkPaid.IsChecked,
-                    Arrived = (bool)chkArrived.IsChecked
+                    Arrived = false,
+                    Problem = false,
+                    Archived = false
                 };
                 Ctx.PurchaseOrders.Add(newPurchaseOrder);
                
