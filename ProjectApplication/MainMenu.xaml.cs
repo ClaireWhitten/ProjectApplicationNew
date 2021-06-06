@@ -54,7 +54,6 @@ namespace ProjectApplication
                     break;
                 case Role.SalesEmployee:
                     DataSubMenuItems.Add("Manage Customers");
-
                     OrdersSubMenuItems.Add("Sales");
                     OrdersSubMenuItems.Add("Purchases");
 
@@ -93,7 +92,7 @@ namespace ProjectApplication
                     this.MainContentControl.Content = new ManageSuppliers_UserControl(Ctx);
                     break;
                 case "Manage Products":
-                    this.MainContentControl.Content = new ManageStock_UserControl(Ctx);
+                    this.MainContentControl.Content = new ManageProducts_UserControl(Ctx);
                     break;
                 case "Manage Customers":
                     this.MainContentControl.Content = new ManageCustomers_UserControl(Ctx);

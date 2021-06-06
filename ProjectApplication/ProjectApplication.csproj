@@ -47,9 +47,20 @@
     <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
+    <Reference Include="Syncfusion.Compression.Base, Version=19.1460.0.66, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Compression.Base.19.1.0.66\lib\net46\Syncfusion.Compression.Base.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Licensing, Version=19.1460.0.66, Culture=neutral, PublicKeyToken=632609b4d040f6b4, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Licensing.19.1.0.66\lib\net46\Syncfusion.Licensing.dll</HintPath>
+    </Reference>
+    <Reference Include="Syncfusion.Pdf.Base, Version=19.1460.0.66, Culture=neutral, PublicKeyToken=3d67ed1f87d44c89, processorArchitecture=MSIL">
+      <HintPath>..\packages\Syncfusion.Pdf.Wpf.19.1.0.66\lib\net46\Syncfusion.Pdf.Base.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -83,6 +94,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\RegisteredProduct.cs" />
     <Compile Include="CreateUpdateWindows\Customer_AddEdit.xaml.cs">
       <DependentUpon>Customer_AddEdit.xaml</DependentUpon>
     </Compile>
@@ -107,8 +119,8 @@
     <Compile Include="ManageDataGrids\ManageCustomers_UserControl.xaml.cs">
       <DependentUpon>ManageCustomers_UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="ManageDataGrids\ManageStock_UserControl.xaml.cs">
-      <DependentUpon>ManageStock_UserControl.xaml</DependentUpon>
+    <Compile Include="ManageDataGrids\ManageProducts_UserControl.xaml.cs">
+      <DependentUpon>ManageProducts_UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="ManageDataGrids\ManageSuppliers_UserControl.xaml.cs">
       <DependentUpon>ManageSuppliers_UserControl.xaml</DependentUpon>
@@ -192,7 +204,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="ManageDataGrids\ManageStock_UserControl.xaml">
+    <Page Include="ManageDataGrids\ManageProducts_UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

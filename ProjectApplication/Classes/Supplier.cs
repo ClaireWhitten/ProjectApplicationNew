@@ -31,7 +31,7 @@ namespace ProjectApplication.Classes
 
         public ICollection<Product> Products { get; set; }
 
-
+        public ICollection<RegisteredProduct> RegisteredProducts { get; set; }
 
     }
 }

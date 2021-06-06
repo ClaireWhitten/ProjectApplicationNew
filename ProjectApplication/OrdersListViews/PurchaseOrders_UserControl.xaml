@@ -27,7 +27,7 @@
                 </ComboBox>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="btnNewPurchaseOrder" Click="btnNewPurchaseOrder_Click" Width="200" Margin="20">New Purchase Order</Button>
-                    
+                    <Button x:Name="btnGenerateInvoice" Width="200" Margin="20" Click="btnGenerateInvoice_Click">Generate Invoice</Button>
                 </StackPanel>
             </StackPanel>
             <ListView x:Name="lvPurchaseOrders" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="600">

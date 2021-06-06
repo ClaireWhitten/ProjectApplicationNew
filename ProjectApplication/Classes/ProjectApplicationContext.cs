@@ -12,9 +12,9 @@ namespace ProjectApplication.Classes
 
         public ProjectApplicationContext() : base("name=ProjectApplicationDBConnectString")
         {
-            Database.SetInitializer(new CreateDatabaseIfNotExists<ProjectApplicationContext>());
+            //Database.SetInitializer(new CreateDatabaseIfNotExists<ProjectApplicationContext>());
             //Database.SetInitializer(new DropCreateDatabaseIfModelChanges<ProjectApplicationContext>());
-            //Database.SetInitializer(new DropCreateDatabaseAlways<ProjectApplicationContext>());
+            Database.SetInitializer(new DropCreateDatabaseAlways<ProjectApplicationContext>());
 
         }
 
@@ -34,6 +34,8 @@ namespace ProjectApplication.Classes
         public DbSet<Invoice> Invoices { get; set; }
 
         public DbSet<Product> Products { get; set; }
+
+        public DbSet<RegisteredProduct> RegisteredProducts { get; set; }
 
         public DbSet<PurchaseOrder> PurchaseOrders { get; set; }
 

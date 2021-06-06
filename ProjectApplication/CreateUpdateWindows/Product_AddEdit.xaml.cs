@@ -26,12 +26,12 @@ namespace ProjectApplication.CreateUpdateWindows
     {
         public ProjectApplicationContext Ctx { get; set; }
 
-        public ObservableCollection<Product> Products { get; set; }
+        public ObservableCollection<RegisteredProduct> Products { get; set; }
 
-        public Product SelectedProduct { get; set; }
+        public RegisteredProduct SelectedProduct { get; set; }
 
         //add constructor
-        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Product> products)
+        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<RegisteredProduct> products)
         {
             Ctx = ctx;
             Products = products;
@@ -43,7 +43,7 @@ namespace ProjectApplication.CreateUpdateWindows
         }
 
         //edit constructor
-        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<Product> products, Product selectedProduct)
+        public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<RegisteredProduct> products, RegisteredProduct selectedProduct)
         {
             Ctx = ctx;
             Products = products;
@@ -51,7 +51,7 @@ namespace ProjectApplication.CreateUpdateWindows
             InitializeComponent();
             this.Title = "Edit Product";
 
-            var productAndSupplier = Ctx.Products.Include("Supplier").Where(p => p.ProductId == selectedProduct.ProductId).ToList();
+            var productAndSupplier = Ctx.RegisteredProducts.Include("Supplier").Where(rp => rp.RegisteredProductId == selectedProduct.RegisteredProductId).ToList();
             this.DataContext = productAndSupplier;
 
             var suppliers = Ctx.Suppliers.ToList();
@@ -69,7 +69,7 @@ namespace ProjectApplication.CreateUpdateWindows
             cbSupplier.SelectedItem = selectedSupplier;
             
 
-            int numberOfProducts = Ctx.Products.Where(p => p.BarCode == selectedProduct.BarCode).ToList().Count();
+            int numberOfProducts = Ctx.Products.Where(p => p.RegisteredProductId == selectedProduct.RegisteredProductId).ToList().Count();
             tbQuantity.Text = numberOfProducts.ToString();
 
 
@@ -85,7 +85,7 @@ namespace ProjectApplication.CreateUpdateWindows
             if (SelectedProduct == null)
             {
 
-                Product newProduct = new Product()
+                RegisteredProduct newProduct = new RegisteredProduct()
                 {
                     Name = tbName.Text,
                     Description = tbDescription.Text,
@@ -94,7 +94,7 @@ namespace ProjectApplication.CreateUpdateWindows
                     Supplier = supplier
                 };
 
-                Ctx.Products.Add(newProduct);
+                Ctx.RegisteredProducts.Add(newProduct);
                 Ctx.SaveChanges();
                 this.Close();
             }
@@ -107,7 +107,7 @@ namespace ProjectApplication.CreateUpdateWindows
                 SelectedProduct.Price = Convert.ToInt32(tbPrice.Text);
                 SelectedProduct.Supplier = supplier;
 
-
+                
                 CollectionViewSource.GetDefaultView(Products).Refresh();
                 Ctx.SaveChanges();
                 this.Close();
@@ -125,8 +125,8 @@ namespace ProjectApplication.CreateUpdateWindows
             string fileContent = File.ReadAllText(openFileDialog.FileName);
 
             string[] delimiters = {
-                            "Name:",
-                            "Description:",
+                            "Product Name:",
+                            "Product Description:",
                             "Barcode:",
                             "Price:",
                           };
@@ -136,7 +136,6 @@ namespace ProjectApplication.CreateUpdateWindows
             tbDescription.Text = productDetailArray[1];
             tbBarcode.Text = productDetailArray[2];
             tbPrice.Text = productDetailArray[3];
-
 
         }
     }

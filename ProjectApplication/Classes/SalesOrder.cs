@@ -29,7 +29,7 @@ namespace ProjectApplication.Classes
 
         public ICollection<SalesOrderProduct> SalesOrderProducts { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
+        //public virtual Invoice Invoice { get; set; }
 
 
     }

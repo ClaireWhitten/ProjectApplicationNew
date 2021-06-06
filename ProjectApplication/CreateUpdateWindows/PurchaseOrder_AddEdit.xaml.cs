@@ -25,7 +25,7 @@ namespace ProjectApplication.CreateUpdateWindows
 
         public Supplier SelectedSupplier { get; set; }
 
-        public Product SelectedProduct { get; set; }
+        public RegisteredProduct SelectedProduct { get; set; }
 
         public  Employee SelectedEmployee { get; set; }
 
@@ -61,7 +61,7 @@ namespace ProjectApplication.CreateUpdateWindows
         //constructor edit purchase order
 
 
-        public PurchaseOrder_AddEdit(ProjectApplicationContext ctx, PurchaseOrder selectedPurchaseOrder, ObservableCollection<PurchaseOrder> purchaseOrders)
+       /* public PurchaseOrder_AddEdit(ProjectApplicationContext ctx, PurchaseOrder selectedPurchaseOrder, ObservableCollection<PurchaseOrder> purchaseOrders)
         {
             Ctx = ctx;
             SelectedPurchaseOrder = selectedPurchaseOrder;
@@ -69,7 +69,7 @@ namespace ProjectApplication.CreateUpdateWindows
 
             
         }
-
+*/
 
 
 
@@ -86,9 +86,9 @@ namespace ProjectApplication.CreateUpdateWindows
             if (SelectedSupplier != null)
             {
                 int supplierId = SelectedSupplier.SupplierId;
-                //List products from that supplier
-                var SupplierProducts = Ctx.Products.Include("Supplier") //set to list of registered products 
-                    .Where(p => p.Supplier.SupplierId == supplierId)
+                //List Registeredproducts from that supplier
+                var SupplierProducts = Ctx.RegisteredProducts.Include("Supplier") 
+                    .Where(rp => rp.Supplier.SupplierId == supplierId)
                     .ToList();
                 cbProducts.ItemsSource = SupplierProducts;
             }
@@ -100,22 +100,36 @@ namespace ProjectApplication.CreateUpdateWindows
         }
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
-            SelectedProduct = cbProducts.SelectedItem as Product;
-            int quantity = Convert.ToInt32(UpDownQuantity.Value);
+            SelectedProduct = cbProducts.SelectedItem as RegisteredProduct;
             if (SelectedProduct != null)
             {
-                for (int i = 0; i <quantity; i++)
+                int quantity = Convert.ToInt32(UpDownQuantity.Value);
+                if (ProductsOrdered.Count == 0 || SelectedProduct.Supplier.SupplierId == ProductsOrdered[0].Supplier.SupplierId)
                 {
-                    ProductsOrdered.Add(new Product()
+                    for (int i = 0; i < quantity; i++)
                     {
-                        BarCode = SelectedProduct.BarCode,
-                        Name = SelectedProduct.Name,
-                        Description = SelectedProduct.Description,
-                        Price = SelectedProduct.Price,
-                        Supplier = SelectedSupplier
-                    });
+                        ProductsOrdered.Add(new Product()
+                        {
+                            RegisteredProduct = SelectedProduct,
+                            BarCode = SelectedProduct.BarCode,
+                            Name = SelectedProduct.Name,
+                            Description = SelectedProduct.Description,
+                            Price = SelectedProduct.Price,
+                            Supplier = SelectedSupplier
+                        });
+                    }
+
+                    foreach (var item in ProductsOrdered)
+                    {
+                        MessageBox.Show(item.Supplier.SupplierId.ToString());
+                    }
+                    tbPrice.Text = Convert.ToString(CalculateTotal());
                 }
-                tbPrice.Text = Convert.ToString(CalculateTotal());
+                else
+                {
+                    MessageBox.Show("Purchase orders for each supplier must be made seperately. You can only add products from one supplier.");
+                }
+
             }
             else
             {
@@ -149,11 +163,11 @@ namespace ProjectApplication.CreateUpdateWindows
                 //loop over each product in the products Ordered list and add them to the database
                 foreach (var item in ProductsOrdered)
                 {
-                    //Method 1 (in comment) adding products to products table, 
+                    //Method 1 (in comment) - by setting the properties of the tussentable
 
                     //Ctx.Products.Add(item);
 
-                    //Method 2  - adding all via the purchaseOrderProducts icollection property of the purchase order (the icollection needs to be initiated first. Have done so in the constructor.)
+                    //Method 2  - via the purchaseOrderProducts icollection property of the purchase order (the icollection needs to be initiated first. Have done so in the constructor.)
                     newPurchaseOrder.PurchaseOrderProducts.Add(new PurchaseOrderProduct()
                     {
                         PurchaseOrder = newPurchaseOrder,

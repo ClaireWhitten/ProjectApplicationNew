@@ -16,6 +16,12 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Syncfusion.Pdf;
+using Syncfusion.Pdf.Graphics;
+using System.ComponentModel;
+using System.Drawing;
+
+
 
 namespace ProjectApplication.OrdersListViews
 {
@@ -35,12 +41,9 @@ namespace ProjectApplication.OrdersListViews
         public PurchaseOrders_UserControl(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
-            if (!IsInitialized)
-            {
-                InitializeComponent();
-            }
 
-            
+            InitializeComponent();
+
             MessageBox.Show("fired!");
 
             //Ctx.PurchaseOrders.AsQueryable().Load();
@@ -59,7 +62,7 @@ namespace ProjectApplication.OrdersListViews
         //checkbox and text box inputs changed event handler
         private void inputChanged(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("changes saved to database");
+            //save changes to database
             Ctx.SaveChanges();
         }
 
@@ -72,17 +75,58 @@ namespace ProjectApplication.OrdersListViews
             purchaseOrderForm.Show();
         }
 
-       
 
-
-
-
-        /*private void btnEditPurchaseOrder_Click(object sender, RoutedEventArgs e)
+        //generate pdf invoice - using synfusion library
+        private void btnGenerateInvoice_Click(object sender, RoutedEventArgs e)
         {
             SelectedPurchaseOrder = lvPurchaseOrders.SelectedItem as PurchaseOrder;
-            PurchaseOrder_AddEdit purchaseOrderForm = new PurchaseOrder_AddEdit(Ctx, SelectedPurchaseOrder, PurchaseOrders);
-            purchaseOrderForm.Show();
-        }*/
+
+            if (SelectedPurchaseOrder != null)
+            {
+                Invoice invoice = new Invoice()
+                {
+                    PurchaseOrder = SelectedPurchaseOrder,
+                    Date = DateTime.Now,
+                    Paid = SelectedPurchaseOrder.Paid
+                };
+
+                // pdf 
+                using (PdfDocument document = new PdfDocument())
+                {
+                    PdfPage page = document.Pages.Add();
+
+                    PdfGraphics graphics = page.Graphics;
+
+                    PdfFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 14);
+
+                    graphics.DrawString("Invoice", font, PdfBrushes.Black, new PointF(0, 0));
+
+                    document.Save("Invoice.pdf");
+
+                    System.Diagnostics.Process.Start("Invoice.pdf");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No purchase order selected. To generate an invoice select an order.");
+            }
+        }
+
+
+        //methods for invoice
+        private double PriceWithBTW(double totalPrice)
+        {
+            return totalPrice * 1.21;
+        }
+
+        private double BTW(double totalPrice)
+        {
+            return totalPrice * 0.21;
+        }
+
+
+
 
 
 

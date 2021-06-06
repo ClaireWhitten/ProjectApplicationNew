@@ -27,7 +27,7 @@ namespace ProjectApplication
         {
 
            ProjectApplicationContext ctx = new ProjectApplicationContext();
-           /*ctx.Employees.Add(new Employee()
+           ctx.Employees.Add(new Employee()
             {
                 FirstName = "Claire",
                 LastName = "Whitten",
@@ -107,7 +107,7 @@ namespace ProjectApplication
 
             }) ;
 
-            ctx.Products.Add(new Product()
+            ctx.RegisteredProducts.Add(new RegisteredProduct()
             {
                 Name = "Iphone 5",
                 Description = "This is an Iphone 5.",
@@ -127,6 +127,31 @@ namespace ProjectApplication
                 }
             });
 
+
+            ctx.RegisteredProducts.Add(new RegisteredProduct()
+            {
+                Name = "Bosch washing machine",
+                Description = "This is a washing machine.",
+                Price = 490,
+                BarCode = "12345678",
+                Supplier = new Supplier()
+                {
+                    Name = "Bosch Ltd",
+                    Street = "Bosch Street",
+                    Number = "6",
+                    PostCode = "1600",
+                    City = "London",
+                    Country = "Uk",
+                    PhoneNumber = "08897765454",
+                    Email = "Bosch_London@suppliers.com",
+                    SupplierSince = DateTime.Now
+                }
+            });
+
+
+
+
+
             ctx.Customers.Add(new Customer() { 
                 FirstName= "David", 
                 LastName = "Hughes",
@@ -141,7 +166,7 @@ namespace ProjectApplication
 
 
             ctx.SaveChanges();
-           */
+           
 
             CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
             ci.DateTimeFormat.ShortDatePattern = "dd/MM/yyyy";

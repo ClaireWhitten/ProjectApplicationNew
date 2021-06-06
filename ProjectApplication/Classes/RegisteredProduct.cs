@@ -6,10 +6,8 @@ using System.Threading.Tasks;
 
 namespace ProjectApplication.Classes
 {
-    public class Product
+    public class RegisteredProduct
     {
-        public int ProductId { get; set; }
-
         public int RegisteredProductId { get; set; }
 
         public int? SupplierId { get; set; }
@@ -26,12 +24,7 @@ namespace ProjectApplication.Classes
 
         public Supplier Supplier { get; set; }
 
-        public RegisteredProduct RegisteredProduct { get; set; }
+        public ICollection<Product> Products { get; set; }
 
-        public ICollection<PurchaseOrderProduct> PurchaseOrderProducts { get; set; }
-
-        public ICollection<SalesOrderProduct> SalesOrderProducts { get; set; }
-
-       
     }
 }
