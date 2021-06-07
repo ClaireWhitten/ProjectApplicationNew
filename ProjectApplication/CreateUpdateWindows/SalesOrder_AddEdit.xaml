@@ -4,9 +4,96 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectApplication.CreateUpdateWindows"
+         xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
         Title="SalesOrder_AddEdit" Height="450" Width="800">
     <Grid>
-        
+        <StackPanel>
+            <Label>Sales Order</Label>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Width="70" x:Name="lblOrderId">Order Id:</Label>
+                <TextBlock x:Name="tbOrderId" Width="40" Text="{Binding SalesOrderId}"></TextBlock>
+                <Label Width="70">Customer:</Label>
+                <ComboBox x:Name="cbCustomer" Width="200" SelectedItem="{Binding}"></ComboBox>
+                <Label Width="90">Date of Order:</Label>
+                <DatePicker x:Name="dpOrderDate" SelectedDate="{Binding OrderDate}"></DatePicker>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label>Employee:</Label>
+                <TextBlock x:Name="tbEmployee"></TextBlock>
+            </StackPanel>
+            <StackPanel x:Name="spAddProducts" Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0">Product Type:</Label>
+                <ComboBox x:Name="cbProductType" Width="300" HorizontalAlignment="Left" SelectionChanged="cbProductType_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal">
+                <Label Margin="10 0">Product:</Label>
+                <ComboBox x:Name="cbProducts" Width="300" HorizontalAlignment="Left" SelectionChanged="cbProducts_SelectionChanged">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <Label Content="{Binding Name}"></Label>
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Label Margin="20 0">Quantity</Label>
+                <StackPanel Orientation="Vertical">
+                <xctk:IntegerUpDown Name="UpDownQuantity" Width="100" HorizontalAlignment="Left"/>
+                <Label Margin="10 0" x:Name="lblLeft" Foreground="Red"></Label>
+                </StackPanel>
+                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="30 0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="../Images/add_symbol.png" Width="20" Height="30"></Image>
+                        <Label>Add Product</Label>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+            <StackPanel Margin="20">
+                <Label>Order overview:</Label>
+                <ListView x:Name="lvOrderedProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" MaxHeight="400">
+                    <ListView.View>
+                        <GridView>
+                            <GridViewColumn Header="BarCode" Width="120" DisplayMemberBinding="{Binding BarCode}"/>
+                            <GridViewColumn Header="Product" Width="120" DisplayMemberBinding="{Binding Name}"/>
+                            <GridViewColumn Header="Price" Width="120" DisplayMemberBinding="{Binding Price}"/>
+                            <GridViewColumn Header="Quantity" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <TextBlock x:Name="tbQuantity" Text="1"/>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                            <GridViewColumn Header="Modify" Width="150">
+                                <GridViewColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <Button>
+                                            <Image Source="../Images/delete_symbol.png" Width="20" Height="20"></Image>
+                                        </Button>
+                                    </DataTemplate>
+                                </GridViewColumn.CellTemplate>
+                            </GridViewColumn>
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Margin="10 0">Total Price:</Label>
+                <TextBlock x:Name="tbPrice" Width="100"></TextBlock>
+                <CheckBox x:Name="chkPaid" VerticalAlignment="Center" Margin="10 0">Order Paid</CheckBox>
+            </StackPanel>
+            <StackPanel>
+                <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
+                        <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>
+                    </StackPanel>
+                </Button>
+            </StackPanel>
+        </StackPanel>
     </Grid>
 </Window>

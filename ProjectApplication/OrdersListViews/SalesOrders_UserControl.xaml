@@ -1,17 +1,23 @@
-﻿<UserControl x:Class="ProjectApplication.OrdersListViews.PurchaseOrders_UserControl"
+﻿<UserControl x:Class="ProjectApplication.OrdersListViews.SalesOrders_UserControl"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:ProjectApplication.OrdersListViews"
+             xmlns:local="clr-namespace:ProjectApplication.Classes"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
-        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+        <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
+                        ObjectType="{x:Type sys:Enum}">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:OrderStatus"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
     </UserControl.Resources>
-    <Grid Background="AliceBlue">
+    <Grid>
         <StackPanel>
-            <Label>Purchase Orders</Label>
+            <Label>Sales Orders</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="0 10">Filter By:</Label>
                 <ComboBox x:Name="filter" Width="200" HorizontalAlignment="Right" Margin="20">
@@ -26,23 +32,25 @@
                     </ComboBoxItem>
                 </ComboBox>
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="btnNewPurchaseOrder" Click="btnNewPurchaseOrder_Click" Width="200" Margin="20">New Purchase Order</Button>
+                    <Button x:Name="btnNewSalesOrder"  Width="200" Margin="20" Click="btnNewSalesOrder_Click">New Sales Order</Button>
+                    <Button x:Name="btnEditSalesOrder"  Width="200" Margin="20" Click="btnEditSalesOrder_Click">Edit Order</Button>
+                    <Button x:Name="btnCancelSalesOrder"  Width="200" Margin="20" Click="btnCancelSalesOrder_Click">Cancel Order</Button>
                     <Button x:Name="btnGenerateInvoice" Width="200" Margin="20" Click="btnGenerateInvoice_Click">Generate Invoice</Button>
                 </StackPanel>
             </StackPanel>
-            <ListView x:Name="lvPurchaseOrders" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="600">
+            <ListView x:Name="lvSalesOrders" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="600">
                 <ListView.View>
                     <GridView>
-                        <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding PurchaseOrderId}"></GridViewColumn>
+                        <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding SalesOrderId}"></GridViewColumn>
                         <GridViewColumn Header="Date" DisplayMemberBinding="{Binding OrderDate}"></GridViewColumn>
                         <GridViewColumn Header="Total Price" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
-                        <GridViewColumn Header="Supplier" DisplayMemberBinding="{Binding Supplier.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Supplier" DisplayMemberBinding="{Binding Customer.Name}"></GridViewColumn>
                         <GridViewColumn Header="Contact" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel>
-                                    <TextBlock Text="{Binding Supplier.Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
-                                    <TextBlock Text="{Binding Supplier.PhoneNumber}"/>
+                                        <TextBlock Text="{Binding Customer.Email}" TextDecorations="Underline" Foreground="Blue" Cursor="Hand"/>
+                                        <TextBlock Text="{Binding Customer.PhoneNumber}"/>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
@@ -51,34 +59,34 @@
                         <GridViewColumn Header="Invoice Paid">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox x:Name="chkPaid" IsChecked="{Binding Paid}" Checked="inputChanged" Unchecked="inputChanged"></CheckBox>
+                                    <CheckBox x:Name="chkPaid" IsChecked="{Binding Paid}" Click="inputChanged"></CheckBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                       
+
                         <GridViewColumn Header="Products">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <StackPanel Width ="400">
                                         <Label>View Products</Label>
                                         <Expander x:Name="exToggle">
-                                            <ListView Width ="400" ItemsSource="{Binding PurchaseOrderProducts}" Visibility="{Binding ElementName=exToggle, Path=IsExpanded, Converter={StaticResource BoolToVis}}" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="100">
+                                            <ListView Width ="400" ItemsSource="{Binding SalesOrderProducts}" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="100">
                                                 <ListView.View>
                                                     <GridView>
                                                         <GridViewColumn Header="Product" DisplayMemberBinding="{Binding Product.Name}"></GridViewColumn>
                                                         <GridViewColumn Header="Code" DisplayMemberBinding="{Binding Product.BarCode}"></GridViewColumn>
                                                     </GridView>
                                                 </ListView.View>
-                                         </ListView>
-                                     </Expander>
+                                            </ListView>
+                                        </Expander>
                                     </StackPanel>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Order Arrived">
+                        <GridViewColumn Header="Order Status">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <CheckBox x:Name="chkArrived" IsChecked="{Binding Arrived}" Click ="inputChanged"></CheckBox>
+                                    <ComboBox x:Name="chkOrderStatus" SelectedItem="{Binding OrderStatus}" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" SelectionChanged="inputChanged"></ComboBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

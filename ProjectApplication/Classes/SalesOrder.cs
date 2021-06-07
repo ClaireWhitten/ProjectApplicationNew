@@ -20,6 +20,14 @@ namespace ProjectApplication.Classes
 
         public bool Paid { get; set; }
 
+        public OrderStatus OrderStatus { get; set; }
+
+        public bool Problem { get; set; }
+
+        public bool Active { get; set; }
+
+        public string Comment { get; set; }
+
 
 
 
@@ -29,7 +37,7 @@ namespace ProjectApplication.Classes
 
         public ICollection<SalesOrderProduct> SalesOrderProducts { get; set; }
 
-        //public virtual Invoice Invoice { get; set; }
+        public virtual Invoice Invoice { get; set; }
 
 
     }

@@ -11,8 +11,6 @@
         <StackPanel>
             <Label>Purchase Order</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Width="70">Order Id:</Label>
-                <TextBlock x:Name="tbOrderId" Width="40"></TextBlock>
                 <Label Width="70">Employee:</Label>
                 <ComboBox x:Name="cbEmployee" Width="200"></ComboBox>
                 <Label Width="90">Date of Order:</Label>
@@ -77,8 +75,7 @@
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0">Total Price:</Label>
-                <TextBox x:Name="tbPrice" Width="100"></TextBox>
-                <CheckBox x:Name="chkArrived" VerticalAlignment="Center" Margin="10 0">Order Arrived</CheckBox>
+                <TextBlock x:Name="tbPrice" Width="100"></TextBlock>
                 <CheckBox x:Name="chkPaid" VerticalAlignment="Center" Margin="10 0">Invoice paid</CheckBox>
             </StackPanel>
             <StackPanel>

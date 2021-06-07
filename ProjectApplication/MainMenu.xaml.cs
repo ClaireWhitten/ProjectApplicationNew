@@ -23,7 +23,7 @@ namespace ProjectApplication
     public partial class MainMenu : Window
     {
 
-        public UserAccount User { get; set; }
+        public static UserAccount User { get; set; }
 
         public List<string> DataSubMenuItems = new List<string>();
         public List<string> OverviewSubMenuItems = new List<string>();
@@ -98,6 +98,9 @@ namespace ProjectApplication
                     this.MainContentControl.Content = new ManageCustomers_UserControl(Ctx);
                     break;
                 case "Purchases":
+                    this.MainContentControl.Content = new PurchaseOrders_UserControl(Ctx);
+                    break;
+                case "Sales":
                     this.MainContentControl.Content = new PurchaseOrders_UserControl(Ctx);
                     break;
             }

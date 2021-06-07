@@ -91,7 +91,8 @@ namespace ProjectApplication.CreateUpdateWindows
                     Description = tbDescription.Text,
                     BarCode = tbBarcode.Text,
                     Price = Convert.ToDouble(tbPrice.Text),
-                    Supplier = supplier
+                    Supplier = supplier,
+                    ProductCategory = (ProductCategory)cbProductType.SelectedItem
                 };
 
                 Ctx.RegisteredProducts.Add(newProduct);
@@ -106,8 +107,10 @@ namespace ProjectApplication.CreateUpdateWindows
                 SelectedProduct.BarCode = tbBarcode.Text;
                 SelectedProduct.Price = Convert.ToInt32(tbPrice.Text);
                 SelectedProduct.Supplier = supplier;
+                SelectedProduct.ProductCategory = (ProductCategory)cbProductType.SelectedItem;
 
-                
+
+
                 CollectionViewSource.GetDefaultView(Products).Refresh();
                 Ctx.SaveChanges();
                 this.Close();

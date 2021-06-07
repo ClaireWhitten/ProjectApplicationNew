@@ -22,10 +22,13 @@ namespace ProjectApplication
     /// Interaction logic for MainWindow.xaml
     /// </summary>
     public partial class LogIn : Window
+
     {
+       
         public LogIn()
         {
-
+            
+           
            ProjectApplicationContext ctx = new ProjectApplicationContext();
            ctx.Employees.Add(new Employee()
             {
@@ -124,28 +127,30 @@ namespace ProjectApplication
                     PhoneNumber = "08897765454",
                     Email = "Apple_NewYork@suppliers.com",
                     SupplierSince = DateTime.Now
-                }
-            });
+                },
+                ProductCategory = ProductCategory.Phone
+        });
 
 
             ctx.RegisteredProducts.Add(new RegisteredProduct()
             {
-                Name = "Bosch washing machine",
-                Description = "This is a washing machine.",
+                Name = "Beats headphones",
+                Description = "These are Beats headphones.",
                 Price = 490,
                 BarCode = "12345678",
                 Supplier = new Supplier()
                 {
-                    Name = "Bosch Ltd",
-                    Street = "Bosch Street",
+                    Name = "Beats Ltd",
+                    Street = "Beat Street",
                     Number = "6",
                     PostCode = "1600",
                     City = "London",
                     Country = "Uk",
                     PhoneNumber = "08897765454",
-                    Email = "Bosch_London@suppliers.com",
+                    Email = "Beats_London@suppliers.com",
                     SupplierSince = DateTime.Now
-                }
+                },
+                ProductCategory = ProductCategory.Headphone
             });
 
 
@@ -175,7 +180,7 @@ namespace ProjectApplication
 
 
             InitializeComponent();
-            MessageBox.Show("Ended");
+          
         }
 
        

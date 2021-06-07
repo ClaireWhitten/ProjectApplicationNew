@@ -24,7 +24,7 @@ namespace ProjectApplication.Classes
 
         public bool Problem { get; set; }
 
-        public bool Archived { get; set; }
+        public bool Active { get; set; }
 
         public string Comment { get; set; }
 
@@ -35,7 +35,6 @@ namespace ProjectApplication.Classes
 
         public Supplier Supplier { get; set; }
 
-        public virtual Invoice Invoice { get; set; }
 
         public ICollection<PurchaseOrderProduct> PurchaseOrderProducts { get; set; }
 

@@ -9,7 +9,7 @@ namespace ProjectApplication.Classes
 {
     public class Invoice
     {
-        [ForeignKey("PurchaseOrder")]
+        [ForeignKey("SalesOrder")]
         public int InvoiceId { get; set; }
 
         public DateTime Date { get; set; }
@@ -17,7 +17,9 @@ namespace ProjectApplication.Classes
         public bool Paid { get; set; }
 
 
-        public virtual PurchaseOrder PurchaseOrder { get; set; }
+        public virtual SalesOrder SalesOrder { get; set; }
+
+        
 
 
     }

@@ -32,6 +32,6 @@ namespace ProjectApplication.Classes
 
         public ICollection<SalesOrder> SalesOrders { get; set; }
 
-
+        //write tostring method 
     }
 }

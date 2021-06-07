@@ -22,6 +22,8 @@ namespace ProjectApplication.Classes
 
         public string BarCode { get; set; }
 
+        public ProductCategory ProductCategory { get; set; }
+
 
 
         public Supplier Supplier { get; set; }

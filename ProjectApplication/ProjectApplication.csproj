@@ -94,7 +94,9 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Classes\ProductCategory.cs" />
     <Compile Include="Classes\RegisteredProduct.cs" />
+    <Compile Include="Classes\UtilityClass.cs" />
     <Compile Include="CreateUpdateWindows\Customer_AddEdit.xaml.cs">
       <DependentUpon>Customer_AddEdit.xaml</DependentUpon>
     </Compile>
@@ -133,6 +135,9 @@
     </Compile>
     <Compile Include="OrdersListViews\PurchaseOrders_UserControl.xaml.cs">
       <DependentUpon>PurchaseOrders_UserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="OrdersListViews\SalesOrders_UserControl.xaml.cs">
+      <DependentUpon>SalesOrders_UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="usercontrols\Buttons_EditUpdateDelete.xaml.cs">
       <DependentUpon>Buttons_EditUpdateDelete.xaml</DependentUpon>
@@ -224,6 +229,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="OrdersListViews\SalesOrders_UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="usercontrols\Buttons_EditUpdateDelete.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -292,6 +301,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\coolblue_banner.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\cancel_order.png" />
+    <Resource Include="Images\edit_order.png" />
+    <Resource Include="Images\new_order.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\invoice_symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

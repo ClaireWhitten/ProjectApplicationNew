@@ -45,7 +45,6 @@ namespace ProjectApplication.CreateUpdateWindows
             Ctx = ctx;
             ProductsOrdered = new ObservableCollection<Product>();
             InitializeComponent();
-            tbOrderId.Visibility = Visibility.Hidden;
             lvOrderedProducts.ItemsSource = ProductsOrdered;
            
 
@@ -156,7 +155,7 @@ namespace ProjectApplication.CreateUpdateWindows
                     Paid = (bool)chkPaid.IsChecked,
                     Arrived = false,
                     Problem = false,
-                    Archived = false
+                    Active = true
                 };
                 Ctx.PurchaseOrders.Add(newPurchaseOrder);
                
