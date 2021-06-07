@@ -20,8 +20,8 @@ using Syncfusion.Pdf;
 using Syncfusion.Pdf.Graphics;
 using System.ComponentModel;
 using System.Drawing;
-
-
+using Microsoft.Win32;
+using System.Diagnostics;
 
 namespace ProjectApplication.OrdersListViews
 {
@@ -90,7 +90,7 @@ namespace ProjectApplication.OrdersListViews
                     Paid = SelectedPurchaseOrder.Paid
                 };
 
-                // pdf 
+                // create pdf invoice
                 using (PdfDocument document = new PdfDocument())
                 {
                     PdfPage page = document.Pages.Add();
@@ -99,9 +99,42 @@ namespace ProjectApplication.OrdersListViews
 
                     PdfFont font = new PdfStandardFont(PdfFontFamily.TimesRoman, 14);
 
-                    graphics.DrawString("Invoice", font, PdfBrushes.Black, new PointF(0, 0));
+                    PdfImage image = PdfImage.FromFile("../../Images/coolblue_banner.jpg");
 
-                    document.Save("Invoice.pdf");
+                    graphics.DrawImage(image, 0, 0, 300, 100);
+
+                    graphics.DrawString("Invoice", font, PdfBrushes.Black, new PointF(0, 100));
+
+
+
+
+
+
+
+
+
+
+                    //allow user to select where to save document-  savefiledialog
+                    SaveFileDialog saveFileDialog = new SaveFileDialog();
+                    saveFileDialog.Filter = "Files(*.pdf)|*.pdf";
+                    saveFileDialog.AddExtension = true;
+                    saveFileDialog.DefaultExt = ".pdf";
+
+                    if (saveFileDialog.ShowDialog() == true && saveFileDialog.CheckPathExists)
+                    {
+                        document.Save(saveFileDialog.FileName);
+                        document.Close();
+
+                        MessageBoxResult result = MessageBox.Show("Do you want to view the PDF file?", "Invoice Created", MessageBoxButton.YesNo, MessageBoxImage.Information);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            Process process = new Process();
+                            process.StartInfo.FileName = saveFileDialog.FileName;
+                            process.Start();
+                        }
+                    }
+                    //document.Save("Invoice.pdf"); 
+
 
                     System.Diagnostics.Process.Start("Invoice.pdf");
                 }
