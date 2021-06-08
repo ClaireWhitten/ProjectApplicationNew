@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="ProjectApplication.Overview.Overview"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:ProjectApplication.Overview"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*" />
+            <ColumnDefinition Width="2*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*" />
+        </Grid.RowDefinitions>
+   
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
+            <Image Source="../Images/coolblue_logo.jpg" Width="150" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
+            <Label x:Name ="lblWelcome">Welcome</Label>
+            <Label x:Name ="lblDateTime"></Label>
+            <Viewbox>
+                <Calendar/>
+            </Viewbox>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+            <Label>Sales</Label>
+                <TextBox x:Name="lbSalesNumber"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+            <Label>Purchases:</Label>
+            <TextBox x:Name="lbPurchases"></TextBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+            <Label>Profit:</Label>
+            <TextBox x:Name="lbProfit"></TextBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
+            <StackPanel Orientation="Vertical">
+                <Label>Top 5 Sellers</Label>
+                <ListBox x:Name="lbTopSellers"></ListBox>
+            </StackPanel>
+            <StackPanel Orientation="Vertical">
+                <Label>New staff:</Label>
+                <ListBox x:Name="lbnewStaff"></ListBox>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.RowSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=RowDefinitions.Count, Mode=OneWay}">
+            <Label>New staff:</Label>
+            <ListBox x:Name="lbStock" Height="400"></ListBox>
+        </StackPanel>
+
+    </Grid>
+</UserControl>

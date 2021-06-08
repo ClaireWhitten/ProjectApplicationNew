@@ -38,6 +38,7 @@ namespace ProjectApplication.CreateUpdateWindows
             InitializeComponent();
             this.Title = "Add Product";
             cbSupplier.ItemsSource = Ctx.Suppliers.ToList();
+            cbProductType.ItemsSource = Enum.GetValues(typeof(ProductCategory));
             tbQuantity.IsEnabled = false;
             tbProductId.IsEnabled = false;
         }
@@ -50,6 +51,8 @@ namespace ProjectApplication.CreateUpdateWindows
             SelectedProduct = selectedProduct;
             InitializeComponent();
             this.Title = "Edit Product";
+            cbProductType.ItemsSource = Enum.GetValues(typeof(ProductCategory));
+
 
             var productAndSupplier = Ctx.RegisteredProducts.Include("Supplier").Where(rp => rp.RegisteredProductId == selectedProduct.RegisteredProductId).ToList();
             this.DataContext = productAndSupplier;

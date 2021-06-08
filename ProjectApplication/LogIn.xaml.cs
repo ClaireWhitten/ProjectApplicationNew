@@ -24,13 +24,12 @@ namespace ProjectApplication
     public partial class LogIn : Window
 
     {
-       
+        public ProjectApplicationContext Ctx = new ProjectApplicationContext();
         public LogIn()
         {
             
            
-           ProjectApplicationContext ctx = new ProjectApplicationContext();
-           ctx.Employees.Add(new Employee()
+           /*Ctx.Employees.Add(new Employee()
             {
                 FirstName = "Claire",
                 LastName = "Whitten",
@@ -46,7 +45,7 @@ namespace ProjectApplication
             });
 
 
-            ctx.Employees.Add(new Employee()
+            Ctx.Employees.Add(new Employee()
             {
                 FirstName = "Kristof",
                 LastName = "Bruggeman",
@@ -69,7 +68,7 @@ namespace ProjectApplication
                 
             });
 
-            ctx.Employees.Add(new Employee()
+            Ctx.Employees.Add(new Employee()
             {
                 FirstName = "Callum",
                 LastName = "Whitten",
@@ -84,8 +83,8 @@ namespace ProjectApplication
                 Role = Role.WarehouseEmployee,
             });
 
-            ctx.SaveChanges();
-            var employee = ctx.Employees.FirstOrDefault(e => e.Role == Role.Administrator);
+            Ctx.SaveChanges();
+            var employee = Ctx.Employees.FirstOrDefault(e => e.Role == Role.Administrator);
 
 
             employee.UserAccount = new UserAccount()
@@ -96,7 +95,7 @@ namespace ProjectApplication
                 Role = Role.Administrator
             };
 
-            ctx.Suppliers.Add(new Supplier()
+            Ctx.Suppliers.Add(new Supplier()
             {
                 Name = "Samsung Ltd",
                 Street = "Grafton Street",
@@ -110,7 +109,7 @@ namespace ProjectApplication
 
             }) ;
 
-            ctx.RegisteredProducts.Add(new RegisteredProduct()
+            Ctx.RegisteredProducts.Add(new RegisteredProduct()
             {
                 Name = "Iphone 5",
                 Description = "This is an Iphone 5.",
@@ -132,7 +131,7 @@ namespace ProjectApplication
         });
 
 
-            ctx.RegisteredProducts.Add(new RegisteredProduct()
+            Ctx.RegisteredProducts.Add(new RegisteredProduct()
             {
                 Name = "Beats headphones",
                 Description = "These are Beats headphones.",
@@ -157,7 +156,7 @@ namespace ProjectApplication
 
 
 
-            ctx.Customers.Add(new Customer() { 
+            Ctx.Customers.Add(new Customer() { 
                 FirstName= "David", 
                 LastName = "Hughes",
                 Street = "Cherry Street",
@@ -170,7 +169,7 @@ namespace ProjectApplication
             });
 
 
-            ctx.SaveChanges();
+            Ctx.SaveChanges();*/
            
 
             CultureInfo ci = new CultureInfo(Thread.CurrentThread.CurrentCulture.Name);
@@ -189,13 +188,12 @@ namespace ProjectApplication
         {
             string username = tbUserName.Text;
             string password = tbPassword.Text;
-            ProjectApplicationContext ctx = new ProjectApplicationContext();
-            UserAccount user = ctx.UserAccounts.FirstOrDefault(u => u.UserName == username);
+            UserAccount user = Ctx.UserAccounts.FirstOrDefault(u => u.UserName == username);
             if (user != null)
             {
                 if (user.Password == password)
                 {
-                    MainMenu mainMenu = new MainMenu(user);
+                    MainMenu mainMenu = new MainMenu(user, Ctx);
                     mainMenu.Show();
                     this.Close();
                 }

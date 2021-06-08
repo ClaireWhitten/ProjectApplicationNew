@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ProjectApplication.CreateUpdateWindows"
          xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
         mc:Ignorable="d"
-        Title="SalesOrder_AddEdit" Height="450" Width="800">
+        Title="SalesOrder_AddEdit" Height="450" Width="800"
+        Closing="SalesOrder_Closing">
     <Grid>
         <StackPanel>
             <Label>Sales Order</Label>
@@ -46,7 +47,7 @@
                 <xctk:IntegerUpDown Name="UpDownQuantity" Width="100" HorizontalAlignment="Left"/>
                 <Label Margin="10 0" x:Name="lblLeft" Foreground="Red"></Label>
                 </StackPanel>
-                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="30 0">
+                <Button x:Name="btnAdd" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="30 0" Click="btnAdd_Click">
                     <StackPanel Orientation="Horizontal">
                         <Image Source="../Images/add_symbol.png" Width="20" Height="30"></Image>
                         <Label>Add Product</Label>

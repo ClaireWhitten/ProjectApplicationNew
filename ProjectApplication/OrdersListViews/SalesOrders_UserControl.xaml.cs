@@ -90,9 +90,21 @@ namespace ProjectApplication.OrdersListViews
 
                 if (result == MessageBoxResult.Yes)
                 {
+
+                    var salesOrderProducts = Ctx.SalesOrderProducts
+                    .Where(so => so.SalesOrderId == SelectedSalesOrder.SalesOrderId).ToList();
+
+
+                    foreach (var item in salesOrderProducts)
+                    {
+                        item.Product.Sold = false;
+                    }
+
+                    Ctx.SalesOrderProducts.RemoveRange(salesOrderProducts);
                     Ctx.SalesOrders.Remove(SelectedSalesOrder);
+
                     Ctx.SaveChanges();
-                    MessageBox.Show($"The employee {SelectedSalesOrder.SalesOrderId} is succussfully deleted. The user account for this user no longer exists.", "Deleted");
+                    MessageBox.Show($"Sales order {SelectedSalesOrder.SalesOrderId} is succussfully cancelled.", "Deleted");
                 }
                 else
                 {
@@ -105,6 +117,18 @@ namespace ProjectApplication.OrdersListViews
                 MessageNotSelected();
             }
         }
+
+
+        private void inputChanged(object sender, RoutedEventArgs e)
+        {
+            //save changes to database
+            Ctx.SaveChanges();
+        }
+
+
+
+
+
 
 
         //invoice
@@ -203,13 +227,7 @@ namespace ProjectApplication.OrdersListViews
 
 
 
-        private void inputChanged(object sender, RoutedEventArgs e)
-        {
-            //save changes to database
-            Ctx.SaveChanges();
-        }
-
-
+  
 
 
 

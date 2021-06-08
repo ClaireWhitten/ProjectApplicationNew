@@ -44,7 +44,7 @@
                         <GridViewColumn Header="Order Id" DisplayMemberBinding="{Binding SalesOrderId}"></GridViewColumn>
                         <GridViewColumn Header="Date" DisplayMemberBinding="{Binding OrderDate}"></GridViewColumn>
                         <GridViewColumn Header="Total Price" DisplayMemberBinding="{Binding TotalPrice}"></GridViewColumn>
-                        <GridViewColumn Header="Supplier" DisplayMemberBinding="{Binding Customer.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Customer" DisplayMemberBinding="{Binding Customer}"></GridViewColumn>
                         <GridViewColumn Header="Contact" Width="150">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
@@ -104,7 +104,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Archive Order">
+                        <GridViewColumn Header="Active">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <CheckBox x:Name="chkArchive" IsChecked="{Binding Active}" Click ="inputChanged"></CheckBox>

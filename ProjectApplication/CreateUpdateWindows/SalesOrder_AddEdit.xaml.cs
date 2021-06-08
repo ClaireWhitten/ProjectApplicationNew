@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Data.Entity;
+using System.ComponentModel;
 
 namespace ProjectApplication.CreateUpdateWindows
 {
@@ -33,6 +34,7 @@ namespace ProjectApplication.CreateUpdateWindows
 
         public Product SelectedProduct { get; set; }
 
+        
 
 
         //Add salesorder constructor
@@ -52,11 +54,14 @@ namespace ProjectApplication.CreateUpdateWindows
             cbCustomer.ItemsSource = customers;
 
             //Employee
+
             tbEmployee.Text = MainMenu.User.Employee.ToString();
 
             //Product Type
             var categories = Enum.GetValues(typeof(ProductCategory));
             cbProductType.ItemsSource = categories;
+
+            
         }
 
 
@@ -93,7 +98,7 @@ namespace ProjectApplication.CreateUpdateWindows
             Product selectedProduct = cbProducts.SelectedItem as Product;
             if(selectedProduct != null)
             {
-                lblLeft.Content = ReturnQuantityInStock(selectedProduct).ToString();
+                lblLeft.Content = ReturnQuantityInStock(selectedProduct).ToString() + " left in stock";
             }
             
         }
@@ -121,18 +126,22 @@ namespace ProjectApplication.CreateUpdateWindows
             tbPrice.Text = Convert.ToString(CalculateTotal());
 
 
+            //order id
+            tbOrderId.Text = SelectedSalesOrder.SalesOrderId.ToString();
+
             //Customer
             var customers = Ctx.Customers.ToList();
             cbCustomer.ItemsSource = customers;
+            cbCustomer.SelectedItem = SelectedSalesOrder.Customer;
 
 
             //Employee
             tbEmployee.Text = selectedSalesOrder.Employee.ToString();
 
-            
-
-           //TUESDAY  - fill the form with selected salesorder properties
-           //TUESDAY  - event handler deleting items from the order list  - for sales and purchase orders
+            //Product Type
+            var categories = Enum.GetValues(typeof(ProductCategory));
+            cbProductType.ItemsSource = categories;
+      
         }
 
 
@@ -140,6 +149,7 @@ namespace ProjectApplication.CreateUpdateWindows
         // adds selected products to observable collection which is shown in list view (order overview)
         private void btnAdd_Click(object sender, RoutedEventArgs e)
         {
+
             SelectedProduct = cbProducts.SelectedItem as Product;
             if (SelectedProduct != null)
             {
@@ -147,11 +157,11 @@ namespace ProjectApplication.CreateUpdateWindows
                 
                 int quantity = Convert.ToInt32(UpDownQuantity.Value);
 
-                //remove products from stock and add to order overview
+                //mark products as sold in databse and add to order overview
                 if (quantity <= numberLeftinStock)
                 {
 
-                    var orderedProducts = Ctx.Products.Where(p => p.BarCode == SelectedProduct.BarCode && p.Sold == false).Take(quantity);
+                    var orderedProducts = Ctx.Products.Where(p => p.BarCode == SelectedProduct.BarCode && p.Sold == false).Take(quantity).ToList();
                     foreach (var product in orderedProducts)
                     {
                         product.Sold = true;
@@ -164,7 +174,7 @@ namespace ProjectApplication.CreateUpdateWindows
                     }
 
                     //update quantity left
-                    lblLeft.Content = ReturnQuantityInStock(SelectedProduct);
+                    lblLeft.Content = ReturnQuantityInStock(SelectedProduct).ToString() + " left in stock";
                 }
                 else
                 {
@@ -188,10 +198,10 @@ namespace ProjectApplication.CreateUpdateWindows
             lvOrderedProducts.SelectedItem = ((Button)sender).DataContext;
             MessageBox.Show(lvOrderedProducts.SelectedIndex.ToString() + lvOrderedProducts.SelectedItem);
 
-           /* Product selectedProduct = lvOrderedProducts.SelectedItem as Product;
+            Product selectedProduct = lvOrderedProducts.SelectedItem as Product;
             ProductsOrdered.RemoveAt(lvOrderedProducts.SelectedIndex);
             selectedProduct.Sold = false;
-            Ctx.SaveChanges();*/
+            Ctx.SaveChanges();
         }
 
 
@@ -200,10 +210,128 @@ namespace ProjectApplication.CreateUpdateWindows
         //saves details of new sales order to database
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            
-            //TUESDAY -different code depending on edit or new sales order (see similar code on other pages)
+            this.Closing -= new System.ComponentModel.CancelEventHandler(SalesOrder_Closing);
+
+            //add new salesorder to database
+            if (SelectedSalesOrder == null)
+            {
+                if (cbCustomer.SelectedItem is Customer && dpOrderDate.SelectedDate != null && ProductsOrdered.Count != 0)
+                {
+                    SalesOrder newSalesOrder = new SalesOrder()
+                    {
+                        OrderDate = (DateTime)dpOrderDate.SelectedDate,
+                        TotalPrice = Convert.ToDouble(tbPrice.Text),
+                        Customer = cbCustomer.SelectedItem as Customer,
+                        Employee = MainMenu.User.Employee,
+                        Paid = (bool)chkPaid.IsChecked,
+                        OrderStatus = OrderStatus.Confirmed,
+                        Problem = false,
+                        Active = true,
+
+                    };
+
+                    SalesOrders.Add(newSalesOrder);
+                    Ctx.SaveChanges();
+
+                    //method 1
+                    foreach (var product in ProductsOrdered)
+                    {
+                        SalesOrderProduct salesOrderProduct = new SalesOrderProduct()
+                        {
+                            SalesOrderId = newSalesOrder.SalesOrderId,
+                            ProductId = product.ProductId
+                        };
+                        Ctx.SalesOrderProducts.Add(salesOrderProduct);
+                    }
+                    Ctx.SaveChanges();
+
+                    
+
+                    /*method 2
+                    foreach (var item in ProductsOrdered)
+                    {
+                        newSalesOrder.SalesOrderProducts.Add(new SalesOrderProduct()
+                        {
+                            SalesOrder = newSalesOrder,
+                            Product = item
+                        }); 
+                    }*/
+
+
+                    this.Close();
+                    this.Closing += new System.ComponentModel.CancelEventHandler(SalesOrder_Closing);
+
+                }
+                else
+                {
+                    MessageBox.Show("Not all fields are completed.");
+                }
+
+            }
+            else //update selectedSales order in database
+            {
+                SelectedSalesOrder.TotalPrice = Convert.ToDouble(tbPrice.Text);
+                SelectedSalesOrder.Paid = (bool)chkPaid.IsChecked;
+
+                //Update the products in the order
+                
+                var salesOrderProducts = Ctx.SalesOrderProducts
+                .Where(so => so.SalesOrderId == SelectedSalesOrder.SalesOrderId).ToList();
+
+                Ctx.SalesOrderProducts.RemoveRange(salesOrderProducts);
+                Ctx.SaveChanges();
+
+                foreach (var product in ProductsOrdered)
+                {
+                    SalesOrderProduct salesOrderProduct = new SalesOrderProduct()
+                    {
+                        SalesOrderId = SelectedSalesOrder.SalesOrderId,
+                        ProductId = product.ProductId
+                    };
+                    Ctx.SalesOrderProducts.Add(salesOrderProduct);
+                }
+                Ctx.SaveChanges();
+
+                CollectionViewSource.GetDefaultView(SalesOrders).Refresh();
+                Ctx.SaveChanges();
+        
+            }
+
+
+            this.Close();
+            this.Closing += new System.ComponentModel.CancelEventHandler(SalesOrder_Closing);
         }
 
+        private void SalesOrder_Closing(object sender, CancelEventArgs e)
+        {
+            Button btnClicked = sender as Button;
+            if (btnClicked == null)
+            {
+
+                if (ProductsOrdered.Count != 0)
+                {
+                    MessageBoxResult result = MessageBox.Show($"The current order has not been saved. Are you sure you want to close this window?", "Confirm", MessageBoxButton.YesNo);
+
+
+                    if (result == MessageBoxResult.Yes)
+                    {
+                        foreach (var product in ProductsOrdered)
+                        {
+
+                            product.Sold = false;
+                            Ctx.SaveChanges();
+                        }
+                    }
+                    else
+                    {
+                        e.Cancel = true;
+                    }
+
+                }
+
+            }
+           
+        }
 
 
 

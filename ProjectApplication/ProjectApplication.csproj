@@ -139,6 +139,9 @@
     <Compile Include="OrdersListViews\SalesOrders_UserControl.xaml.cs">
       <DependentUpon>SalesOrders_UserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Overview\Overview.xaml.cs">
+      <DependentUpon>Overview.xaml</DependentUpon>
+    </Compile>
     <Compile Include="usercontrols\Buttons_EditUpdateDelete.xaml.cs">
       <DependentUpon>Buttons_EditUpdateDelete.xaml</DependentUpon>
     </Compile>
@@ -230,6 +233,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="OrdersListViews\SalesOrders_UserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Overview\Overview.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

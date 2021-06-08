@@ -29,12 +29,13 @@ namespace ProjectApplication
         public List<string> OverviewSubMenuItems = new List<string>();
         public List<string> OrdersSubMenuItems = new List<string>();
 
-        public ProjectApplicationContext Ctx { get; set; } = new ProjectApplicationContext();
+        public ProjectApplicationContext Ctx { get; set; }
 
 
-        public MainMenu(UserAccount user)
+        public MainMenu(UserAccount user, ProjectApplicationContext ctx)
         {
             User = user;
+            Ctx = ctx;
             InitializeComponent();
            
             switch (User.Role)
