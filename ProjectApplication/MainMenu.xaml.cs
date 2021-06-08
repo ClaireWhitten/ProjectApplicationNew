@@ -101,7 +101,7 @@ namespace ProjectApplication
                     this.MainContentControl.Content = new PurchaseOrders_UserControl(Ctx);
                     break;
                 case "Sales":
-                    this.MainContentControl.Content = new PurchaseOrders_UserControl(Ctx);
+                    this.MainContentControl.Content = new SalesOrders_UserControl(Ctx);
                     break;
             }
         }

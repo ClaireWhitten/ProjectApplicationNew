@@ -114,14 +114,12 @@ namespace ProjectApplication.CreateUpdateWindows
                             Name = SelectedProduct.Name,
                             Description = SelectedProduct.Description,
                             Price = SelectedProduct.Price,
-                            Supplier = SelectedSupplier
+                            Supplier = SelectedSupplier,
+                            Sold = false,
+                            ProductCategory = SelectedProduct.ProductCategory
                         });
                     }
 
-                    foreach (var item in ProductsOrdered)
-                    {
-                        MessageBox.Show(item.Supplier.SupplierId.ToString());
-                    }
                     tbPrice.Text = Convert.ToString(CalculateTotal());
                 }
                 else

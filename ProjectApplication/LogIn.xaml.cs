@@ -115,7 +115,7 @@ namespace ProjectApplication
                 Name = "Iphone 5",
                 Description = "This is an Iphone 5.",
                 Price = 490,
-                BarCode = "12345678",
+                BarCode = "56432",
                 Supplier = new Supplier()
                 {
                     Name = "Apple Ltd",
@@ -137,7 +137,7 @@ namespace ProjectApplication
                 Name = "Beats headphones",
                 Description = "These are Beats headphones.",
                 Price = 490,
-                BarCode = "12345678",
+                BarCode = "123456",
                 Supplier = new Supplier()
                 {
                     Name = "Beats Ltd",

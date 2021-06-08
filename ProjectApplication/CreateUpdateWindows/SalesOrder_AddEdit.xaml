@@ -14,7 +14,7 @@
                 <Label Width="70" x:Name="lblOrderId">Order Id:</Label>
                 <TextBlock x:Name="tbOrderId" Width="40" Text="{Binding SalesOrderId}"></TextBlock>
                 <Label Width="70">Customer:</Label>
-                <ComboBox x:Name="cbCustomer" Width="200" SelectedItem="{Binding}"></ComboBox>
+                <ComboBox x:Name="cbCustomer" Width="200"></ComboBox>
                 <Label Width="90">Date of Order:</Label>
                 <DatePicker x:Name="dpOrderDate" SelectedDate="{Binding OrderDate}"></DatePicker>
             </StackPanel>
@@ -27,7 +27,7 @@
                 <ComboBox x:Name="cbProductType" Width="300" HorizontalAlignment="Left" SelectionChanged="cbProductType_SelectionChanged">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
-                            <Label Content="{Binding Name}"></Label>
+                            <Label Content="{Binding}"></Label>
                         </DataTemplate>
                     </ComboBox.ItemTemplate>
                 </ComboBox>
@@ -71,7 +71,7 @@
                             <GridViewColumn Header="Modify" Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button>
+                                        <Button x:Name="btnDeleteProduct" Click="btnDeleteProduct_Click">
                                             <Image Source="../Images/delete_symbol.png" Width="20" Height="20"></Image>
                                         </Button>
                                     </DataTemplate>
@@ -84,7 +84,7 @@
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0">Total Price:</Label>
                 <TextBlock x:Name="tbPrice" Width="100"></TextBlock>
-                <CheckBox x:Name="chkPaid" VerticalAlignment="Center" Margin="10 0">Order Paid</CheckBox>
+                <CheckBox x:Name="chkPaid" VerticalAlignment="Center" Margin="10 0" IsChecked="{Binding Paid}">Order Paid</CheckBox>
             </StackPanel>
             <StackPanel>
                 <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">

@@ -24,6 +24,8 @@ namespace ProjectApplication.Classes
 
         public ProductCategory ProductCategory { get; set; }
 
+        public bool Sold { get; set; }
+
 
 
         public Supplier Supplier { get; set; }

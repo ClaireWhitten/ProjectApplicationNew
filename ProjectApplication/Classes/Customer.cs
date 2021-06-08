@@ -32,6 +32,11 @@ namespace ProjectApplication.Classes
 
         public ICollection<SalesOrder> SalesOrders { get; set; }
 
-        //write tostring method 
+        public override string ToString()
+        {
+            return $"{this.CustomerId}: {this.FirstName} {this.LastName}";
+        }
+
+
     }
 }

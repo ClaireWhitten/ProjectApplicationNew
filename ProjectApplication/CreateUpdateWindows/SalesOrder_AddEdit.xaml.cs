@@ -13,6 +13,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace ProjectApplication.CreateUpdateWindows
 {
@@ -37,6 +38,8 @@ namespace ProjectApplication.CreateUpdateWindows
         //Add salesorder constructor
         public SalesOrder_AddEdit(ProjectApplicationContext ctx, ObservableCollection<SalesOrder> salesOrders)
         {
+            Ctx = ctx;
+            SalesOrders = salesOrders;
             InitializeComponent();
             lblOrderId.Visibility = Visibility.Hidden;
             tbOrderId.Visibility = Visibility.Hidden;
@@ -45,7 +48,7 @@ namespace ProjectApplication.CreateUpdateWindows
 
 
             //select customer
-            var customers = Ctx.Customers.ToList();
+            List<Customer> customers = Ctx.Customers.ToList();
             cbCustomer.ItemsSource = customers;
 
             //Employee
@@ -54,7 +57,6 @@ namespace ProjectApplication.CreateUpdateWindows
             //Product Type
             var categories = Enum.GetValues(typeof(ProductCategory));
             cbProductType.ItemsSource = categories;
-
         }
 
 
@@ -69,7 +71,7 @@ namespace ProjectApplication.CreateUpdateWindows
                 ProductCategory category = (ProductCategory)cbProductType.SelectedItem;
                 
                 var groupedProductsInStock = Ctx.Products
-                    .Where(p => p.ProductCategory == category)
+                    .Where(p => p.ProductCategory == category && p.Sold == false)
                     .GroupBy(p => p.BarCode)
                     .ToList();
 
@@ -104,12 +106,30 @@ namespace ProjectApplication.CreateUpdateWindows
             SelectedSalesOrder = selectedSalesOrder;
             SalesOrders = salesOrders;
             InitializeComponent();
+
+            //Set existing properties
+            this.DataContext = selectedSalesOrder;
+            
+            //product overview
             ProductsOrdered = new ObservableCollection<Product>();
             lvOrderedProducts.ItemsSource = ProductsOrdered;
 
-            
+            foreach (var item in SelectedSalesOrder.SalesOrderProducts)
+            {
+                ProductsOrdered.Add(item.Product);
+            }
+            tbPrice.Text = Convert.ToString(CalculateTotal());
+
+
+            //Customer
             var customers = Ctx.Customers.ToList();
             cbCustomer.ItemsSource = customers;
+
+
+            //Employee
+            tbEmployee.Text = selectedSalesOrder.Employee.ToString();
+
+            
 
            //TUESDAY  - fill the form with selected salesorder properties
            //TUESDAY  - event handler deleting items from the order list  - for sales and purchase orders
@@ -131,10 +151,10 @@ namespace ProjectApplication.CreateUpdateWindows
                 if (quantity <= numberLeftinStock)
                 {
 
-                    var orderedProducts = Ctx.Products.Where(p => p.BarCode == SelectedProduct.BarCode).Take(quantity);
+                    var orderedProducts = Ctx.Products.Where(p => p.BarCode == SelectedProduct.BarCode && p.Sold == false).Take(quantity);
                     foreach (var product in orderedProducts)
                     {
-                        Ctx.Products.RemoveRange(orderedProducts);
+                        product.Sold = true;
                         Ctx.SaveChanges();
                     }
 
@@ -163,12 +183,24 @@ namespace ProjectApplication.CreateUpdateWindows
 
 
 
+        private void btnDeleteProduct_Click(object sender, RoutedEventArgs e)
+        {
+            lvOrderedProducts.SelectedItem = ((Button)sender).DataContext;
+            MessageBox.Show(lvOrderedProducts.SelectedIndex.ToString() + lvOrderedProducts.SelectedItem);
+
+           /* Product selectedProduct = lvOrderedProducts.SelectedItem as Product;
+            ProductsOrdered.RemoveAt(lvOrderedProducts.SelectedIndex);
+            selectedProduct.Sold = false;
+            Ctx.SaveChanges();*/
+        }
+
 
 
 
         //saves details of new sales order to database
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
+            
             //TUESDAY -different code depending on edit or new sales order (see similar code on other pages)
         }
 
@@ -195,7 +227,7 @@ namespace ProjectApplication.CreateUpdateWindows
         private int ReturnQuantityInStock(Product selectedProduct)
         {
             int quantity = Ctx.Products
-                .Where(p => p.BarCode == selectedProduct.BarCode)
+                .Where(p => p.BarCode == selectedProduct.BarCode && p.Sold == false)
                 .ToList()
                 .Count();
 
