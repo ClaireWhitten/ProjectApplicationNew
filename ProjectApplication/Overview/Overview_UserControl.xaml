@@ -35,15 +35,15 @@
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
             <StackPanel Orientation="Vertical">
             <Label>Sales</Label>
-                <TextBox x:Name="lbSalesNumber"></TextBox>
+                <TextBlock x:Name="tbSalesNumber"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical">
             <Label>Purchases:</Label>
-            <TextBox x:Name="lbPurchases"></TextBox>
+            <TextBlock x:Name="tbPurchases"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical">
             <Label>Profit:</Label>
-            <TextBox x:Name="lbProfit"></TextBox>
+            <TextBlock x:Name="tbProfit"></TextBlock>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
@@ -79,7 +79,24 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.RowSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=RowDefinitions.Count, Mode=OneWay}">
             <Label>Current Stock:</Label>
-            <ListBox x:Name="lbStock" Height="400"></ListBox>
+            <ListView x:Name="lvStock" Height="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Name}"></GridViewColumn>
+                        <GridViewColumn Header="Number in Stock"  DisplayMemberBinding="{Binding NumberInStock}"></GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="4">
+        <ListView x:Name="lvPopularProducts" Height="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
+                    <GridViewColumn Header="Number in Stock"  DisplayMemberBinding="{Binding Value}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
         </StackPanel>
 
     </Grid>

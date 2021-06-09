@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Data.Entity;
 
 namespace ProjectApplication.Overview
 {
@@ -60,6 +61,99 @@ namespace ProjectApplication.Overview
 
             lbTopSellers.ItemsSource = topSellers;
 
+
+            //current stock
+            var currentStock = Ctx.Products
+                .GroupBy(p => p.Name)
+                .Select(p => new
+                {
+                    Name = p.Key + " " + p.FirstOrDefault().Name,
+                    NumberInStock = p.Count()
+                })
+                .ToList();
+            lvStock.ItemsSource = currentStock;
+
+
+            //sales order  total
+            DateTime oneweekago = today.AddDays(-7);
+            var weeklySales = Ctx.SalesOrders.Where(s => s.OrderDate > oneweekago).ToList();
+            double totalSales = 0;
+
+            foreach (var sale in weeklySales)
+            {
+                totalSales += sale.TotalPrice;
+            }
+            tbSalesNumber.Text = $"{weeklySales.Count()}  £{totalSales.ToString()}";
+
+            //purchase order  total
+            var weeklyPurchases = Ctx.PurchaseOrders.Where(p => p.OrderDate > oneweekago).ToList();
+            double totalPurchases = 0;
+            foreach (var purchase in weeklyPurchases)
+            {
+                totalPurchases += purchase.TotalPrice;
+            }
+
+            tbPurchases.Text = $"{weeklyPurchases.Count()}  £{totalPurchases.ToString()}";
+
+
+
+            // profit 
+            double profit = totalSales - totalPurchases;
+            tbProfit.Text = $" £{profit}";
+
+
+            //Most popular products 
+            var salesOrders = Ctx.SalesOrders
+                .Include(so => so.SalesOrderProducts.Select(p => p.Product))
+                .ToList();
+
+            var productGroups = Ctx.Products
+                .GroupBy(p => p.BarCode)
+                .ToList();
+
+            List<Product> products = new List<Product>();
+
+            foreach (var group in productGroups)
+            {
+                products.Add(group.First());
+                MessageBox.Show(group.First().BarCode);
+                
+            }
+
+
+            int occurences = 0;
+            Dictionary<Product, int> productOccurences = new Dictionary<Product, int>();
+
+            for (int i = 0; i < products.Count(); i++)
+            {
+               
+                foreach (var order in salesOrders)
+                {
+                    if (order.SalesOrderProducts.ToList().Exists(p => p.Product.BarCode == products[i].BarCode))
+                    {
+                        
+                        occurences++;
+                    }
+                }
+
+                productOccurences.Add(products[i], occurences);
+                MessageBox.Show(occurences.ToString());
+                occurences = 0;
+            }
+
+          lvPopularProducts.ItemsSource = productOccurences;
+
+         
+
+            
+
+
+
+            /*method 
+            private double calculateTotal(List<T>)
+            {
+
+            }*/
         }
     }
 }
