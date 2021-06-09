@@ -33,10 +33,9 @@ namespace ProjectApplication
         public ManageSuppliers_UserControl(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
-            Ctx.Suppliers.AsQueryable().Load();
-            Suppliers = Ctx.Suppliers.Local;
             InitializeComponent();
-            SuppliersDataGrid.ItemsSource = Suppliers;
+            GetSupplierData();
+           
             
         }
 
@@ -83,6 +82,37 @@ namespace ProjectApplication
                 MessageBox.Show("No supplier has been selected.");
             }
 
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
+
+            var searchResults = Ctx.Suppliers
+                .Where(s => s.Name == searchBy || s.City == searchBy || s.Country == searchBy || s.SupplierId.ToString() == searchBy)
+                .ToList();
+
+
+            ObservableCollection<Supplier> myCollection = new ObservableCollection<Supplier>(searchResults);
+            Suppliers = myCollection;
+            SuppliersDataGrid.ItemsSource = Suppliers;
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                GetSupplierData();
+            }
+        }
+
+        private void GetSupplierData()
+        {
+            Ctx.Suppliers.AsQueryable().Load();
+            Suppliers = Ctx.Suppliers.Local;
+
+            SuppliersDataGrid.ItemsSource = Suppliers;
         }
     }
 }

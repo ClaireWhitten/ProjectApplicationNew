@@ -33,7 +33,7 @@ namespace ProjectApplication.Overview
             DateTime date = DateTime.Now;
             lblDateTime.Content = date.ToString("HH:mm");
 
-            lblWelcome.Content = $"Welcome {MainMenu.User.Employee.FirstName} {MainMenu.User.Employee.LastName} \n Employee Number: {MainMenu.User.Employee.EmployeeId}";
+            lblWelcome.Content = $"Welcome {MainMenu.User.Employee.FirstName} {MainMenu.User.Employee.LastName} \n Employee Number: {MainMenu.User.Employee.EmployeeId}!  ";
 
            
             
@@ -141,7 +141,10 @@ namespace ProjectApplication.Overview
                 occurences = 0;
             }
 
-          lvPopularProducts.ItemsSource = productOccurences;
+            List<KeyValuePair<Product, int>> sortedList = productOccurences.ToList();
+            sortedList.Sort((x, y) => x.Value.CompareTo(y.Value));
+            sortedList.Reverse();
+            lvPopularProducts.ItemsSource = sortedList;
 
          
 

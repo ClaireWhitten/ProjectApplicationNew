@@ -34,14 +34,12 @@ namespace ProjectApplication
         {
             InitializeComponent();
             Ctx = ctx;
+            GetUserAccountData();
             //List<UserAccount> userAccounts = ctx.UserAccounts.ToList();
             //ObservableCollection<UserAccount> observableUserAccounts = new ObservableCollection<UserAccount>(userAccounts); //makes an observable collection from the list
             //UsersDataGrid.ItemsSource = userAccounts;
          
-            Ctx.UserAccounts.AsQueryable().Load(); // Executes the query and will load the objects into the DbContext so that they are tracked by the entity framework
-            // load is a method of a queryable
-            UserAccounts = Ctx.UserAccounts.Local;
-            UsersDataGrid.ItemsSource = UserAccounts;
+            
             
         }
 
@@ -112,6 +110,35 @@ namespace ProjectApplication
             } 
         }
 
-     
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
+
+            var searchResults = Ctx.UserAccounts
+                .Where(s => s.UserName == searchBy ||  s.UserAccountId.ToString() == searchBy)
+                .ToList();
+
+
+            ObservableCollection<UserAccount> myCollection = new ObservableCollection<UserAccount>(searchResults);
+            UserAccounts = myCollection;
+            UsersDataGrid.ItemsSource = UserAccounts;
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                GetUserAccountData();
+            }
+        }
+
+        private void GetUserAccountData()
+        {
+            Ctx.UserAccounts.AsQueryable().Load(); // Executes the query and will load the objects into the DbContext so that they are tracked by the entity framework
+            // load is a method of a queryable
+            UserAccounts = Ctx.UserAccounts.Local;
+            UsersDataGrid.ItemsSource = UserAccounts;
+        }
     }
 }

@@ -44,17 +44,8 @@ namespace ProjectApplication.OrdersListViews
         {
             Ctx = ctx;
             InitializeComponent();
-
-            //Ctx.PurchaseOrders.AsQueryable().Load();
-
-            // query purchase orders including the supplier, employee and the products in the purchase order (via the purchaseorderproducts icollection property)
-            Ctx.PurchaseOrders
-                .Include("Supplier")
-                .Include("Employee")
-                .Include(po => po.PurchaseOrderProducts.Select(p => p.Product)).Load(); //load - does same as toList() - executes query
-
-            PurchaseOrders = Ctx.PurchaseOrders.Local;
-            lvPurchaseOrders.ItemsSource = PurchaseOrders;
+            getPurchaseOrderData();
+           
         }
 
 
@@ -74,6 +65,48 @@ namespace ProjectApplication.OrdersListViews
             purchaseOrderForm.Show();
         }
 
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            
+            string searchBy = tbSearch.Text;
 
+            var searchResults  = Ctx.PurchaseOrders
+                .Where(po=> po.PurchaseOrderId.ToString() == searchBy || po.Supplier.Name == searchBy)
+                .Include("Supplier")
+                .Include("Employee")
+                .Include(po => po.PurchaseOrderProducts.Select(p => p.Product)).ToList();
+
+
+            ObservableCollection<PurchaseOrder> myCollection = new ObservableCollection<PurchaseOrder>(searchResults);
+            PurchaseOrders = myCollection;
+            lvPurchaseOrders.ItemsSource = PurchaseOrders;
+            
+        }
+
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                getPurchaseOrderData();
+            }
+        }
+
+        private void getPurchaseOrderData()
+        {
+            // query purchase orders including the supplier, employee and the products in the purchase order (via the purchaseorderproducts icollection property)
+            Ctx.PurchaseOrders
+               .Include("Supplier")
+               .Include("Employee")
+               .Include(po => po.PurchaseOrderProducts.Select(p => p.Product)).Load(); //load - does same as toList() - executes query
+                                                                                       //Ctx.PurchaseOrders.AsQueryable().Load();
+           
+
+            PurchaseOrders = Ctx.PurchaseOrders.Local;
+            lvPurchaseOrders.ItemsSource = PurchaseOrders;
+
+        }
+       
     }
 }

@@ -35,7 +35,7 @@ namespace ProjectApplication
 
         public MainMenu(UserAccount user, ProjectApplicationContext ctx)
         {
-            this.WindowState = WindowState.Maximized;
+           // this.WindowState = WindowState.Maximized;
             User = user;
             Ctx = ctx;
             InitializeComponent();

@@ -35,10 +35,9 @@ namespace ProjectApplication
         public ManageProducts_UserControl(ProjectApplicationContext ctx)
         {
             Ctx = ctx;
-            Ctx.RegisteredProducts.Include("Supplier").Load();
-            RegisteredProducts = Ctx.RegisteredProducts.Local;
             InitializeComponent();
-            ProductDataGrid.ItemsSource = RegisteredProducts;
+            GetRegisteredProductData();
+            
             
         }
 
@@ -101,5 +100,38 @@ namespace ProjectApplication
                 }
             }
         }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                GetRegisteredProductData();
+            }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
+
+            var searchResults = Ctx.RegisteredProducts
+                .Where(rp => rp.Name == searchBy || rp.Supplier.Name == searchBy || rp.RegisteredProductId.ToString() == searchBy || rp.BarCode == searchBy)
+                .Include("Supplier")
+                .ToList();
+
+
+            ObservableCollection<RegisteredProduct> myCollection = new ObservableCollection<RegisteredProduct>(searchResults);
+            RegisteredProducts = myCollection;
+            ProductDataGrid.ItemsSource = RegisteredProducts;
+        }
+
+        private void GetRegisteredProductData()
+        {
+            Ctx.RegisteredProducts.Include("Supplier").Load();
+            RegisteredProducts = Ctx.RegisteredProducts.Local;
+
+            ProductDataGrid.ItemsSource = RegisteredProducts;
+        }
+       
     }
 }

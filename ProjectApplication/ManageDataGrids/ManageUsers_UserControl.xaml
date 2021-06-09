@@ -19,9 +19,18 @@
     <Grid Background="AliceBlue">
         <StackPanel>
             <Label>Manage User Accounts</Label>
+            <StackPanel Orientation="Horizontal">
+            <StackPanel Orientation="Horizontal">
+                <TextBox x:Name="tbSearch" Width="200" Height="30" TextChanged="tbSearch_TextChanged"></TextBox>
+                <Button x:Name="btnSearch" Width="40" Height="30" Margin="5" Click="btnSearch_Click">
+                    <Image Source="../Images/search_symbol.png" Width="30" Height="30"></Image>
+                </Button>
+            </StackPanel>
+            
             <StackPanel Orientation="Horizontal" Margin="10">
                 <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Users_EditClickedEventHandler" 
                                          AddClicked="Users_AddClickedEventHandler" DeleteClicked="Users_DeleteClickedEventHandler"/>
+            </StackPanel>
             </StackPanel>
             <DataGrid x:Name="UsersDataGrid" AutoGenerateColumns="False" SelectionChanged="UsersDataGrid_SelectionChanged" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible" >
                 <DataGrid.Columns>

@@ -201,6 +201,7 @@ namespace ProjectApplication.CreateUpdateWindows
             Product selectedProduct = lvOrderedProducts.SelectedItem as Product;
             ProductsOrdered.RemoveAt(lvOrderedProducts.SelectedIndex);
             selectedProduct.Sold = false;
+            tbPrice.Text = Convert.ToString(CalculateTotal());
             Ctx.SaveChanges();
         }
 

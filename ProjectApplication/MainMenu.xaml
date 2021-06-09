@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ProjectApplication"
         mc:Ignorable="d"
-        Title="Main Menu" Width="1200" Height="800">
+        Title="Main Menu" Width="1920" Height="1080">
    
     <Grid Background="#1daaef">
         <DockPanel>
@@ -34,7 +34,7 @@
                 <Label x:Name="lblDate"  Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">Date and Time</Label>
                 </MenuItem>
             </Menu>
-            <Button x:Name="btnLogOut" DockPanel.Dock="Right" Background="#1daaef" BorderBrush="Black"  Width="40" Height="40" VerticalAlignment="Top" Margin="10">
+            <Button x:Name="btnLogOut" DockPanel.Dock="Right" Background="#1daaef" BorderBrush="Black"  Width="60" Height="60" VerticalAlignment="Top" Margin="10">
                 <Image Source="Images/Logout_symbol.png" MouseDown="Image_MouseDown" ></Image>
             </Button>
             <ContentControl x:Name="MainContentControl"></ContentControl>

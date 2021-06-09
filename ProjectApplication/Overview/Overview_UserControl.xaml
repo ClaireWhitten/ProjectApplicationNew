@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:ProjectApplication.Overview"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="800" d:DesignWidth="1280">
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
@@ -24,26 +24,28 @@
             <RowDefinition Height="1*" />
         </Grid.RowDefinitions>
    
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Horizontal">
-            <Image Source="../Images/coolblue_banner.jpg" Width="300" Height="120" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
-            <Label x:Name ="lblWelcome">Welcome</Label>
-            <Label x:Name ="lblDateTime"></Label>
-            <Viewbox>
-                <Calendar/>
-            </Viewbox>
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
+            <Image Source="../Images/coolblue_banner.jpg" Width="600" Height="180" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
+            <StackPanel Orientation="Horizontal">
+                <Viewbox>
+                    <Calendar/>
+                </Viewbox>
+                <Label x:Name ="lblWelcome" FontSize="20">Welcome</Label>
+                <Label x:Name ="lblDateTime"></Label>
+            </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="20">
             <Label>Sales</Label>
-                <TextBlock x:Name="tbSalesNumber"></TextBlock>
+                <TextBlock x:Name="tbSalesNumber" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="20">
             <Label>Purchases:</Label>
-            <TextBlock x:Name="tbPurchases"></TextBlock>
+                <TextBlock x:Name="tbPurchases" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Vertical">
+            <StackPanel Orientation="Vertical" Margin="20">
             <Label>Profit:</Label>
-            <TextBlock x:Name="tbProfit"></TextBlock>
+                <TextBlock x:Name="tbProfit" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
@@ -92,7 +94,7 @@
         <ListView x:Name="lvPopularProducts" Height="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
+                        <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
                     <GridViewColumn Header="Number in Stock"  DisplayMemberBinding="{Binding Value}"></GridViewColumn>
                 </GridView>
             </ListView.View>

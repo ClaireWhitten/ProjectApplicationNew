@@ -46,13 +46,7 @@ namespace ProjectApplication.OrdersListViews
         {
             Ctx = ctx;
             InitializeComponent();
-            Ctx.SalesOrders
-                .Include("Customer")
-                .Include("Employee")
-                .Include(so => so.SalesOrderProducts.Select(p => p.Product)).Load();
-
-            SalesOrders = Ctx.SalesOrders.Local;
-            lvSalesOrders.ItemsSource = SalesOrders;
+            getSalesOrderData();
         }
 
         //add sale
@@ -252,6 +246,115 @@ namespace ProjectApplication.OrdersListViews
         {
             MessageBox.Show("No sales order has been selected. Select an order.");
         }
-        
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
+            var searchResults = Ctx.SalesOrders
+               .Where(so => so.SalesOrderId.ToString() == searchBy || so.Customer.FirstName == searchBy || so.Customer.LastName == searchBy)
+               .Include("Customer")
+               .Include("Employee")
+               .Include(so => so.SalesOrderProducts.Select(p => p.Product))
+               .ToList();
+           
+           
+            ObservableCollection<SalesOrder> myCollection = new ObservableCollection<SalesOrder>(searchResults);
+            SalesOrders = myCollection;
+            lvSalesOrders.ItemsSource = SalesOrders;
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                getSalesOrderData();
+            }
+        }
+
+        private void getSalesOrderData()
+        {
+            Ctx.SalesOrders
+                .Include("Customer")
+                .Include("Employee")
+                .Include(so => so.SalesOrderProducts.Select(p => p.Product)).Load();
+
+            SalesOrders = Ctx.SalesOrders.Local;
+            lvSalesOrders.ItemsSource = SalesOrders;
+        }
+
+        private void filter_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ComboBoxItem selected = cbFilter.SelectedItem as ComboBoxItem;
+            if (selected != null)
+            {
+                switch (selected.Content)
+                {
+                    case "Invoice unpaid":
+                        dateInputsHidden();
+                        var searchResults1 = Ctx.SalesOrders
+                       .Where(so => so.Paid == false)
+                       .Include("Customer")
+                       .Include("Employee")
+                       .Include(so => so.SalesOrderProducts.Select(p => p.Product))
+                       .ToList();
+
+                        SetNewResults(searchResults1);
+                        break;
+                    case "Problem":
+                        dateInputsHidden();
+                       var searchResults2 = Ctx.SalesOrders
+                      .Where(so => so.Problem == true)
+                      .Include("Customer")
+                      .Include("Employee")
+                      .Include(so => so.SalesOrderProducts.Select(p => p.Product))
+                      .ToList();
+
+                        SetNewResults(searchResults2);
+                        break;
+                    case "By Date":
+                        lblDate.Visibility = Visibility.Visible;
+                        dpFirstDate.Visibility = Visibility.Visible;
+                        dpSecondDate.Visibility = Visibility.Visible;
+                        btnDateSearch.Visibility = Visibility.Visible;
+                        break;
+                    case "All":
+                        dateInputsHidden();
+                        getSalesOrderData();
+                        break;
+                }
+            }
+        }
+
+
+        private void SetNewResults(List<SalesOrder> searchResults)
+        {
+            ObservableCollection<SalesOrder> myCollection = new ObservableCollection<SalesOrder>(searchResults);
+            SalesOrders = myCollection;
+            lvSalesOrders.ItemsSource = SalesOrders;
+        }
+
+        private void dateInputsHidden()
+        {
+            lblDate.Visibility = Visibility.Hidden;
+            dpFirstDate.Visibility = Visibility.Hidden;
+            dpSecondDate.Visibility = Visibility.Hidden;
+            btnDateSearch.Visibility = Visibility.Hidden;
+        }
+
+        private void btnDateSearch_Click(object sender, RoutedEventArgs e)
+        {
+            DateTime firstDate = (DateTime)dpFirstDate.SelectedDate;
+            DateTime secondDate = (DateTime)dpSecondDate.SelectedDate;
+
+            var searchResults3 = Ctx.SalesOrders
+           .Where(so => so.OrderDate >= firstDate && so.OrderDate <= secondDate)
+           .Include("Customer")
+           .Include("Employee")
+           .Include(so => so.SalesOrderProducts.Select(p => p.Product))
+           .ToList();
+
+            SetNewResults(searchResults3);
+        }
     }
 }

@@ -33,15 +33,8 @@ namespace ProjectApplication
         {
             
             Ctx = ctx;
-
-            Ctx.Customers.Load();
-
-            Customers = Ctx.Customers.Local;
-
             InitializeComponent();
-
-
-            CustomerDataGrid.ItemsSource = Customers;
+            getCustomerData();
 
 
         }
@@ -98,6 +91,35 @@ namespace ProjectApplication
 
         }
 
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
 
+            var searchResults = Ctx.Customers
+                .Where(c => c.FirstName == searchBy || c.LastName == searchBy || c.CustomerId.ToString() == searchBy)
+                .ToList();
+
+
+            ObservableCollection<Customer> myCollection = new ObservableCollection<Customer>(searchResults);
+            Customers = myCollection;
+            CustomerDataGrid.ItemsSource = Customers;
+        }
+
+
+        private void getCustomerData()
+        {
+            Ctx.Customers.Load();
+            Customers = Ctx.Customers.Local;
+            CustomerDataGrid.ItemsSource = Customers;
+        }
+
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                getCustomerData();
+            }
+        }
     }
 }

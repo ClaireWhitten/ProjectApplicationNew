@@ -32,10 +32,8 @@ namespace ProjectApplication
         {
             Ctx = ctx;
             InitializeComponent();
-
-            Ctx.Employees.AsQueryable().Load();
-            Employees = Ctx.Employees.Local;
-            EmployeeDataGrid.ItemsSource = Employees;
+            GetEmployeeData();
+            
             
         }
 
@@ -91,15 +89,34 @@ namespace ProjectApplication
 
         }
 
+        private void tbSearch_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            TextBox tb = sender as TextBox;
+            if (tb.Text.Trim().Length == 0)
+            {
+                GetEmployeeData();
+            }
+        }
+
+        private void btnSearch_Click(object sender, RoutedEventArgs e)
+        {
+            string searchBy = tbSearch.Text;
+
+            var searchResults = Ctx.Employees
+                .Where(c => c.FirstName == searchBy || c.LastName == searchBy || c.EmployeeId.ToString() == searchBy)
+                .ToList();
 
 
+            ObservableCollection<Employee> myCollection = new ObservableCollection<Employee>(searchResults);
+            Employees = myCollection;
+            EmployeeDataGrid.ItemsSource = Employees;
+        }
 
-
-
-
-
-
-
-
+        private void GetEmployeeData()
+        {
+            Ctx.Employees.AsQueryable().Load();
+            Employees = Ctx.Employees.Local;
+            EmployeeDataGrid.ItemsSource = Employees;
+        }
     }
 }
