@@ -39,9 +39,9 @@ namespace ProjectApplication.Classes
 
         public virtual UserAccount UserAccount { get; set; }
 
-        public ICollection<PurchaseOrder> PurchaseOrders { get; set; } //only sellers
+        public ICollection<PurchaseOrder> PurchaseOrders { get; set; } 
 
-        public ICollection<SalesOrder> SalesOrders { get; set; } // only sellers
+        public ICollection<SalesOrder> SalesOrders { get; set; } 
 
        
         public string EmployeeDetails

@@ -20,13 +20,6 @@
                     </ItemsControl>
                 </MenuItem>
                 <MenuItem x:Name="miOrders" Header="_Overview" Height="30" Click="MenuItem_Click">
-                    <ItemsControl x:Name="OverviewSubMenu">
-                        <ItemsControl.ItemTemplate>
-                            <DataTemplate>
-                                <MenuItem Header="{Binding}"/>
-                            </DataTemplate>
-                        </ItemsControl.ItemTemplate>
-                    </ItemsControl>
                 </MenuItem>
                 <MenuItem x:Name="miOverview" Header="_Orders" Height="30" Click="MenuItem_Click">
                     <ItemsControl x:Name="OrdersSubmenu">

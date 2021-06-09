@@ -27,9 +27,9 @@
                 <DatePicker SelectedDate="1958-04-19" x:Name="dpDOB"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Margin="10 0 0 0" Width="80">Employee Id:</Label>
+                <Label Margin="10 0 0 0" Width="80" x:Name="lblEmployeeId">Employee Id:</Label>
                 <TextBox x:Name="tbEmployeeId" Width="150" Text="{Binding EmployeeId}" IsEnabled="False"></TextBox>
-                <Label Margin="10 0 0 0" Width="80">User Account:</Label>
+                <Label Margin="10 0 0 0" Width="80" x:Name="lblUserAccount">User Account:</Label>
                 <TextBox x:Name="tbUserAccount" Width="150" Text="{Binding UserAccount.UserName}"></TextBox>
             </StackPanel>
             <Label FontWeight="Bold" Margin="20 0 0 0">Job</Label>
@@ -61,7 +61,7 @@
                 <Label Margin="10 0 0 0" Width="60">Email:</Label>
                 <TextBox x:Name="tbEmail" Width="250" Text="{Binding Email}"></TextBox>
             </StackPanel>
-            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20">
+            <Button x:Name="btnSave" Background="AliceBlue" BorderBrush="Black" Width="100" Height="30" Margin="20" Click="btnSave_Click">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock Height="20" Margin="10 0 10 0">Save</TextBlock>
                     <Image Source="../Images/save_symbol.png" Width="20" Height="30"></Image>

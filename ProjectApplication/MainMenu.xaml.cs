@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 using ProjectApplication.Classes;
 using ProjectApplication.CreateUpdateWindows;
 using ProjectApplication.OrdersListViews;
+using ProjectApplication.Overview;
 
 namespace ProjectApplication
 {
@@ -26,7 +27,7 @@ namespace ProjectApplication
         public static UserAccount User { get; set; }
 
         public List<string> DataSubMenuItems = new List<string>();
-        public List<string> OverviewSubMenuItems = new List<string>();
+       // public List<string> OverviewSubMenuItems = new List<string>();
         public List<string> OrdersSubMenuItems = new List<string>();
 
         public ProjectApplicationContext Ctx { get; set; }
@@ -34,9 +35,11 @@ namespace ProjectApplication
 
         public MainMenu(UserAccount user, ProjectApplicationContext ctx)
         {
+            this.WindowState = WindowState.Maximized;
             User = user;
             Ctx = ctx;
             InitializeComponent();
+            
            
             switch (User.Role)
             {
@@ -46,10 +49,10 @@ namespace ProjectApplication
                     DataSubMenuItems.Add("Manage Products");
                     DataSubMenuItems.Add("Manage Suppliers");
                     DataSubMenuItems.Add("Manage Customers");
-                    OverviewSubMenuItems.Add("Employee Overview");
+                   /* OverviewSubMenuItems.Add("Employee Overview");
                     OverviewSubMenuItems.Add("Warehouse Overview");
                     OverviewSubMenuItems.Add("Supplier Overview");
-                    OverviewSubMenuItems.Add("Products Overview");
+                    OverviewSubMenuItems.Add("Products Overview");*/
                     OrdersSubMenuItems.Add("Sales");
                     OrdersSubMenuItems.Add("Purchases");
                     break;
@@ -61,15 +64,15 @@ namespace ProjectApplication
                     break;
                 case Role.WarehouseEmployee:
                     DataSubMenuItems.Add("Manage Stock");
-                    OverviewSubMenuItems.Add("Warehouse Overview");
-                    OverviewSubMenuItems.Add("Products Overview");
+                    //OverviewSubMenuItems.Add("Warehouse Overview");
+                    //OverviewSubMenuItems.Add("Products Overview");
                     OrdersSubMenuItems.Add("Sales");
                     OrdersSubMenuItems.Add("Purchases");
                     break;
             }
 
             DataSubMenu.ItemsSource = DataSubMenuItems;
-            OverviewSubMenu.ItemsSource = OverviewSubMenuItems;
+            //OverviewSubMenu.ItemsSource = OverviewSubMenuItems;
             OrdersSubmenu.ItemsSource = OrdersSubMenuItems;
 
         }
@@ -103,6 +106,9 @@ namespace ProjectApplication
                     break;
                 case "Sales":
                     this.MainContentControl.Content = new SalesOrders_UserControl(Ctx);
+                    break;
+                case "_Overview":
+                    this.MainContentControl.Content = new Overview_UserControl(Ctx);
                     break;
             }
         }

@@ -34,6 +34,10 @@ namespace ProjectApplication
             Ctx = ctx;
             Employees = employees;
             InitializeComponent();
+            tbUserAccount.Visibility = Visibility.Hidden;
+            tbEmployeeId.Visibility = Visibility.Hidden;
+            lblEmployeeId.Visibility = Visibility.Hidden;
+            lblUserAccount.Visibility = Visibility.Hidden;
 
         }
 
@@ -77,6 +81,7 @@ namespace ProjectApplication
                 };
                 Ctx.Employees.Add(newEmployee);
                 Ctx.SaveChanges();
+                this.Close();
             }
             else
             {
@@ -98,6 +103,7 @@ namespace ProjectApplication
 
                 CollectionViewSource.GetDefaultView(Employees).Refresh();
                 Ctx.SaveChanges();
+                this.Close();
 
             }
 

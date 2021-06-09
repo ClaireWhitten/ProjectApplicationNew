@@ -139,8 +139,8 @@
     <Compile Include="OrdersListViews\SalesOrders_UserControl.xaml.cs">
       <DependentUpon>SalesOrders_UserControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Overview\Overview.xaml.cs">
-      <DependentUpon>Overview.xaml</DependentUpon>
+    <Compile Include="Overview\Overview_UserControl.xaml.cs">
+      <DependentUpon>Overview_UserControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="usercontrols\Buttons_EditUpdateDelete.xaml.cs">
       <DependentUpon>Buttons_EditUpdateDelete.xaml</DependentUpon>
@@ -236,7 +236,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Overview\Overview.xaml">
+    <Page Include="Overview\Overview_UserControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -316,6 +316,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\invoice_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\employee_symbol.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\medal_symbol.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
