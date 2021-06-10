@@ -316,6 +316,15 @@
   <ItemGroup>
     <Resource Include="Images\medal_symbol.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\sales_image2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\purchase_image.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\profit_image.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

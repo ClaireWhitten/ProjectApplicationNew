@@ -33,7 +33,7 @@ namespace ProjectApplication.Overview
             DateTime date = DateTime.Now;
             lblDateTime.Content = date.ToString("HH:mm");
 
-            lblWelcome.Content = $"Welcome {MainMenu.User.Employee.FirstName} {MainMenu.User.Employee.LastName} \n Employee Number: {MainMenu.User.Employee.EmployeeId}!  ";
+            lblWelcome.Content = $"Welcome \n{MainMenu.User.Employee.FirstName} {MainMenu.User.Employee.LastName} \nEmployee Id: {MainMenu.User.Employee.EmployeeId}";
 
            
             
@@ -50,14 +50,12 @@ namespace ProjectApplication.Overview
                 .OrderByDescending(e => e.SalesOrders.Count)
                 .Select(e => new
                 {
-                    Name = e.FirstName + e.LastName,
-                    NumberofSales = e.SalesOrders.Count
+                    Name = e.FirstName + " " + e.LastName,
+                    NumberofSales = e.SalesOrders.Count()
                 })
+                .Take(5)
                 .ToList();
-            /* foreach (var item in topSellers)
-             {
-                 MessageBox.Show(item.Name + item.NumberofSales.ToString());
-             }*/
+            
 
             lbTopSellers.ItemsSource = topSellers;
 
@@ -67,7 +65,7 @@ namespace ProjectApplication.Overview
                 .GroupBy(p => p.Name)
                 .Select(p => new
                 {
-                    Name = p.Key + " " + p.FirstOrDefault().Name,
+                    Name = p.Key,
                     NumberInStock = p.Count()
                 })
                 .ToList();
@@ -83,7 +81,8 @@ namespace ProjectApplication.Overview
             {
                 totalSales += sale.TotalPrice;
             }
-            tbSalesNumber.Text = $"{weeklySales.Count()}  £{totalSales.ToString()}";
+            tbSalesNumber.Text = $"{weeklySales.Count()} sales";
+            tbIncome.Text = $"£{totalSales.ToString()}";
 
             //purchase order  total
             var weeklyPurchases = Ctx.PurchaseOrders.Where(p => p.OrderDate > oneweekago).ToList();
@@ -93,13 +92,15 @@ namespace ProjectApplication.Overview
                 totalPurchases += purchase.TotalPrice;
             }
 
-            tbPurchases.Text = $"{weeklyPurchases.Count()}  £{totalPurchases.ToString()}";
+            tbPurchases.Text = $"{weeklyPurchases.Count()} purchases";
+            tbSpendings.Text = $"£{totalPurchases.ToString()}";
 
 
 
             // profit 
             double profit = totalSales - totalPurchases;
-            tbProfit.Text = $" £{profit}";
+            tbProfitMade.Text = $" £{profit}";
+            
 
 
             //Most popular products 
@@ -116,7 +117,7 @@ namespace ProjectApplication.Overview
             foreach (var group in productGroups)
             {
                 products.Add(group.First());
-                MessageBox.Show(group.First().BarCode);
+               
                 
             }
 
@@ -137,7 +138,7 @@ namespace ProjectApplication.Overview
                 }
 
                 productOccurences.Add(products[i], occurences);
-                MessageBox.Show(occurences.ToString());
+               
                 occurences = 0;
             }
 

@@ -39,8 +39,9 @@ namespace ProjectApplication
             User = user;
             Ctx = ctx;
             InitializeComponent();
-            
-           
+            this.MainContentControl.Content = new Overview_UserControl(Ctx);
+
+
             switch (User.Role)
             {
                 case Role.Administrator:
@@ -113,7 +114,8 @@ namespace ProjectApplication
             }
         }
 
-        private void Image_MouseDown(object sender, MouseButtonEventArgs e)
+
+        private void btnLogOut_Click(object sender, RoutedEventArgs e)
         {
             LogIn loginPage = new LogIn();
             loginPage.Show();

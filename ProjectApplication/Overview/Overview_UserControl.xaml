@@ -9,7 +9,9 @@
     <UserControl.Resources>
         <Style TargetType="{x:Type Label}">
             <Setter Property="Foreground" Value="White" />
-            <Setter Property="FontSize" Value="15"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Background" Value="#f57900"/>
+            <Setter Property="FontWeight" Value="DemiBold" />
         </Style>
     </UserControl.Resources>
     <Grid Background="#1daaef">
@@ -19,69 +21,100 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
-            <RowDefinition Height="1*" />
+            <RowDefinition Height="1*"/>
+            <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
-   
-        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical">
-            <Image Source="../Images/coolblue_banner.jpg" Width="600" Height="180" VerticalAlignment="Top" HorizontalAlignment="Left"></Image>
-            <StackPanel Orientation="Horizontal">
-                <Viewbox>
-                    <Calendar/>
-                </Viewbox>
+
+        <StackPanel Grid.Column="0" Grid.Row="0" Orientation="Vertical" Background="#018de2" HorizontalAlignment="Stretch">
+            <Image Source="../Images/coolblue_banner.jpg" Width="650" Height="250" VerticalAlignment="Stretch" HorizontalAlignment="Center" Margin="-5,0"/>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Grid.Column="1" Grid.Row="0" HorizontalAlignment="Stretch" Background="#018de2">
+            <StackPanel Orientation="Vertical" Width="300" Margin="20" VerticalAlignment="Top">
                 <Label x:Name ="lblWelcome" FontSize="20">Welcome</Label>
-                <Label x:Name ="lblDateTime"></Label>
+                <Label x:Name ="lblDateTime" FontSize="20"></Label>
             </StackPanel>
+            <Viewbox>
+                <Calendar Width="180"/>
+            </Viewbox>
         </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal">
-            <StackPanel Orientation="Vertical" Margin="20">
-            <Label>Sales</Label>
-                <TextBlock x:Name="tbSalesNumber" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
+        <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
+             <Label>Sales</Label>
+                <TextBlock x:Name="tbSalesNumber" Background="AliceBlue" FontSize="20" FontWeight="Bold" Width="200" Height="auto" TextAlignment="Center"></TextBlock>
+                <Image Width="200" Height="150" Source="../Images/sales_image2.png"></Image>
+                <TextBlock x:Name="tbIncome" Background="AliceBlue"  Width="200" Height="auto" TextAlignment="Center" FontSize="50" FontWeight="Bold"></TextBlock>
             </StackPanel>
-            <StackPanel Orientation="Vertical" Margin="20">
+            <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
             <Label>Purchases:</Label>
-                <TextBlock x:Name="tbPurchases" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
+                <TextBlock x:Name="tbPurchases" Background="AliceBlue" FontSize="20" Width="200" Height="auto" FontWeight="Bold" TextAlignment="Center"></TextBlock>
+                <Image Width="200" Height="auto" Source="../Images/purchase_image.png"></Image>
+                <TextBlock x:Name="tbSpendings" Background="AliceBlue" FontSize="50" Width="200" Height="auto" FontWeight="Bold"  TextAlignment="Center"></TextBlock>
+            </StackPanel>
+            <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
+            <Label>Profit:</Label>
+                <TextBlock x:Name="tbProfit" Background="AliceBlue" FontSize="20" Width="200" FontWeight="Bold" Height="auto" TextAlignment="Center"></TextBlock>
+                <Image Width="200" Height="100" Source="../Images/profit_image.png"></Image>
+                <TextBlock x:Name="tbProfitMade" Background="AliceBlue" FontSize="50" FontWeight="Bold" Width="200" Height="auto" TextAlignment="Center"></TextBlock>
+            </StackPanel>
+        </StackPanel>
+        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
+            <StackPanel Orientation="Vertical" Margin="20">
+                <Label>Top 5 Sellers</Label>
+                <ListBox x:Name="lbTopSellers"  Width="400" Height="auto" FontSize="15" >
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Height" Value="50" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/medal_symbol.png" Width="60" Height="60">
+                                </Image>
+                                <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
+                                <TextBlock Text="   " FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding NumberofSales}" FontSize="20"></TextBlock>
+                                <TextBlock Text="   " FontSize="20"></TextBlock>
+                                <TextBlock Text="sales" FontSize="20"></TextBlock>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>
+                </ListBox>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20">
-            <Label>Profit:</Label>
-                <TextBlock x:Name="tbProfit" Background="Orange" FontSize="40" Width="180" Height="180"></TextBlock>
-            </StackPanel>
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal">
-            <StackPanel Orientation="Vertical">
-                <Label>Top 5 Sellers</Label>
-                <ListBox x:Name="lbTopSellers">
-                    <ListBox.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel Orientation="Horizontal">
-                                <TextBlock Text="{Binding Name}"></TextBlock>
-                                <TextBlock Text="{Binding NumberOfSales}"></TextBlock>
-                                <TextBlock Text="sales"></TextBlock>
-                                <Image Source="../Images/medal_symbol.png" Width="20" Height="20">
-                                </Image>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListBox.ItemTemplate>
-                </ListBox>
-            </StackPanel>
-            <StackPanel Orientation="Vertical">
                 <Label>New Employees:</Label>
-                <ListBox x:Name="lbnewStaff">
+                <ListBox x:Name="lbnewStaff"  Width="400" Height="auto" FontSize="20">
+                    <ListBox.ItemContainerStyle>
+                        <Style TargetType="ListBoxItem">
+                            <Setter Property="Height" Value="50" />
+                        </Style>
+                    </ListBox.ItemContainerStyle>
                     <ListBox.ItemTemplate>
                         <DataTemplate>
                             <StackPanel Orientation="Horizontal">
+                                <Image Source="../Images/employee_symbol.png" Width="50" Height="50"></Image>
                                 <TextBlock Text="{Binding}"></TextBlock>
-                                <Image Source="../Images/employee_symbol.png" Width="20" Height="20"></Image>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
                 </ListBox>
             </StackPanel>
         </StackPanel>
-        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.RowSpan="{Binding RelativeSource={RelativeSource AncestorType=Grid}, Path=RowDefinitions.Count, Mode=OneWay}">
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
+        <Label>Most Popular Products:</Label>
+            <ListView x:Name="lvPopularProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
+                    <GridViewColumn Header="Orders"  DisplayMemberBinding="{Binding Value}"></GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2" Margin="20">
             <Label>Current Stock:</Label>
-            <ListView x:Name="lvStock" Height="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
+            <ListView x:Name="lvStock" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Name}"></GridViewColumn>
@@ -89,16 +122,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </StackPanel>
-        <StackPanel Grid.Column="0" Grid.Row="4">
-        <ListView x:Name="lvPopularProducts" Height="400" ScrollViewer.VerticalScrollBarVisibility="Visible">
-            <ListView.View>
-                <GridView>
-                        <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
-                    <GridViewColumn Header="Number in Stock"  DisplayMemberBinding="{Binding Value}"></GridViewColumn>
-                </GridView>
-            </ListView.View>
-        </ListView>
         </StackPanel>
 
     </Grid>

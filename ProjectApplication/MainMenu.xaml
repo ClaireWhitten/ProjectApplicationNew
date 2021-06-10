@@ -6,10 +6,10 @@
         xmlns:local="clr-namespace:ProjectApplication"
         mc:Ignorable="d"
         Title="Main Menu" Width="1920" Height="1080">
-   
-    <Grid Background="#1daaef">
+
+    <Grid Background="#018de2">
         <DockPanel>
-            <Menu DockPanel.Dock="Top" Height="30">
+            <Menu DockPanel.Dock="Top" Height="30" Background="AliceBlue">
                 <MenuItem x:Name="miData" Header="_Manage Data" Height="30" Click="MenuItem_Click">
                     <ItemsControl x:Name="DataSubMenu">
                         <ItemsControl.ItemTemplate>
@@ -30,13 +30,12 @@
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>
                 </MenuItem>
-                <MenuItem>
-                <Label x:Name="lblDate"  Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">Date and Time</Label>
-                </MenuItem>
             </Menu>
-            <Button x:Name="btnLogOut" DockPanel.Dock="Right" Background="#1daaef" BorderBrush="Black"  Width="60" Height="60" VerticalAlignment="Top" Margin="10">
-                <Image Source="Images/Logout_symbol.png" MouseDown="Image_MouseDown" ></Image>
+            <StackPanel DockPanel.Dock="Right" Background="AliceBlue">
+                <Button x:Name="btnLogOut" DockPanel.Dock="Right"  BorderBrush="Black" Background="AliceBlue" Width="100" Height="100" VerticalAlignment="Top" Margin="10" Click="btnLogOut_Click">
+                <Image Source="Images/Logout_symbol.png" Width="100" Height="100"></Image>
             </Button>
+            </StackPanel>
             <ContentControl x:Name="MainContentControl"></ContentControl>
         </DockPanel>
     </Grid>
