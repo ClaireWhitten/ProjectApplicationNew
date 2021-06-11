@@ -40,21 +40,21 @@
         <StackPanel Grid.Column="0" Grid.Row="1" Orientation="Horizontal" HorizontalAlignment="Center">
             <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
              <Label>Sales</Label>
-                <TextBlock x:Name="tbSalesNumber" Background="AliceBlue" FontSize="20" FontWeight="Bold" Width="200" Height="auto" TextAlignment="Center"></TextBlock>
+                <TextBlock x:Name="tbSalesNumber" Background="AliceBlue" FontSize="18" FontWeight="Bold" Width="200" Height="auto" TextAlignment="Center"></TextBlock>
                 <Image Width="200" Height="150" Source="../Images/sales_image2.png"></Image>
-                <TextBlock x:Name="tbIncome" Background="AliceBlue"  Width="200" Height="auto" TextAlignment="Center" FontSize="50" FontWeight="Bold"></TextBlock>
+                <TextBlock x:Name="tbIncome" Background="AliceBlue"  Width="250" Height="auto" TextAlignment="Center" FontSize="50" FontWeight="Bold"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
             <Label>Purchases:</Label>
-                <TextBlock x:Name="tbPurchases" Background="AliceBlue" FontSize="20" Width="200" Height="auto" FontWeight="Bold" TextAlignment="Center"></TextBlock>
+                <TextBlock x:Name="tbPurchases" Background="AliceBlue" FontSize="18" Width="200" Height="auto" FontWeight="Bold" TextAlignment="Center"></TextBlock>
                 <Image Width="200" Height="auto" Source="../Images/purchase_image.png"></Image>
-                <TextBlock x:Name="tbSpendings" Background="AliceBlue" FontSize="50" Width="200" Height="auto" FontWeight="Bold"  TextAlignment="Center"></TextBlock>
+                <TextBlock x:Name="tbSpendings" Background="AliceBlue" FontSize="50" Width="250" Height="auto" FontWeight="Bold"  TextAlignment="Center"></TextBlock>
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20" Background="AliceBlue" Height="300">
             <Label>Profit:</Label>
-                <TextBlock x:Name="tbProfit" Background="AliceBlue" FontSize="20" Width="200" FontWeight="Bold" Height="auto" TextAlignment="Center"></TextBlock>
+                <TextBlock x:Name="tbProfit" Background="AliceBlue" FontSize="18" Width="200" FontWeight="Bold" Height="auto" TextAlignment="Center"></TextBlock>
                 <Image Width="200" Height="100" Source="../Images/profit_image.png"></Image>
-                <TextBlock x:Name="tbProfitMade" Background="AliceBlue" FontSize="50" FontWeight="Bold" Width="200" Height="auto" TextAlignment="Center"></TextBlock>
+                <TextBlock x:Name="tbProfitMade" Background="AliceBlue" FontSize="50" FontWeight="Bold" Width="250" Height="auto" TextAlignment="Center"></TextBlock>
             </StackPanel>
         </StackPanel>
         <StackPanel Grid.Column="0" Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Center">
@@ -71,11 +71,11 @@
                             <StackPanel Orientation="Horizontal">
                                 <Image Source="../Images/medal_symbol.png" Width="60" Height="60">
                                 </Image>
-                                <TextBlock Text="{Binding Name}" FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding Name}" FontSize="15"></TextBlock>
                                 <TextBlock Text="   " FontSize="20"></TextBlock>
-                                <TextBlock Text="{Binding NumberofSales}" FontSize="20"></TextBlock>
-                                <TextBlock Text="   " FontSize="20"></TextBlock>
-                                <TextBlock Text="sales" FontSize="20"></TextBlock>
+                                <TextBlock Text="{Binding NumberofSales}" FontSize="15" Foreground="#f57900"></TextBlock>
+                                <TextBlock Text="   " FontSize="15"></TextBlock>
+                                <TextBlock Text="sales" FontSize="15"></TextBlock>
                             </StackPanel>
                         </DataTemplate>
                     </ListBox.ItemTemplate>
@@ -83,7 +83,7 @@
             </StackPanel>
             <StackPanel Orientation="Vertical" Margin="20">
                 <Label>New Employees:</Label>
-                <ListBox x:Name="lbnewStaff"  Width="400" Height="auto" FontSize="20">
+                <ListBox x:Name="lbnewStaff"  Width="400" Height="250" FontSize="15" ScrollViewer.VerticalScrollBarVisibility="Visible">
                     <ListBox.ItemContainerStyle>
                         <Style TargetType="ListBoxItem">
                             <Setter Property="Height" Value="50" />
@@ -103,7 +103,7 @@
 
         <StackPanel Grid.Column="1" Grid.Row="1" Margin="20">
         <Label>Most Popular Products:</Label>
-            <ListView x:Name="lvPopularProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15">
+            <ListView x:Name="lvPopularProducts" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15" MaxHeight="250">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Key.Name}"></GridViewColumn>
@@ -114,7 +114,7 @@
         </StackPanel>
         <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="2" Margin="20">
             <Label>Current Stock:</Label>
-            <ListView x:Name="lvStock" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15">
+            <ListView x:Name="lvStock" ScrollViewer.VerticalScrollBarVisibility="Visible" FontSize="15" MaxHeight="250">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="Product"  DisplayMemberBinding="{Binding Name}"></GridViewColumn>

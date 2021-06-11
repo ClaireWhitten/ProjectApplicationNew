@@ -196,12 +196,13 @@ namespace ProjectApplication.CreateUpdateWindows
         private void btnDeleteProduct_Click(object sender, RoutedEventArgs e)
         {
             lvOrderedProducts.SelectedItem = ((Button)sender).DataContext;
-            MessageBox.Show(lvOrderedProducts.SelectedIndex.ToString() + lvOrderedProducts.SelectedItem);
+           
 
             Product selectedProduct = lvOrderedProducts.SelectedItem as Product;
             ProductsOrdered.RemoveAt(lvOrderedProducts.SelectedIndex);
             selectedProduct.Sold = false;
             tbPrice.Text = Convert.ToString(CalculateTotal());
+            lblLeft.Content = ReturnQuantityInStock(selectedProduct).ToString() + " left in stock";
             Ctx.SaveChanges();
         }
 

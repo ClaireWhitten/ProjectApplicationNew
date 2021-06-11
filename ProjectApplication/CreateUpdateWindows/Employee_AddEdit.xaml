@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ProjectApplication.Classes"
         xmlns:sys="clr-namespace:System;assembly=mscorlib"
         mc:Ignorable="d"
-        Title="Add Employee" Height="auto" Width="auto">
+        Title="Add Employee" Height="550" Width="800">
     <Window.Resources>
         <ObjectDataProvider x:Key="dataFromEnum" MethodName="GetValues"
                         ObjectType="{x:Type sys:Enum}">
@@ -24,20 +24,20 @@
                 <Label Margin="10 0 0 0" Width="80">Last Name:</Label>
                 <TextBox x:Name="tbLastName" Width="150" Text="{Binding LastName}"></TextBox>
                 <Label Margin="10 0 0 0" Width="80">Date of Birth:</Label>
-                <DatePicker SelectedDate="1958-04-19" x:Name="dpDOB"></DatePicker>
+                <DatePicker x:Name="dpDOB" SelectedDate="{Binding DOB}"></DatePicker>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80" x:Name="lblEmployeeId">Employee Id:</Label>
                 <TextBox x:Name="tbEmployeeId" Width="150" Text="{Binding EmployeeId}" IsEnabled="False"></TextBox>
                 <Label Margin="10 0 0 0" Width="80" x:Name="lblUserAccount">User Account:</Label>
-                <TextBox x:Name="tbUserAccount" Width="150" Text="{Binding UserAccount.UserName}"></TextBox>
+                <TextBlock x:Name="tbUserAccount" Width="150" Text="{Binding UserAccount.UserName}"></TextBlock>
             </StackPanel>
             <Label FontWeight="Bold" Margin="20 0 0 0">Job</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label  Margin="10 0 0 0" Width="80">Job Role:</Label>
                 <ComboBox x:Name="cbRole" SelectedItem="{Binding Role}" ItemsSource="{Binding Source={StaticResource dataFromEnum}}" Width="150"/>
                 <Label  Margin="10 0 0 0" Width="80">Start Date:</Label>
-                <DatePicker x:Name="dpStartDate" Width="150" Text="{Binding StartDate}"></DatePicker>
+                <DatePicker x:Name="dpStartDate" Width="150" SelectedDate="{Binding StartDate}"></DatePicker>
                 <Label  Margin="10 0 0 0" Width="60">Salary:</Label>
                 <TextBox x:Name="tbSalary" Width="150" Text="{Binding Salary}"></TextBox>
             </StackPanel>

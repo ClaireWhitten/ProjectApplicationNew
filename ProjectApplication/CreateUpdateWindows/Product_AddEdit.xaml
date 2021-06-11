@@ -10,11 +10,11 @@
         <StackPanel>
             <Label FontWeight="Bold" Margin="20 0 0 0">Product Details:</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Margin="10 0 0 0" Width="100">Product Id:</Label>
+                <Label x:Name="lblProductId" Margin="10 0 0 0" Width="100">Product Id:</Label>
                 <TextBox x:Name="tbProductId" Width="80" Text="{Binding ProductId}"></TextBox>
                 <Label Width="80" Margin="10 0 0 0">Barcode:</Label>
                 <TextBox x:Name="tbBarcode" Width="180" Text="{Binding BarCode}"></TextBox>
-                <Label Width="100" Margin="10 0 0 0">Number in stock:</Label>
+                <Label x:Name="lblNumberInStock" Width="100" Margin="10 0 0 0">Number in stock:</Label>
                 <TextBox x:Name="tbQuantity" Width="80"></TextBox>
             </StackPanel>
 
@@ -40,7 +40,7 @@
                     </ComboBox.ItemTemplate>
                 </ComboBox>
                 <Label Margin="10 0 0 0" Width="100">Product Type:</Label>
-                <ComboBox Name="cbProductType" Width="300" SelectedItem="{Binding ProductCategory}">
+                <ComboBox Name="cbProductType" Width="200" SelectedItem="{Binding ProductCategory}">
                     <ComboBox.ItemTemplate>
                         <DataTemplate>
                             <TextBlock Text="{Binding}"/>

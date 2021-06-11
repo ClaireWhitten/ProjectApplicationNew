@@ -16,10 +16,10 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <Grid Background="AliceBlue">
+    <Grid Background="#018de2">
         <StackPanel>
-            <Label>Manage Products</Label>
-            <StackPanel Orientation="Horizontal">
+            <Label Margin="5">Manage Products</Label>
+            <StackPanel Orientation="Horizontal" Margin="10">
             <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="tbSearch" Width="200" Height="30" TextChanged="tbSearch_TextChanged"></TextBox>
                 <Button x:Name="btnSearch" Width="40" Height="30" Margin="5" Click="btnSearch_Click">
@@ -37,7 +37,7 @@
                 </Button>
             </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="ProductDataGrid" AutoGenerateColumns="False" Margin="10" VerticalScrollBarVisibility="Visible" MaxHeight="600" RowHeight="35">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Product Id" Binding="{Binding RegisteredProductId}"/>
                     <DataGridTextColumn Header="Supplier" Binding="{Binding Supplier.Name}" />

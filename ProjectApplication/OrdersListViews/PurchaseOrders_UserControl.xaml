@@ -9,7 +9,7 @@
     <UserControl.Resources>
         <BooleanToVisibilityConverter x:Key="BoolToVis"/>
     </UserControl.Resources>
-    <Grid Background="AliceBlue">
+    <Grid Background="#018de2">
         <StackPanel>
             <Label>Purchase Orders</Label>
             <StackPanel Orientation="Horizontal" Margin="20">
@@ -19,18 +19,7 @@
                         <Image Source="../Images/search_symbol.png" Width="30" Height="30"></Image>
                     </Button>
                 </StackPanel>
-                <Label Margin="0 10">Filter By:</Label>
-                <ComboBox x:Name="filter" Width="200" HorizontalAlignment="Right" Margin="20">
-                    <ComboBoxItem>
-                        <Label>Unpaid orders</Label>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Label>Past 48 hours</Label>
-                    </ComboBoxItem>
-                    <ComboBoxItem>
-                        <Label>Not yet arrived</Label>
-                    </ComboBoxItem>
-                </ComboBox>
+  
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="btnNewPurchaseOrder" Click="btnNewPurchaseOrder_Click" Width="200" Margin="20">New Purchase Order</Button>
                 </StackPanel>
@@ -101,13 +90,7 @@
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>
-                        <GridViewColumn Header="Archive Order">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="chkArchive" IsChecked="{Binding Active}" Click ="inputChanged"></CheckBox>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
+          
                     </GridView>
                 </ListView.View>
             </ListView>

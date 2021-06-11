@@ -35,6 +35,8 @@ namespace ProjectApplication.CreateUpdateWindows
             Suppliers = suppliers;
             InitializeComponent();
             this.Title = "Add Supplier";
+            tbSupplierId.Visibility = Visibility.Hidden;
+            lblSupplierId.Visibility = Visibility.Hidden;
         }
 
 
@@ -73,6 +75,8 @@ namespace ProjectApplication.CreateUpdateWindows
 
                 Ctx.Suppliers.Add(newSupplier);
                 Ctx.SaveChanges();
+                this.Close();
+
             }
             else
             {
@@ -91,6 +95,8 @@ namespace ProjectApplication.CreateUpdateWindows
 
                 CollectionViewSource.GetDefaultView(Suppliers).Refresh();
                 Ctx.SaveChanges();
+                this.Close();
+
             }
         }
     }

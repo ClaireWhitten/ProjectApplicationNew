@@ -16,10 +16,10 @@
         </ObjectDataProvider.MethodParameters>
     </ObjectDataProvider>
 </UserControl.Resources>
-    <Grid Background="AliceBlue">
+    <Grid Background="#018de2">
         <StackPanel>
-            <Label>Manage Employees</Label>
-            <StackPanel Orientation="Horizontal">
+            <Label Margin="5">Manage Employees</Label>
+            <StackPanel Orientation="Horizontal" Margin="10">
                 <StackPanel Orientation="Horizontal">
                     <TextBox x:Name="tbSearch" Width="200" Height="30" TextChanged="tbSearch_TextChanged"></TextBox>
                     <Button x:Name="btnSearch" Width="40" Height="30" Margin="5" Click="btnSearch_Click">
@@ -31,7 +31,7 @@
                                          AddClicked="Employees_AddClickedEventHandler" DeleteClicked="Employees_DeleteClickedEventHandler"/>
             </StackPanel>
             </StackPanel>
-            <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="EmployeeDataGrid" AutoGenerateColumns="false" Margin="10" VerticalScrollBarVisibility="Visible" RowHeight="35" MaxHeight="600">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Employee Id" Binding="{Binding EmployeeId}" Width="auto"/>
                     <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="auto"/>
@@ -47,6 +47,7 @@
                     <DataGridTextColumn  Header="Street" Binding="{Binding Street}" Width="auto"/>
                     <DataGridTextColumn  Header="Number" Binding="{Binding Number}" Width="auto"/>
                     <DataGridTextColumn  Header="PostCode" Binding="{Binding PostCode}" Width="auto"/>
+                    <DataGridTextColumn  Header="City" Binding="{Binding City}" Width="auto"/>
                     <DataGridTextColumn  Header="Email" Binding="{Binding Email}" Width="auto"/>
                     <DataGridTextColumn  Header="Phone Number" Binding="{Binding PhoneNumber}" Width="auto"/>
                     <DataGridTextColumn  Header="Salary" Binding="{Binding Salary}" Width="auto"/>

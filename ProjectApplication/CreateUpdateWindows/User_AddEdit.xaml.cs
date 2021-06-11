@@ -40,6 +40,7 @@ namespace ProjectApplication
 
             InitializeComponent();
             cbEmployees.ItemsSource = employeesWithoutUserAccount;
+            
            
         }
 
@@ -79,7 +80,9 @@ namespace ProjectApplication
                         Employee = selectedEmployee
                     });
                     Ctx.SaveChanges();
-                    
+                    this.Close();
+
+
                 }
                 else
                 {
@@ -98,7 +101,9 @@ namespace ProjectApplication
 
                 CollectionViewSource.GetDefaultView(UserAccounts).Refresh();
                 Ctx.SaveChanges();
-                
+                this.Close();
+
+
 
             }
         }

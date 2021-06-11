@@ -48,8 +48,13 @@ namespace ProjectApplication
             SelectedEmployee = selectedEmployee;
             this.DataContext = selectedEmployee;
             InitializeComponent();
+            if (SelectedEmployee.UserAccount == null)
+            {
+                tbUserAccount.Visibility = Visibility.Hidden;
+                lblUserAccount.Visibility = Visibility.Hidden;
+            }
 
-           
+         
           /*  tbEmployeeId.Text = selectedEmployee.EmployeeId.ToString();
            
             tbUserAccount.Text = selectedEmployee.UserAccount.UserName;
@@ -70,10 +75,10 @@ namespace ProjectApplication
                     DOB = (DateTime)dpDOB.SelectedDate,
                     PhoneNumber = tbPhoneNumber.Text,
                     Street = tbStreet.Text,
-                    PostCode = tbStreet.Text,
+                    PostCode = tbPostcode.Text,
                     Number = tbNumber.Text,
-                    Email = tbNumber.Text,
-                    City = tbNumber.Text,
+                    Email = tbEmail.Text,
+                    City = tbCity.Text,
                     StartDate = (DateTime)dpStartDate.SelectedDate,
                     Salary = Convert.ToDouble(tbSalary.Text),
                     Role = (Role)cbRole.SelectedItem
@@ -91,14 +96,14 @@ namespace ProjectApplication
                 SelectedEmployee.DOB = (DateTime)dpDOB.SelectedDate;
                 SelectedEmployee.PhoneNumber = tbPhoneNumber.Text;
                 SelectedEmployee.Street = tbStreet.Text;
-                SelectedEmployee.PostCode = tbStreet.Text;
+                SelectedEmployee.PostCode = tbPostcode.Text;
                 SelectedEmployee.Number = tbNumber.Text;
-                SelectedEmployee.Email = tbNumber.Text;
-                SelectedEmployee.City = tbNumber.Text;
+                SelectedEmployee.Email = tbEmail.Text;
+                SelectedEmployee.City = tbCity.Text;
                 SelectedEmployee.StartDate = (DateTime)dpStartDate.SelectedDate;
                 SelectedEmployee.Salary = Convert.ToDouble(tbSalary.Text);
                 SelectedEmployee.Role = (Role)cbRole.SelectedItem;
-                SelectedEmployee.UserAccount.Role = (Role)cbRole.SelectedItem;
+                
 
 
                 CollectionViewSource.GetDefaultView(Employees).Refresh();

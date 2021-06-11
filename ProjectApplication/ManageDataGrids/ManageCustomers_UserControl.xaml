@@ -7,20 +7,23 @@
              xmlns:uc="clr-namespace:ProjectApplication.usercontrols"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <Grid Background="AliceBlue">
+    <Grid Background="#018de2">
         <StackPanel>
-            <Label>Manage Customers</Label>
-            <StackPanel Orientation="Horizontal">
-                <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Customers_EditClickedEventHandler" 
-                                         AddClicked="Customers_AddClickedEventHandler" DeleteClicked="Customers_DeleteClickedEventHandler"/>
-            <StackPanel Orientation="Horizontal">
+            <Label Margin="5">Manage Customers</Label>
+            <StackPanel Orientation="Horizontal" Margin="10">
+                <StackPanel Orientation="Horizontal">
                 <TextBox x:Name="tbSearch" Width="200" Height="30" TextChanged="tbSearch_TextChanged"></TextBox>
                 <Button x:Name="btnSearch" Width="40" Height="30" Margin="5" Click="btnSearch_Click">
                     <Image Source="../Images/search_symbol.png" Width="30" Height="30"></Image>
                 </Button>
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <uc:Buttons_EditUpdateDelete x:Name="ucButtons_EditUpdateDelete" EditClicked="Customers_EditClickedEventHandler" 
+                                             AddClicked="Customers_AddClickedEventHandler" DeleteClicked="Customers_DeleteClickedEventHandler"/>
+
+                </StackPanel>
             </StackPanel>
-            </StackPanel>
-            <DataGrid x:Name="CustomerDataGrid" AutoGenerateColumns="false" Width="1100" Margin="10" VerticalScrollBarVisibility="Visible">
+            <DataGrid x:Name="CustomerDataGrid" AutoGenerateColumns="false" Margin="10" VerticalScrollBarVisibility="Visible" ScrollViewer.VerticalScrollBarVisibility="Visible"  MaxHeight="600" RowHeight="35">
                 <DataGrid.Columns>
                     <DataGridTextColumn IsReadOnly="True" Header="Customer Id" Binding="{Binding CustomerId}" Width="auto"/>
                     <DataGridTextColumn Header="First Name" Binding="{Binding FirstName}" Width="auto"/>

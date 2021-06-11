@@ -15,7 +15,7 @@
             </ObjectDataProvider.MethodParameters>
         </ObjectDataProvider>
     </UserControl.Resources>
-    <Grid>
+    <Grid Background="#018de2">
         <StackPanel>
             <Label>Sales Orders</Label>
             <StackPanel Orientation="Vertical" Margin="20">
@@ -32,7 +32,8 @@
                     <ComboBoxItem>Invoice unpaid</ComboBoxItem>
                     <ComboBoxItem>Problem</ComboBoxItem>
                     <ComboBoxItem>By Date</ComboBoxItem>
-                 </ComboBox>
+                    <ComboBoxItem>All</ComboBoxItem>
+                    </ComboBox>
                     </StackPanel>
                     <StackPanel Orientation="Vertical" Margin="20">
                     <Label x:Name="lblDate" Visibility="Hidden">Orders Between:</Label>
@@ -113,13 +114,6 @@
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
                                     <TextBox x:Name="tbComment" Text="{Binding Comment}" Width="200" LostFocus="inputChanged"></TextBox>
-                                </DataTemplate>
-                            </GridViewColumn.CellTemplate>
-                        </GridViewColumn>
-                        <GridViewColumn Header="Active">
-                            <GridViewColumn.CellTemplate>
-                                <DataTemplate>
-                                    <CheckBox x:Name="chkArchive" IsChecked="{Binding Active}" Click ="inputChanged"></CheckBox>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

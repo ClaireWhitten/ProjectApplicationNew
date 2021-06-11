@@ -50,10 +50,11 @@ namespace ProjectApplication
                     DataSubMenuItems.Add("Manage Products");
                     DataSubMenuItems.Add("Manage Suppliers");
                     DataSubMenuItems.Add("Manage Customers");
-                   /* OverviewSubMenuItems.Add("Employee Overview");
-                    OverviewSubMenuItems.Add("Warehouse Overview");
-                    OverviewSubMenuItems.Add("Supplier Overview");
-                    OverviewSubMenuItems.Add("Products Overview");*/
+                    DataSubMenuItems.Add("Manage Stock (to add)");
+                    /* OverviewSubMenuItems.Add("Employee Overview");
+                     OverviewSubMenuItems.Add("Warehouse Overview");
+                     OverviewSubMenuItems.Add("Supplier Overview");
+                     OverviewSubMenuItems.Add("Products Overview");*/
                     OrdersSubMenuItems.Add("Sales");
                     OrdersSubMenuItems.Add("Purchases");
                     break;
@@ -64,7 +65,8 @@ namespace ProjectApplication
 
                     break;
                 case Role.WarehouseEmployee:
-                    DataSubMenuItems.Add("Manage Stock");
+                    DataSubMenuItems.Add("Manage Suppliers");
+                    DataSubMenuItems.Add("Manage Stock (to add)");
                     //OverviewSubMenuItems.Add("Warehouse Overview");
                     //OverviewSubMenuItems.Add("Products Overview");
                     OrdersSubMenuItems.Add("Sales");

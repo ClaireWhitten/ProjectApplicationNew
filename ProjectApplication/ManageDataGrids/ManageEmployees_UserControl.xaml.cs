@@ -114,7 +114,7 @@ namespace ProjectApplication
 
         private void GetEmployeeData()
         {
-            Ctx.Employees.AsQueryable().Load();
+            Ctx.Employees.Include("UserAccount").Load();
             Employees = Ctx.Employees.Local;
             EmployeeDataGrid.ItemsSource = Employees;
         }

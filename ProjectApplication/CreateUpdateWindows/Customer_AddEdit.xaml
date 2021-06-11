@@ -17,7 +17,7 @@
                 <TextBox x:Name="tbLastName" Width="150" Text="{Binding LastName}"></TextBox>
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
-                <Label Margin="10 0 0 0" Width="80">CustomerId:</Label>
+                <Label x:Name="lblCustomerId" Margin="10 0 0 0" Width="80">CustomerId:</Label>
                 <TextBox x:Name="tbCustomerId" Width="150" Text="{Binding CustomerId}" IsEnabled="False"></TextBox>
                 <Label Margin="10 0 0 0" Width="100">Customer Since:</Label>
                 <DatePicker x:Name="dpCustomerSince" SelectedDate="{Binding CustomerSince}"></DatePicker>

@@ -87,7 +87,7 @@ namespace ProjectApplication
         //generate product template
         private void btnGenerateTemplate_Click(object sender, RoutedEventArgs e)
         {
-            string[] templateProperties = {"Product Name:","Product Description:","BarCode:","Price:"};
+            string[] templateProperties = {"Product Name:","Product Description:","Barcode:","Price:"};
 
                                  //returns the path of                this special folder https://docs.microsoft.com/en-us/dotnet/api/system.environment.specialfolder?view=net-5.0
             string docPath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);

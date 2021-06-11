@@ -47,6 +47,13 @@ namespace ProjectApplication.OrdersListViews
             Ctx = ctx;
             InitializeComponent();
             getSalesOrderData();
+            if (MainMenu.User.Role == Role.WarehouseEmployee)
+            {
+                btnCancelSalesOrder.Visibility = Visibility.Hidden;
+                btnEditSalesOrder.Visibility = Visibility.Hidden;
+                btnNewSalesOrder.Visibility = Visibility.Hidden;
+
+            }
         }
 
         //add sale

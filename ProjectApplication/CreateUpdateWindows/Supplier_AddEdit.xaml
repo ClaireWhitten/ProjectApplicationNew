@@ -12,7 +12,7 @@
             <StackPanel Orientation="Horizontal" Margin="20">
                 <Label Margin="10 0 0 0" Width="80">Name:</Label>
                 <TextBox x:Name="tbName" Width="150" Text="{Binding Name}"></TextBox>
-                <Label Margin="10 0 0 0" Width="80">Supplier Id:</Label>
+                <Label x:Name="lblSupplierId" Margin="10 0 0 0" Width="80">Supplier Id:</Label>
                 <TextBox x:Name="tbSupplierId" Width="150" Text="{Binding SupplierId}"></TextBox>
                 <Label Margin="10 0 0 0" Width="100">Supplier Since:</Label>
                 <DatePicker x:Name="dpCustomerSince" SelectedDate="{Binding SupplierSince}"></DatePicker>
@@ -28,10 +28,11 @@
                 <TextBox x:Name="tbCity" Width="100" Text="{Binding City}"></TextBox>
                 <Label Width="60" Margin="10 0 0 0">Postcode:</Label>
                 <TextBox x:Name="tbPostcode" Width="100" Text="{Binding PostCode}"></TextBox>
-                <Label Width="60" Margin="10 0 0 0">Country:</Label>
-                <TextBox x:Name="tbCountry" Width="100" Text="{Binding Country}"></TextBox>
+                
             </StackPanel>
             <StackPanel Orientation="Horizontal" Margin="20">
+                <Label Width="60" Margin="10 0 0 0">Country:</Label>
+                <TextBox x:Name="tbCountry" Width="100" Text="{Binding Country}"></TextBox>
                 <Label Margin="10 0 0 0" Width="80">Phone:</Label>
                 <TextBox x:Name="tbPhoneNumber" Width="150" Text="{Binding PhoneNumber}"></TextBox>
                 <Label Margin="10 0 0 0" Width="60">Email:</Label>

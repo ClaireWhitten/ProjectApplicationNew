@@ -35,6 +35,8 @@ namespace ProjectApplication.CreateUpdateWindows
             Ctx = ctx;
             Customers = customers;
             InitializeComponent();
+            tbCustomerId.Visibility = Visibility.Hidden;
+            lblCustomerId.Visibility = Visibility.Hidden;
         }
 
         //edit employee form
@@ -59,13 +61,14 @@ namespace ProjectApplication.CreateUpdateWindows
                     CustomerSince = (DateTime)dpCustomerSince.SelectedDate,
                     PhoneNumber = tbPhoneNumber.Text,
                     Street = tbStreet.Text,
-                    PostCode = tbStreet.Text,
+                    PostCode = tbPostcode.Text,
                     Number = tbNumber.Text,
-                    Email = tbNumber.Text,
-                    City = tbNumber.Text
+                    Email = tbEmail.Text,
+                    City = tbCity.Text
                 };
                 Ctx.Customers.Add(newCustomer);
                 Ctx.SaveChanges();
+                this.Close();
             }
             else
             {
@@ -75,13 +78,14 @@ namespace ProjectApplication.CreateUpdateWindows
                 SelectedCustomer.CustomerSince = (DateTime)dpCustomerSince.SelectedDate;
                 SelectedCustomer.PhoneNumber = tbPhoneNumber.Text;
                 SelectedCustomer.Street = tbStreet.Text;
-                SelectedCustomer.PostCode = tbStreet.Text;
+                SelectedCustomer.PostCode = tbPostcode.Text;
                 SelectedCustomer.Number = tbNumber.Text;
-                SelectedCustomer.Email = tbNumber.Text;
-                SelectedCustomer.City = tbNumber.Text;
+                SelectedCustomer.Email = tbEmail.Text;
+                SelectedCustomer.City = tbCity.Text;
 
                 CollectionViewSource.GetDefaultView(Customers).Refresh();
-                Ctx.SaveChanges(); 
+                Ctx.SaveChanges();
+                this.Close();
 
             }
             

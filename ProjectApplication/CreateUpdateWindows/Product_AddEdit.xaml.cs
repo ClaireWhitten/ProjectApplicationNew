@@ -30,6 +30,8 @@ namespace ProjectApplication.CreateUpdateWindows
 
         public RegisteredProduct SelectedProduct { get; set; }
 
+        string OriginalBarcode { get; set; }
+
         //add constructor
         public Product_AddEdit(ProjectApplicationContext ctx, ObservableCollection<RegisteredProduct> products)
         {
@@ -39,8 +41,11 @@ namespace ProjectApplication.CreateUpdateWindows
             this.Title = "Add Product";
             cbSupplier.ItemsSource = Ctx.Suppliers.ToList();
             cbProductType.ItemsSource = Enum.GetValues(typeof(ProductCategory));
-            tbQuantity.IsEnabled = false;
-            tbProductId.IsEnabled = false;
+            tbQuantity.Visibility = Visibility.Hidden;
+            tbProductId.Visibility = Visibility.Hidden;
+            lblNumberInStock.Visibility = Visibility.Hidden;
+            lblProductId.Visibility = Visibility.Hidden;
+
         }
 
         //edit constructor
@@ -49,6 +54,7 @@ namespace ProjectApplication.CreateUpdateWindows
             Ctx = ctx;
             Products = products;
             SelectedProduct = selectedProduct;
+            OriginalBarcode = SelectedProduct.BarCode;
             InitializeComponent();
             this.Title = "Edit Product";
             cbProductType.ItemsSource = Enum.GetValues(typeof(ProductCategory));
@@ -85,6 +91,7 @@ namespace ProjectApplication.CreateUpdateWindows
         private void btnSave_Click_1(object sender, RoutedEventArgs e)
         {
             Supplier supplier = cbSupplier.SelectedItem as Supplier;
+            
             if (SelectedProduct == null)
             {
 
@@ -108,9 +115,24 @@ namespace ProjectApplication.CreateUpdateWindows
                 SelectedProduct.Name = tbName.Text;
                 SelectedProduct.Description = tbDescription.Text;
                 SelectedProduct.BarCode = tbBarcode.Text;
-                SelectedProduct.Price = Convert.ToInt32(tbPrice.Text);
+                SelectedProduct.Price = Convert.ToDouble(tbPrice.Text);
                 SelectedProduct.Supplier = supplier;
                 SelectedProduct.ProductCategory = (ProductCategory)cbProductType.SelectedItem;
+
+
+                var productsInStock = Ctx.Products.Where(p => p.BarCode == OriginalBarcode).ToList();
+
+                foreach (var item in productsInStock)
+                {
+                    item.Name = tbName.Text;
+                    item.Description = tbDescription.Text;
+                    item.BarCode = tbBarcode.Text;
+                    item.Price = Convert.ToDouble(tbPrice.Text);
+                    item.Supplier = supplier;
+                    item.ProductCategory = (ProductCategory)cbProductType.SelectedItem;
+                }
+                Ctx.SaveChanges();
+
 
 
 
